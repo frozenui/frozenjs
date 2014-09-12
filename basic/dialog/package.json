@@ -1,0 +1,10 @@
+{
+  "family": "frozen",
+  "category":"basic",
+  "name": "dialog",
+  "dependence":[
+    "core.js"
+  ],
+  "description": "frozenUI 弹窗组件",
+  "author": "jeakeyliang"
+}

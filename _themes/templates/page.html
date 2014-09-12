@@ -1,0 +1,72 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
+
+    <link rel="stylesheet" href="<%=root%>static/css/theme.css" />
+    <link rel="stylesheet" href="<%=root%>static/css/solarized.css" />
+    <script type="text/javascript" src="<%=root%>static/js/theme.js"></script>
+    <script type="text/javascript" src="<%=root%>static/js/head.js"></script>
+  </head>
+  <body>
+    <div id="body-wrapper">
+      <script type="text/javascript">
+        write_head();
+      </script>
+      <div class="main-area entry-content" id="content">
+          <div class="side-area">
+              
+              <dl id="navigation" role="navigation">
+                <% var nowCat="index" %>
+                <% _.forEach(navs, function(item) { %>
+                  <% var cat=item.url.split("/").length==1?"index" : item.url.split("/")[0]; %>
+                  <% if(nowCat==cat){ %>
+                    <% if(current==item.url){ %>
+                      <dd class="side-highlight"><a href="<%=root%><%- item.url %>"> <%- item.title %> <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <% }else{ %>
+                    <dd><a href="<%=root%><%- item.url %>"> <%- item.title %> <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <% } %>
+                  <% }else{  %>
+                    <% 
+                      var name="基础组件";
+                      if(cat=="effect"){ 
+                        name="特效组件";
+                      }
+                      if(cat=="lib"){
+                        name="依赖库";
+                      }
+                      nowCat=cat;
+                    %>
+
+                    <dt><%- name %></dt>
+                    <% if(current==item.url){ %>
+                      <dd class="side-highlight"><a href="<%=root%><%- item.url %>"> <%- item.title %> <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <% }else{ %>
+                    <dd><a href="<%=root%><%- item.url %>"> <%- item.title %> <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <% } %>
+                  <% }%>
+                <% }); %>
+                
+              </dl>
+          </div>
+          
+          <div class="content-area">
+            <%=content%>
+          </div>
+          <div id="footer-wrapper">
+            <footer>
+              
+            </footer>
+          </div>
+      </div>
+    </div>
+    
+  </body>
+ 
+</html>

@@ -1,0 +1,23 @@
+{
+  "name": "frozenjs",
+  "version": "1.0.0",
+  "family": "frozen",
+  "homepage": "http://frozenui.github.io/frozenjs/",
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-connect": "~0.6.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "load-grunt-tasks": "~0.3.0",
+    "grunt-contrib-compress": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-markdown-extend": "0.0.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frozenui/frozenjs"
+  },
+  "description": "frozenUI js组件库",
+  "main": "Gruntfile.js",
+  "author": "jeakeyliang",
+  "license": "ISC"
+}

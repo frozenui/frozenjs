@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
+
+    <link rel="stylesheet" href="../../static/css/theme.css" />
+    <link rel="stylesheet" href="../../static/css/solarized.css" />
+    <script type="text/javascript" src="../../static/js/theme.js"></script>
+    <script type="text/javascript" src="../../static/js/head.js"></script>
+  </head>
+  <body>
+    <div id="body-wrapper">
+      <script type="text/javascript">
+        write_head();
+      </script>
+      <div class="main-area entry-content" id="content">
+          <div class="side-area">
+              
+              <dl id="navigation" role="navigation">
+                
+                
+                  
+                  
+                    
+                    <dd><a href="../../README.html"> 关于FrozenJS <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="../../how.html"> 如何使用 <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+
+                    <dt>基础组件</dt>
+                    
+                    <dd><a href="../../basic/core/index.html"> Core <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="../../basic/dialog/index.html"> Dialog <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+
+                    <dt>特效组件</dt>
+                    
+                    <dd><a href="../../effect/cover/index.html"> Cover <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+
+                    <dt>依赖库</dt>
+                    
+                      <dd class="side-highlight"><a href="../../lib/zepto/index.html"> Zepto <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    
+                  
+                
+                
+              </dl>
+          </div>
+          
+          <div class="content-area">
+            <h1 id="zepto">Zepto</h1><hr>
+<p>原始项目见<a href="https://github.com/madrobby/zepto">Zepto</a></p>
+<h2 id="本分支提供的特性">本分支提供的特性</h2><p>1、兼容<code>SeaJS</code>模块，不需要自己改源码加 <code>define</code>头</p>
+<p>2、支持<code>$.noop</code>、<code>$.now</code>、<code>$.error</code>，其用法同<code>jQuery</code></p>
+<p>3、添加<code>withCredentials</code>支持，修复在<code>xhr.open</code>前设置<code>withCredentials</code>报<code>INVALID_STATE_ERR</code>错误的问题</p>
+<p>4、修复2个手指连续点击或滑动导致的<code>evaluating &#39;touch.el.trigger&#39;</code>错误的问题</p>
+<p>5、修复三星机型<code>touchmove</code>过于敏感导致<code>longTap</code>事件失效的问题</p>
+<h2 id="构建">构建</h2><p><code>dist</code>目录里有已构建好的版本，可以直接使用，集成了<code>zepto callbacks deferred event ajax form touch</code>模块，如果需要自定义模块的话就需要手动构建了</p>
+<p>1、安装<a href="http://nodejs.org/">NodeJS</a></p>
+<p>2、clone本项目的源代码</p>
+<p>3、进入源代码目录，运行下面的命令安装依赖包</p>
+<pre>$ npm install</pre><p>4、运行脚本构建自己的Zepto吧</p>
+<pre>$ npm run-script dist</pre><p>5、修改make第42行可以定制自己需要的模块，或者如下操作</p>
+<pre>$ MODULES=&quot;zepto event data&quot; npm run-script dist</pre><h2 id="单元测试">单元测试</h2><pre>npm test</pre>
+          </div>
+          <div id="footer-wrapper">
+            <footer>
+              
+            </footer>
+          </div>
+      </div>
+    </div>
+    
+  </body>
+ 
+</html>

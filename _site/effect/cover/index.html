@@ -1,0 +1,127 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
+
+    <link rel="stylesheet" href="../../static/css/theme.css" />
+    <link rel="stylesheet" href="../../static/css/solarized.css" />
+    <script type="text/javascript" src="../../static/js/theme.js"></script>
+    <script type="text/javascript" src="../../static/js/head.js"></script>
+  </head>
+  <body>
+    <div id="body-wrapper">
+      <script type="text/javascript">
+        write_head();
+      </script>
+      <div class="main-area entry-content" id="content">
+          <div class="side-area">
+              
+              <dl id="navigation" role="navigation">
+                
+                
+                  
+                  
+                    
+                    <dd><a href="../../README.html"> 关于FrozenJS <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="../../how.html"> 如何使用 <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+
+                    <dt>基础组件</dt>
+                    
+                    <dd><a href="../../basic/core/index.html"> Core <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="../../basic/dialog/index.html"> Dialog <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+
+                    <dt>特效组件</dt>
+                    
+                      <dd class="side-highlight"><a href="../../effect/cover/index.html"> Cover <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+
+                    <dt>依赖库</dt>
+                    
+                    <dd><a href="../../lib/zepto/index.html"> Zepto <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    
+                  
+                
+                
+              </dl>
+          </div>
+          
+          <div class="content-area">
+            <h1 id="cover">Cover</h1><hr>
+<p>Cover动画组件，提供cover显示隐藏、定位、自定义形状和背景等功能特性。</p>
+<p>Cover 组件不依赖样式</p>
+<p>Dialog 继承自 <code>widget</code></p>
+<hr>
+<h2 id="最佳实践">最佳实践</h2><div class="highlight"><pre><code class="javascript">seajs.use(<span class="string">'cover'</span>, <span class="keyword">function</span>(Dialog) {
+    <span class="keyword">var</span> cover = <span class="keyword">new</span> Cover({
+        element:<span class="string">"#cover"</span>, 
+        trigger: <span class="string">'.trigger'</span>,
+        dismiss:<span class="string">'.dismiss'</span>
+    });
+});</code></pre></div><h2 id="配置说明">配置说明</h2><h3 id="element-element">element <em>element</em></h3><p>需要被cover的元素，可传入选择器，默认为<code>body</code>。</p>
+<h3 id="trigger-element">trigger <em>element</em></h3><p>cover触发显示的元素。</p>
+<h3 id="dismiss-element">dismiss <em>element</em></h3><p>cover触发隐藏的元素。</p>
+<h3 id="background-string">background <em>string</em></h3><p>cover的背景色，默认为<code>random</code>（随机背景色）。</p>
+<h3 id="shape-string">shape <em>string</em></h3><p>cover的形状，默认为<code>random</code>（随机形状）
+可选参数：random|round|square</p>
+<h3 id="fromskew-array">fromSkew <em>array</em></h3><p>cover动画开始时的斜切角度，默认为<code>random</code>（随机角度）</p>
+<h3 id="duration-int">duration <em>int</em></h3><p>动画时间，默认为<code>1000</code></p>
+<h3 id="startpos-string">startPos <em>string</em></h3><p>cover动画开始时的位置，默认为<code>source</code>（trigger的中心位置）
+可选参数：source|top|center|bottom</p>
+<h3 id="offset-array">offset <em>array</em></h3><p>cover在startPos的基础上的偏移量，默认为<code>[0,0]</code></p>
+<h3 id="expandaxis-string">expandAxis <em>string</em></h3><p>cover需要展开的轴，默认为<code>y</code>
+可选参数：x|y|xy</p>
+<h3 id="isfloat-bool">isFloat <em>bool</em></h3><p>cover动画时，trigger是否处于遮罩的上方，默认为<code>true</code></p>
+<h3 id="zindex-int">zIndex <em>int</em></h3><p>cover遮罩的z-index，默认为<code>999</code></p>
+<h2 id="实例方法">实例方法</h2><p>主要有 show、hide方法。</p>
+<h2 id="事件说明">事件说明</h2><h3 id="show（before-after）">show（before|after）</h3><p>可以使用 <code>.after(&#39;show&#39;, function() {})</code>或<code>.before(&#39;show&#39;, function() {})</code> 来触发cover显示动画开始前和开始后的动画</p>
+<h3 id="hide（before-after）">hide（before|after）</h3><p>可以使用 <code>.after(&#39;hide&#39;, function() {})</code>或<code>.before(&#39;hide&#39;, function() {})</code> 来触发cover隐藏动画开始前和开始后的动画</p>
+<h3 id="shown（before-after）">shown（before|after）</h3><p>可以使用 <code>.after(&#39;shown&#39;, function() {})</code>或<code>.before(&#39;shown&#39;, function() {})</code> 来触发cover显示动画结束前和开始后的动画</p>
+<h3 id="hidden（before-after）">hidden（before|after）</h3><p>可以使用 <code>.after(&#39;hidden&#39;, function() {})</code>或<code>.before(&#39;hidden&#39;, function() {})</code> 来触发cover隐藏动画结束前和开始后的动画</p>
+
+          </div>
+          <div id="footer-wrapper">
+            <footer>
+              
+            </footer>
+          </div>
+      </div>
+    </div>
+    
+  </body>
+ 
+</html>
