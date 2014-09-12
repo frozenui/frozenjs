@@ -19,5 +19,6 @@ Thumbs.db
 build
 _site
 sea-modules
+node_modules
 .cache
 _site/
