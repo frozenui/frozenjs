@@ -1,0 +1,112 @@
+<!doctype html>
+<head>
+	<meta charset="utf-8"/>
+	<title>zepto tap 点透测试</title>
+	<script src="zepto.js"></script>
+	<script src="tappy.js"></script>
+	
+	
+	
+	<meta name="viewport" content="width=device-width,user-scalable=no" />
+	<style type="text/css">
+		#divTapAbove,#divClickUnder{position: absolute;top: 0;left: 0;}
+		#divTapAbove{width: 200px;height: 75px;background: red}
+		#divClickUnder{width: 300px;height: 50px;background: blue}
+		#output{position: absolute;top: 100px;left:0;border: 1px solid #000;width:200px;min-height:100px;}
+		.foo{width: 200px;height:200px;background-color: #aaa;position: absolute;top:300px;}
+		.bar{width: 100px;height:100px;background-color: #bbb;}
+	</style>
+</head>
+<body>
+	<div id="divClickUnder"></div>
+	<div id="divTapAbove"></div>
+	<div id="output"></div>
+	<div class="foo">
+	    <div class="bar">
+	    </div>
+	</div>
+	<script>
+		var $divTapAbove = $('#divTapAbove')
+		var $output = $('#output')
+		,$divTapAbove = $('#divTapAbove')
+		$( ".foo" ).on( "tap", function(e){
+		    console.log("foo")
+		   $output.html($output.html() + 'foo<br/>')
+		    
+		});
+		$( ".bar" ).on( "tap", function(e){
+		    console.log("bar")
+		    $output.html($output.html() + 'bar<br/>')
+		    e.stopPropagation();
+		    
+		});
+		$( ".foo" ).on( "tap", function(e){
+		    console.log("foo2")
+		    $output.html($output.html() + 'foo2<br/>')
+
+		});
+
+		// $( ".bar" ).bind( "tap", function(e){
+		//     console.log("bar")
+		//     e.preventDefault();
+		// });
+		// var myElement = $divTapAbove[0];
+
+		// // We create a manager object, which is the same as Hammer(), but without the presetted recognizers. 
+		// var mc = new Hammer.Manager(myElement);
+
+
+		// // Tap recognizer with minimal 2 taps
+		// mc.add( new Hammer.Tap({ event: 'doubletap', taps: 2 }) );
+		// // Single tap recognizer
+		// mc.add( new Hammer.Tap({ event: 'singletap' }) );
+
+
+		// // we want to recognize this simulatenous, so a quadrupletap will be detected even while a tap has been recognized.
+		// mc.get('doubletap').recognizeWith('singletap');
+		// // we only want to trigger a tap, when we don't have detected a doubletap
+		// mc.get('singletap').requireFailure('doubletap');
+
+
+		// mc.on("singletap doubletap", function(ev) {
+		// 	$divTapAbove.hide()
+		// 	$output.html($output.html() + 'tap<br/>')
+		//     myElement.textContent += ev.type +" ";
+		// });
+
+		
+		
+		$(function(){
+			// new FastClick(document.body);
+			
+			$('#divClickUnder').on('click',function(){
+				$output.html($output.html() + 'click<br/>')
+			})
+			// el.addEventListener('tap', onTap, false);
+
+			// function onTap (e) {
+			//    alert(1)
+			// }
+			
+
+			$divTapAbove.bind("tap",function(ev){
+				$divTapAbove.hide() // 注意，该div被tap触发后会隐藏自己
+				$output.html($output.html() + 'tap<br/>')
+				// ev.stopPropagation();
+			}).bind("touchend", function(){
+				$output.html($output.html() + 'touchend<br/>')
+			        // console.log("touchend");
+			});
+			// var el = document.getElementById('divTapAbove'),
+   //  		myTap = new Tap(el);
+			// el.addEventListener('tap', onTap, false);
+
+			// function onTap (e) {
+			//    $divTapAbove.hide()
+			//    $output.html($output.html() + 'tap<br/>');
+			//    e.preventDefault();
+			// }
+
+		})
+	</script>
+</body>

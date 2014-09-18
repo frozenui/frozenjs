@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="{{theme.lang}}">
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     
@@ -8,17 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
-
+    <link rel="stylesheet" href="http://frozenui.github.io/static/solarized.css" />
     <link rel="stylesheet" href="static/css/theme.css" />
-    <link rel="stylesheet" href="static/css/solarized.css" />
+    <script type="text/javascript" src="http://127.0.0.1/vipstyle/frozenjs/lib/zepto.min.js"></script>
+    <script type="text/javascript" src="http://frozenui.github.io/static/layout.js"></script>
     <script type="text/javascript" src="static/js/theme.js"></script>
-    <script type="text/javascript" src="static/js/head.js"></script>
   </head>
   <body>
     <div id="body-wrapper">
-      <script type="text/javascript">
-        write_head();
-      </script>
+      <div class="head-area">
+        <script type="text/javascript">
+          write_header();
+        </script>
+      </div>
       <div class="main-area entry-content" id="content">
           <div class="side-area">
               
@@ -28,31 +30,14 @@
                   
                   
                     
-                      <dd class="side-highlight"><a href="index.html"> 关于FrozenJS <i class="iconfont" title="单箭头右">å</i></a></dd>
+                      <dd class="side-highlight"><a href="index.html"> 关于FrozenJS </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="how.html"> 如何使用 <i class="iconfont" title="单箭头右">å</i></a></dd>
-                    
-                  
-                
-                  
-                  
-                    
-
-                    <dt>基础组件</dt>
-                    
-                    <dd><a href="basic/core/index.html"> Core <i class="iconfont" title="单箭头右">å</i></a></dd>
-                    
-                  
-                
-                  
-                  
-                    
-                    <dd><a href="basic/dialog/index.html"> Dialog <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <dd><a href="how.html"> 如何使用 </a></dd>
                     
                   
                 
@@ -60,9 +45,16 @@
                   
                     
 
-                    <dt>特效组件</dt>
+                    <dt>基础</dt>
                     
-                    <dd><a href="effect/cover/index.html"> Cover <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <dd><a href="basic/core/index.html"> Core </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="basic/tap/index.html"> Tap </a></dd>
                     
                   
                 
@@ -70,9 +62,19 @@
                   
                     
 
-                    <dt>依赖库</dt>
+                    <dt>UI</dt>
                     
-                    <dd><a href="lib/zepto/index.html"> Zepto <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <dd><a href="ui/dialog/index.html"> Dialog </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+
+                    <dt>特效</dt>
+                    
+                    <dd><a href="effect/cover/index.html"> Cover </a></dd>
                     
                   
                 
@@ -81,44 +83,32 @@
           </div>
           
           <div class="content-area">
-            <h1 id="关于frozenjs">关于FrozenJS</h1><p>这里是描述，描述，描述</p>
-<hr>
-<h3 id="调用方式">调用方式</h3><p>dialog支持三种不同的调用方式，一般使用<code>$.dialog(options)</code>即可，不同的方式配置options后都会直接toggle弹窗。</p>
-<div class="highlight"><pre><code class="javascript"><span class="comment">//最简单的方式，组件会根据默认模板输出dom结构</span>
-$.dialog(options);
-
-<span class="comment">//通过传入模板字符串的方式</span>
-$(<span class="string">'&lt;div&gt;&lt;%=title%&gt;&lt;&lt;/div&gt;'</span>).dialog(options);
-
-<span class="comment">//通过传入css选择器的方式</span>
-$(<span class="string">"#id"</span>).dialog(options);
-
-<span class="comment">//常用调用方式</span>
-$.dialog({
-    title:<span class="string">'温馨提示'</span>,
-    content:<span class="string">'温馨提示内容'</span>,
-    callback:<span class="keyword">function</span>(index){
-        alert(<span class="string">"你点击了第"</span>+index+<span class="string">"按钮"</span>);
-    },
-    end:<span class="keyword">function</span>(state){
-        alert(<span class="string">"弹窗已经："</span>+state);
-    }
-})</code></pre></div><h3 id="配置说明">配置说明</h3><h3 id="快捷使用">快捷使用</h3><h4 id="dialog-39-show-39">.dialog(&#39;show&#39;)</h4><p>弹出浮层，常用于<code>$(&quot;#id&quot;).dialog(&#39;show&#39;)</code></p>
-<h4 id="dialog-39-hide-39">.dialog(&#39;hide&#39;)</h4><p>弹出浮层，常用于<code>$(&quot;#id&quot;).dialog(&#39;hide&#39;)</code></p>
-<h3 id="模板规则">模板规则</h3><ol>
-<li>模板弹出时自动为顶级加上<code>show</code>类名，隐藏时自动去掉<code>show</code>，所以一般需要通过<code>show</code>类名来控制模板的显示隐藏。</li>
-<li>模板约定底部按钮的标签必须为<code>button</code></li>
-<li>模板约定弹窗窗体需设置属性<code>data-role=&#39;wrapper&#39;</code></li>
-<li>模板约定需要触发关闭的按钮或元素必须设置属性<code>data-role=&#39;dismiss&#39;</code></li>
-<li>建议使用默认模板</li>
+            <h1 id="关于frozenjs">关于FrozenJS</h1><hr>
+<h2 id="什么是frozenjs">什么是FrozenJS</h2><p>FrozenJS是针对移动端开发的js组件库，其依赖<a href="http://zeptojs.com">zepto.js</a>和FronzenUI。</p>
+<p>FrozenJS的所有组件均以zepto的插件的形式存在。</p>
+<p>FrozenJS包括：</p>
+<ol>
+<li>basic：FrozenJS的一些基础功能，包括模板引擎、tap支持等。</li>
+<li>ui：主要是一些触屏常用的UI组件，包括dialog等。</li>
+<li>effect：非常用的特效库，特殊场景使用到是可以单独调用。</li>
+</ol>
+<h2 id="frozenjs能做什么">FrozenJS能做什么</h2><p>FrozenJS针对移动端而生，可以处理大部分移动端的UI呈现。而且还可以满足某些特殊场景的特效展示。</p>
+<h2 id="frozenjs的优势">FrozenJS的优势</h2><ol>
+<li>体积小，js只依赖zepto。</li>
+<li>调用简单。</li>
+</ol>
+<h2 id="frozenjs的理念">FrozenJS的理念</h2><ol>
+<li>为移动而生</li>
+<li>轻量，可复用</li>
 </ol>
 
           </div>
-          <div id="footer-wrapper">
-            <footer>
-              
-            </footer>
-          </div>
+          
+      </div>
+      <div class="footer-area">
+        <script type="text/javascript">
+          write_footer();
+        </script>
       </div>
     </div>
     

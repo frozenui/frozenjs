@@ -8,17 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
-
+    <link rel="stylesheet" href="http://frozenui.github.io/static/solarized.css" />
     <link rel="stylesheet" href="../../static/css/theme.css" />
-    <link rel="stylesheet" href="../../static/css/solarized.css" />
+    <script type="text/javascript" src="http://127.0.0.1/vipstyle/frozenjs/lib/zepto.min.js"></script>
+    <script type="text/javascript" src="http://frozenui.github.io/static/layout.js"></script>
     <script type="text/javascript" src="../../static/js/theme.js"></script>
-    <script type="text/javascript" src="../../static/js/head.js"></script>
   </head>
   <body>
     <div id="body-wrapper">
-      <script type="text/javascript">
-        write_head();
-      </script>
+      <div class="head-area">
+        <script type="text/javascript">
+          write_header();
+        </script>
+      </div>
       <div class="main-area entry-content" id="content">
           <div class="side-area">
               
@@ -28,31 +30,14 @@
                   
                   
                     
-                    <dd><a href="../../README.html"> 关于FrozenJS <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <dd><a href="../../index.html"> 关于FrozenJS </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../how.html"> 如何使用 <i class="iconfont" title="单箭头右">å</i></a></dd>
-                    
-                  
-                
-                  
-                  
-                    
-
-                    <dt>基础组件</dt>
-                    
-                    <dd><a href="../../basic/core/index.html"> Core <i class="iconfont" title="单箭头右">å</i></a></dd>
-                    
-                  
-                
-                  
-                  
-                    
-                    <dd><a href="../../basic/dialog/index.html"> Dialog <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <dd><a href="../../how.html"> 如何使用 </a></dd>
                     
                   
                 
@@ -60,9 +45,16 @@
                   
                     
 
-                    <dt>特效组件</dt>
+                    <dt>基础</dt>
                     
-                      <dd class="side-highlight"><a href="../../effect/cover/index.html"> Cover <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <dd><a href="../../basic/core/index.html"> Core </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="../../basic/tap/index.html"> Tap </a></dd>
                     
                   
                 
@@ -70,9 +62,19 @@
                   
                     
 
-                    <dt>依赖库</dt>
+                    <dt>UI</dt>
                     
-                    <dd><a href="../../lib/zepto/index.html"> Zepto <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <dd><a href="../../ui/dialog/index.html"> Dialog </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+
+                    <dt>特效</dt>
+                    
+                      <dd class="side-highlight"><a href="../../effect/cover/index.html"> Cover </a></dd>
                     
                   
                 
@@ -83,42 +85,194 @@
           <div class="content-area">
             <h1 id="cover">Cover</h1><hr>
 <p>Cover动画组件，提供cover显示隐藏、定位、自定义形状和背景等功能特性。</p>
-<p>Cover 组件不依赖样式</p>
-<p>Dialog 继承自 <code>widget</code></p>
-<hr>
-<h2 id="最佳实践">最佳实践</h2><div class="highlight"><pre><code class="javascript">seajs.use(<span class="string">'cover'</span>, <span class="keyword">function</span>(Dialog) {
-    <span class="keyword">var</span> cover = <span class="keyword">new</span> Cover({
-        element:<span class="string">"#cover"</span>, 
-        trigger: <span class="string">'.trigger'</span>,
-        dismiss:<span class="string">'.dismiss'</span>
-    });
-});</code></pre></div><h2 id="配置说明">配置说明</h2><h3 id="element-element">element <em>element</em></h3><p>需要被cover的元素，可传入选择器，默认为<code>body</code>。</p>
-<h3 id="trigger-element">trigger <em>element</em></h3><p>cover触发显示的元素。</p>
-<h3 id="dismiss-element">dismiss <em>element</em></h3><p>cover触发隐藏的元素。</p>
-<h3 id="background-string">background <em>string</em></h3><p>cover的背景色，默认为<code>random</code>（随机背景色）。</p>
-<h3 id="shape-string">shape <em>string</em></h3><p>cover的形状，默认为<code>random</code>（随机形状）
-可选参数：random|round|square</p>
-<h3 id="fromskew-array">fromSkew <em>array</em></h3><p>cover动画开始时的斜切角度，默认为<code>random</code>（随机角度）</p>
-<h3 id="duration-int">duration <em>int</em></h3><p>动画时间，默认为<code>1000</code></p>
-<h3 id="startpos-string">startPos <em>string</em></h3><p>cover动画开始时的位置，默认为<code>source</code>（trigger的中心位置）
-可选参数：source|top|center|bottom</p>
-<h3 id="offset-array">offset <em>array</em></h3><p>cover在startPos的基础上的偏移量，默认为<code>[0,0]</code></p>
-<h3 id="expandaxis-string">expandAxis <em>string</em></h3><p>cover需要展开的轴，默认为<code>y</code>
-可选参数：x|y|xy</p>
-<h3 id="isfloat-bool">isFloat <em>bool</em></h3><p>cover动画时，trigger是否处于遮罩的上方，默认为<code>true</code></p>
-<h3 id="zindex-int">zIndex <em>int</em></h3><p>cover遮罩的z-index，默认为<code>999</code></p>
-<h2 id="实例方法">实例方法</h2><p>主要有 show、hide方法。</p>
-<h2 id="事件说明">事件说明</h2><h3 id="show（before-after）">show（before|after）</h3><p>可以使用 <code>.after(&#39;show&#39;, function() {})</code>或<code>.before(&#39;show&#39;, function() {})</code> 来触发cover显示动画开始前和开始后的动画</p>
-<h3 id="hide（before-after）">hide（before|after）</h3><p>可以使用 <code>.after(&#39;hide&#39;, function() {})</code>或<code>.before(&#39;hide&#39;, function() {})</code> 来触发cover隐藏动画开始前和开始后的动画</p>
-<h3 id="shown（before-after）">shown（before|after）</h3><p>可以使用 <code>.after(&#39;shown&#39;, function() {})</code>或<code>.before(&#39;shown&#39;, function() {})</code> 来触发cover显示动画结束前和开始后的动画</p>
-<h3 id="hidden（before-after）">hidden（before|after）</h3><p>可以使用 <code>.after(&#39;hidden&#39;, function() {})</code>或<code>.before(&#39;hidden&#39;, function() {})</code> 来触发cover隐藏动画结束前和开始后的动画</p>
+<h2 id="调用方式">调用方式</h2><div class="highlight"><pre><code class="javascript"><span class="comment">// 绑定cover到.cover</span>
+$(<span class="string">".cover"</span>).cover(option);
 
+<span class="comment">// 直接绑定到body上，与$("body").cover(option)等效</span>
+$.cover(option);</code></pre></div><h2 id="配置说明">配置说明</h2><p>配置信息可以通过js传参，也可以通过元素的<code>data-*</code>的方式。</p>
+<p>配置信息也可以被trigger的<code>data-*</code>来重置。</p>
+<p>具体配置信息如下：</p>
+<table>
+    <tr>
+        <th>name</th>
+        <th>type</th>
+        <th>default</th>
+        <th>description</th>
+    </tr>
+    <tr>
+        <td>trigger</td>
+        <td>element</td>
+        <td>null</td>
+        <td>cover触发显示的元素。</td>
+    </tr>
+    <tr>
+        <td>dismiss</td>
+        <td>null</td>
+        <td>null</td>
+        <td>cover触发隐藏的元素。</td>
+    </tr>
+    <tr>
+        <td>background</td>
+        <td>string</td>
+        <td>随机</td>
+        <td>cover的背景色，可通过trigger的data-background配置重置。下同</td>
+    </tr>
+    <tr>
+        <td>duration</td>
+        <td>int</td>
+        <td>1000</td>
+        <td>动画耗时</td>
+    </tr>
+    <tr>
+        <td>startPos</td>
+        <td>string</td>
+        <td>&quot;source&quot;</td>
+        <td>
+            <p>cover动画开始时的位置，默认为<code>source</code>（trigger的中心位置）。</p>
+            <p>可选参数：source|top|center|bottom</p>
+        </td>
+    </tr>
+    <tr>
+        <td>offset</td>
+        <td>Array</td>
+        <td>[0,0]</td>
+        <td>cover在startPos的基础上的偏移量。</td>
+    </tr>
+    <tr>
+        <td>expandAxis</td>
+        <td>string</td>
+        <td>&#39;x&#39;</td>
+        <td>cover扩展方向，可选 x|y|xy</td>
+    </tr>
+    <tr>
+        <td>isFloat</td>
+        <td>BOOL</td>
+        <td>true</td>
+        <td>触发元素是否保持在cover上方</td>
+    </tr>
+    <tr>
+        <td>zIndex</td>
+        <td>int</td>
+        <td>999</td>
+        <td>cover的z-index</td>
+    </tr>
+    <tr>
+        <td>callback</td>
+        <td>functon</td>
+        <td>function(){}</td>
+        <td>事件回调，有两个参数，第一个参数为事件类型，第二个参数为当前cover对象。</td>
+    </tr>
+</table>
+
+
+<h2 id="demo展示">DEMO展示</h2><div class="md-iframe">
+<iframe src="iframe-readme-1.html" allowtransparency="true" 
+frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code class="xml"><span class="comment">&lt;!-- CSS --&gt;</span>
+<span class="tag">&lt;<span class="title">style</span> <span class="attribute">type</span>=<span class="value">"text/css"</span>&gt;</span><span class="css">
+<span class="tag">body</span><span class="rules">{<span class="rule"><span class="attribute">position</span>:<span class="value"> absolute;</span></span><span class="rule"><span class="attribute">top</span>:<span class="value"><span class="number">0</span>px;</span></span><span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">0</span>px;</span></span><span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100</span>%;</span></span><span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100</span>%;</span></span><span class="rule">}</span></span>
+<span class="class">.ui-frozen-cover</span><span class="rules">{<span class="rule"><span class="attribute">overflow</span>:<span class="value"> hidden;</span></span><span class="rule"><span class="attribute">position</span>:<span class="value"> absolute;</span></span><span class="rule"><span class="attribute">top</span>:<span class="value"><span class="number">0</span>px;</span></span><span class="rule"><span class="attribute">left</span>:<span class="value"><span class="number">0</span>px;</span></span><span class="rule"><span class="attribute">width</span>:<span class="value"> <span class="number">100</span>%;</span></span><span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">100</span>%;</span></span><span class="rule">}</span></span>
+<span class="class">.item</span><span class="rules">{<span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">100</span>%;</span></span><span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">25</span>%;</span></span><span class="rule"><span class="attribute">display</span>:<span class="value"> -webkit-box;</span></span><span class="rule"><span class="attribute">-webkit-box-pack</span>:<span class="value">center;</span></span> <span class="rule"><span class="attribute">-webkit-box-align</span>:<span class="value">center}</span></span></span>
+<span class="class">.close</span><span class="rules">{<span class="rule"><span class="attribute">position</span>:<span class="value">fixed;</span></span><span class="rule"><span class="attribute">top</span>:<span class="value"><span class="number">10</span>px;</span></span><span class="rule"><span class="attribute">right</span>:<span class="value"><span class="number">10</span>px;</span></span><span class="rule"><span class="attribute">display</span>:<span class="value"> block;</span></span><span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">50</span>px;</span></span><span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">50</span>px;</span></span><span class="rule"><span class="attribute">color</span>:<span class="value"><span class="hexcolor">#fff</span>;</span></span><span class="rule"><span class="attribute">border</span>:<span class="value"><span class="hexcolor">#fff</span> <span class="number">1</span>px solid;</span></span> <span class="rule"><span class="attribute">text-align</span>:<span class="value"> center;</span></span><span class="rule"><span class="attribute">border-radius</span>:<span class="value"> <span class="number">50</span>px;</span></span><span class="rule"><span class="attribute">line-height</span>:<span class="value"> <span class="number">50</span>px;</span></span><span class="rule"><span class="attribute">display</span>:<span class="value"> none;</span></span><span class="rule"><span class="attribute">z-index</span>:<span class="value"> <span class="number">2000</span>}</span></span></span>
+<span class="class">.title</span><span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"><span class="hexcolor">#fff</span>;</span></span><span class="rule"><span class="attribute">display</span>:<span class="value"> block;</span></span><span class="rule"><span class="attribute">text-align</span>:<span class="value"> center;</span></span><span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">24</span>px;</span></span><span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value">all .<span class="number">5</span>s .<span class="number">3</span>s;</span></span><span class="rule">}</span></span>
+<span class="class">.info</span><span class="rules">{<span class="rule"><span class="attribute">color</span>:<span class="value"><span class="hexcolor">#fff</span>;</span></span><span class="rule"><span class="attribute">display</span>:<span class="value"> block;</span></span><span class="rule"><span class="attribute">text-align</span>:<span class="value"> center;</span></span><span class="rule"><span class="attribute">font-size</span>:<span class="value"> <span class="number">12</span>px;</span></span><span class="rule"><span class="attribute">-webkit-transition</span>:<span class="value">all .<span class="number">5</span>s;</span></span><span class="rule"><span class="attribute">top</span>:<span class="value"><span class="number">50</span>%;</span></span><span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">100</span>%;</span></span><span class="rule"><span class="attribute">top</span>:<span class="value"><span class="number">50</span>%;</span></span><span class="rule"><span class="attribute">position</span>:<span class="value"> absolute;</span></span><span class="rule"><span class="attribute">z-index</span>:<span class="value"> <span class="number">2000</span>;</span></span><span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">0</span>;</span></span><span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"><span class="function">translateY(<span class="number">50</span>px)</span>;</span></span><span class="rule">}</span></span>
+<span class="class">.info</span><span class="class">.show</span><span class="rules">{<span class="rule"><span class="attribute">opacity</span>:<span class="value"> <span class="number">1</span>;</span></span><span class="rule"><span class="attribute">-webkit-transform</span>:<span class="value"><span class="function">translateY(<span class="number">0</span>)</span>;</span></span><span class="rule">}</span></span>
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+
+<span class="comment">&lt;!-- HTML --&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-frozen-cover"</span> <span class="attribute">id</span>=<span class="value">"cover"</span> <span class="attribute">data-start-pos</span>=<span class="value">"source"</span> <span class="attribute">data-trigger</span>=<span class="value">".item"</span> <span class="attribute">data-dismiss</span>=<span class="value">".close"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"close"</span> &gt;</span>关闭<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"item"</span> <span class="attribute">style</span>=<span class="value">"background:#35a;"</span> <span class="attribute">data-background</span>=<span class="value">"#35a"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"title"</span>&gt;</span>网页重构<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"item"</span> <span class="attribute">style</span>=<span class="value">"background:#880;"</span> <span class="attribute">data-background</span>=<span class="value">"#880"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"title"</span>&gt;</span>前端开发<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"item"</span> <span class="attribute">style</span>=<span class="value">"background:#4a3;"</span> <span class="attribute">data-background</span>=<span class="value">"#4a3"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"title"</span>&gt;</span>交互设计<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"item"</span> <span class="attribute">style</span>=<span class="value">"background:#099;"</span> <span class="attribute">data-background</span>=<span class="value">"#099"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"title"</span>&gt;</span>视觉设计<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"text"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"info"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">p</span>&gt;</span>全球最牛网页重构<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"info"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">p</span>&gt;</span>全球最牛前端开发<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"info"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">p</span>&gt;</span>全球最牛交互设计<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"info"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">p</span>&gt;</span>全球最牛视觉设计<span class="tag">&lt;/<span class="title">p</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+
+
+<span class="comment">&lt;!-- JS --&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+$(<span class="string">".ui-frozen-cover"</span>).cover({
+    callback:<span class="keyword">function</span>(type,obj){
+        <span class="keyword">switch</span>(type){
+            <span class="keyword">case</span> <span class="string">"show"</span>:
+            covershow(obj);
+            <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">"hide"</span>:
+            coverhide(obj);
+            <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">"hidden"</span>:
+            coverhidden(obj);
+            <span class="keyword">break</span>;
+            <span class="keyword">case</span> <span class="string">"shown"</span>:
+            covershown(obj);
+            <span class="keyword">break</span>;
+        }
+
+    }
+});
+<span class="function"><span class="keyword">function</span> <span class="title">covershow</span><span class="params">(cover)</span>{</span>
+    <span class="keyword">if</span>(!cover._isShown){
+        <span class="keyword">var</span> title=cover.currentTrigger.find(<span class="string">'.title'</span>),
+            index=$(<span class="string">".item"</span>).index(cover.currentTrigger);
+
+        title.css({
+            <span class="string">'-webkit-transform'</span>:<span class="string">'translateY('</span>+(cover.position.screenHeight/<span class="number">2</span>-title.offset().top-<span class="number">30</span>)+<span class="string">'px)'</span>
+        });
+        $(<span class="string">'.info'</span>).eq(index).css({
+            <span class="string">"-webkit-transition-delay"</span>:<span class="string">".5s"</span>
+        })
+        $(<span class="string">'.info'</span>).eq(index).addClass(<span class="string">'show'</span>);
+    }
+};
+<span class="function"><span class="keyword">function</span> <span class="title">coverhide</span><span class="params">(cover)</span>{</span>
+    <span class="keyword">var</span> title=cover.currentTrigger.find(<span class="string">'.title'</span>),
+        index=$(<span class="string">".item"</span>).index(cover.currentTrigger);
+
+    title.css({
+        <span class="string">'-webkit-transform'</span>:<span class="string">'translateY(0px)'</span>
+    })
+    $(<span class="string">'.info'</span>).eq(index).css({
+            <span class="string">"-webkit-transition-delay"</span>:<span class="string">"0s"</span>
+        })
+    $(<span class="string">'.info'</span>).eq(index).removeClass(<span class="string">'show'</span>);
+};
+<span class="function"><span class="keyword">function</span> <span class="title">covershown</span><span class="params">(cover)</span>{</span>
+    $(<span class="string">'.close'</span>).show();
+};
+<span class="function"><span class="keyword">function</span> <span class="title">coverhidden</span><span class="params">()</span>{</span>
+    $(<span class="string">'.close'</span>).hide();
+};
+
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div>
           </div>
-          <div id="footer-wrapper">
-            <footer>
-              
-            </footer>
-          </div>
+          
+      </div>
+      <div class="footer-area">
+        <script type="text/javascript">
+          write_footer();
+        </script>
       </div>
     </div>
     

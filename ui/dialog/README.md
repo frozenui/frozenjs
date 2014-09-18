@@ -18,27 +18,10 @@ $('<div><%=title%><</div>').dialog(options);
 //通过传入css选择器的方式
 $("#id").dialog(options);
 
-//常用调用方式
-
-$.dialog({
-	title:'温馨提示',
-	content:'温馨提示内容',
-	callback:function(index){
-		alert("你点击了第"+index+"按钮");
-	},
-	end:function(state){
-		alert("弹窗已经："+state);
-	}
-})
 
 ```
-```iframe
-<style type="text/css">
-.demo{width: 100px;height:100px;background:#000;}
-</style>
 
-<div class="demo"></div>
-```
+
 ## 配置说明
 
 <table>
@@ -100,21 +83,50 @@ $.dialog({
 
 </table>
 
-## 快捷使用
-
-#### .dialog('show')
-
-弹出浮层，常用于`$("#id").dialog('show')`
-
-#### .dialog('hide')
-
-弹出浮层，常用于`$("#id").dialog('hide')`
 
 
 ## 模板规则
 
 1. 模板弹出时自动为顶级加上`show`类名，隐藏时自动去掉`show`，所以一般需要通过`show`类名来控制模板的显示隐藏。
-1. 模板约定底部按钮的标签必须为`button`
-1. 模板约定弹窗窗体需设置属性`data-role='wrapper'`
+1. 模板约定底部按钮的标签必须设置属性`data-role='button'`
 1. 模板约定需要触发关闭的按钮或元素必须设置属性`data-role='dismiss'`
 1. 建议使用默认模板
+
+## DEMO演示
+```iframe
+ <div class="ui-center">
+
+    <div class="ui-btn" id="btn1">模板创建弹窗</div>
+    <div class="ui-btn" id="btn2">DOM创建弹窗</div>
+</div>
+<div class="ui-dialog">
+    <div class="ui-dialog-cnt">
+        <div class="ui-dialog-bd">
+            <div>
+            <h4>标题</h4>
+            <div>内容</div></div>
+        </div>
+        <div class="ui-dialog-ft ui-btn-group">
+            <button type="button" data-role="button"  class="select" id="dialogButton<%=i%>">关闭</button> 
+		</div>
+    </div>        
+</div>
+<script type="text/javascript">
+$("#btn1").tap(function(){
+	$.dialog({
+	    title:'温馨提示',
+	    content:'温馨提示内容',
+	    button:["确认","取消"],
+	    callback:function(type,index){
+	        console.log("type:"+type+";index:"+index);
+	    }
+	})
+	
+})
+$("#btn2").tap(function(){
+	$(".ui-dialog").dialog();
+
+})
+
+</script>
+```

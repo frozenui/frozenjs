@@ -8,17 +8,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
-
+    <link rel="stylesheet" href="http://frozenui.github.io/static/solarized.css" />
     <link rel="stylesheet" href="static/css/theme.css" />
-    <link rel="stylesheet" href="static/css/solarized.css" />
+    <script type="text/javascript" src="http://127.0.0.1/vipstyle/frozenjs/lib/zepto.min.js"></script>
+    <script type="text/javascript" src="http://frozenui.github.io/static/layout.js"></script>
     <script type="text/javascript" src="static/js/theme.js"></script>
-    <script type="text/javascript" src="static/js/head.js"></script>
   </head>
   <body>
     <div id="body-wrapper">
-      <script type="text/javascript">
-        write_head();
-      </script>
+      <div class="head-area">
+        <script type="text/javascript">
+          write_header();
+        </script>
+      </div>
       <div class="main-area entry-content" id="content">
           <div class="side-area">
               
@@ -28,14 +30,14 @@
                   
                   
                     
-                      <dd class="side-highlight"><a href="README.html"> 关于FrozenJS <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <dd><a href="index.html"> 关于FrozenJS </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="how.html"> 如何使用 <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <dd><a href="how.html"> 如何使用 </a></dd>
                     
                   
                 
@@ -45,14 +47,14 @@
 
                     <dt>基础组件</dt>
                     
-                    <dd><a href="basic/core/index.html"> Core <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <dd><a href="basic/core/index.html"> Core </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="basic/dialog/index.html"> Dialog <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <dd><a href="basic/tap/index.html"> Core </a></dd>
                     
                   
                 
@@ -62,17 +64,7 @@
 
                     <dt>特效组件</dt>
                     
-                    <dd><a href="effect/cover/index.html"> Cover <i class="iconfont" title="单箭头右">å</i></a></dd>
-                    
-                  
-                
-                  
-                  
-                    
-
-                    <dt>依赖库</dt>
-                    
-                    <dd><a href="lib/zepto/index.html"> Zepto <i class="iconfont" title="单箭头右">å</i></a></dd>
+                    <dd><a href="effect/cover/index.html"> Cover </a></dd>
                     
                   
                 
@@ -114,11 +106,12 @@ $.dialog({
 </ol>
 
           </div>
-          <div id="footer-wrapper">
-            <footer>
-              
-            </footer>
-          </div>
+          
+      </div>
+      <div class="footer-area">
+        <script type="text/javascript">
+          write_footer();
+        </script>
       </div>
     </div>
     

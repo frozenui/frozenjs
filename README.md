@@ -1,58 +1,28 @@
 # 关于FrozenJS
 
-这里是描述，描述，描述
-
 ---
 
+## 什么是FrozenJS
 
+FrozenJS是针对移动端开发的js组件库，其依赖[zepto.js](http://zeptojs.com)和FronzenUI。
 
-### 调用方式
+FrozenJS的所有组件均以zepto的插件的形式存在。
 
-dialog支持三种不同的调用方式，一般使用`$.dialog(options)`即可，不同的方式配置options后都会直接toggle弹窗。
+FrozenJS包括：
+1. basic：FrozenJS的一些基础功能，包括模板引擎、tap支持等。
+2. ui：主要是一些触屏常用的UI组件，包括dialog等。
+3. effect：非常用的特效库，特殊场景使用到是可以单独调用。
 
-```js
-//最简单的方式，组件会根据默认模板输出dom结构
-$.dialog(options);
+## FrozenJS能做什么
 
-//通过传入模板字符串的方式
-$('<div><%=title%><</div>').dialog(options);
+FrozenJS针对移动端而生，可以处理大部分移动端的UI呈现。而且还可以满足某些特殊场景的特效展示。
 
-//通过传入css选择器的方式
-$("#id").dialog(options);
+## FrozenJS的优势
 
-//常用调用方式
-$.dialog({
-	title:'温馨提示',
-	content:'温馨提示内容',
-	callback:function(index){
-		alert("你点击了第"+index+"按钮");
-	},
-	end:function(state){
-		alert("弹窗已经："+state);
-	}
-})
+1. 体积小，js只依赖zepto。
+2. 调用简单。
 
-```
+## FrozenJS的理念
 
-### 配置说明
-
-
-
-### 快捷使用
-
-#### .dialog('show')
-
-弹出浮层，常用于`$("#id").dialog('show')`
-
-#### .dialog('hide')
-
-弹出浮层，常用于`$("#id").dialog('hide')`
-
-
-### 模板规则
-
-1. 模板弹出时自动为顶级加上`show`类名，隐藏时自动去掉`show`，所以一般需要通过`show`类名来控制模板的显示隐藏。
-1. 模板约定底部按钮的标签必须为`button`
-1. 模板约定弹窗窗体需设置属性`data-role='wrapper'`
-1. 模板约定需要触发关闭的按钮或元素必须设置属性`data-role='dismiss'`
-1. 建议使用默认模板
+1. 为移动而生
+2. 轻量，可复用

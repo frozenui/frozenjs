@@ -19,10 +19,9 @@ width: 840px;
 }
 
 
-.side-area{background-color: transparent;}
-.side-area a{background-color: #fff;}
-.side-area dt{border-top:1px solid #ddd;padding:20px 15px 5px;font-size: 14px;}
 
+.side-area dt{padding:20px 15px 5px;font-size: 14px;}
+.side-area{border-right: 1px solid #eee;}
 #content{
     font-size: 14px;
 }

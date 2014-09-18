@@ -1,51 +1,28 @@
 <!DOCTYPE HTML>
-<html lang="{{theme.lang}}">
+<html lang="cn">
   <head>
     <meta charset="UTF-8">
     
     <title></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="http://127.0.0.1/vipstyle/frozenjs/lib/zepto.min.js"></script>
+    <% if(category!="basic"){ %>
+      <script type="text/javascript" src="http://127.0.0.1/vipstyle/frozenjs/1.0.0/basic-debug.js"></script>
+    <% } %>
     
-    <link rel="stylesheet" href="<%=root%>static/css/theme.css" />
-    <link rel="stylesheet" href="<%=root%>static/css/solarized.css" />
+    <% _.forEach(srcs, function(item) { %>
+      <script type="text/javascript" src="<%=root%><%=item%>"></script>
+    <% }); %>
+
+    <link rel="stylesheet" href="http://i.gtimg.cn/vipstyle/frozenui/1.0.0/css/basic.css?_bid=256" />
+    
     
   </head>
   <body>
-    <div id="body-wrapper">
-     
-      <aside id="sidebar-wrapper">
-        
-        
-        <ul id="navigation" role="navigation">
-          
-          <% _.forEach(navs, function(item) { %>
-
-            <li><a href="<%=root%><%- item.url %>"> <%- item.title %> </a></li>
-          <% }); %>
-          
-        </ul>
-        
-      </aside>
+    
+     <%=content%>
       
-      <div id="content-wrapper">
-        <div id="content">
-          <article class="hentry">
-            <h1 class="entry-title"></h1>
-            <div class="entry-content">
-              <%=content%>
-            </div>
-          </article>
-         
-        </div>
-      </div>
-      
-    </div>
-    <div id="footer-wrapper">
-      <footer>
-        
-      </footer>
-    </div>
   </body>
  
 </html>

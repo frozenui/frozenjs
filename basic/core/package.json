@@ -1,0 +1,7 @@
+{
+  "family": "frozen",
+  "category":"basic",
+  "name": "core",
+  "description": "frozenUI 插件需要调用的公用方法",
+  "author": "jeakeyliang"
+}
