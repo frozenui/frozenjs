@@ -11,11 +11,11 @@
 直接引用可以使用手机QQ的离线包，可以大幅提升加载速度。
 
 ```html
-<script type="text/javascript" src="zepto.js"></script>
-<script type="text/javascript" src="frozen.js"></script>
+<script type="text/javascript" src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js"></script>
+<script type="text/javascript" src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js"></script>
 <!-- 特效组件 -->
-<script type="text/javascript" src="effect.cover.js"></script>
-<link rel="stylesheet" type="text/css" href="basic.css">
+<script type="text/javascript" src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/effect.cover.js"></script>
+<link rel="stylesheet" type="text/css" href="http://i.gtimg.cn/vipstyle/frozenui/1.0.0/css/basic.css?_bid=256">
 ```
 
 ## github
@@ -28,7 +28,8 @@
 
 FrozenJS的调用方式很简单，跟熟知的jQuery插件很相似，比如dialog的调用：
 
-```iframe
+```js
+
 <div class="ui-center">
     <div class="ui-btn" id="btn1">点击打开弹窗</div>
 </div>

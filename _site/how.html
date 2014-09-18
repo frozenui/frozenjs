@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
     <link rel="stylesheet" href="http://frozenui.github.io/static/solarized.css" />
     <link rel="stylesheet" href="static/css/theme.css" />
-    <script type="text/javascript" src="http://127.0.0.1/vipstyle/frozenjs/lib/zepto.min.js"></script>
+    <script type="text/javascript" src="http://zeptojs.com/zepto.min.js"></script>
     <script type="text/javascript" src="http://frozenui.github.io/static/layout.js"></script>
     <script type="text/javascript" src="static/js/theme.js"></script>
   </head>
@@ -30,14 +30,14 @@
                   
                   
                     
-                    <dd><a href="index.html"> 关于FrozenJS </a></dd>
+                    <dd><a href="index.html"> 关于FrozenJS </a></dd>
                     
                   
                 
                   
                   
                     
-                      <dd class="side-highlight"><a href="how.html"> 如何使用 </a></dd>
+                      <dd class="side-highlight"><a href="how.html"> 如何使用 </a></dd>
                     
                   
                 
@@ -47,14 +47,14 @@
 
                     <dt>基础</dt>
                     
-                    <dd><a href="basic/core/index.html"> Core </a></dd>
+                    <dd><a href="basic/core/index.html"> Core </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="basic/tap/index.html"> Tap </a></dd>
+                    <dd><a href="basic/tap/index.html"> Tap </a></dd>
                     
                   
                 
@@ -64,7 +64,7 @@
 
                     <dt>UI</dt>
                     
-                    <dd><a href="ui/dialog/index.html"> Dialog </a></dd>
+                    <dd><a href="ui/dialog/index.html"> Dialog </a></dd>
                     
                   
                 
@@ -74,7 +74,7 @@
 
                     <dt>特效</dt>
                     
-                    <dd><a href="effect/cover/index.html"> Cover </a></dd>
+                    <dd><a href="effect/cover/index.html"> Cover </a></dd>
                     
                   
                 
@@ -87,17 +87,16 @@
 <h2 id="直接引用">直接引用</h2><p>使用FrozenJS需引入zepto.js、frozen.js、frozenUI。</p>
 <p>如果要使用特效组件，需要引入相应的特效组件的js。</p>
 <p>直接引用可以使用手机QQ的离线包，可以大幅提升加载速度。</p>
-<div class="highlight"><pre><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"zepto.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"frozen.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<div class="highlight"><pre><code class="xml"><span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
 <span class="comment">&lt;!-- 特效组件 --&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"effect.cover.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"basic.css"</span>&gt;</span></code></pre></div><h2 id="github">github</h2><p>你也可以去github上查看和下载FrozenJS的代码。任何建议也可以再github上给我们反馈。</p>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/effect.cover.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"http://i.gtimg.cn/vipstyle/frozenui/1.0.0/css/basic.css?_bid=256"</span>&gt;</span></code></pre></div><h2 id="github">github</h2><p>你也可以去github上查看和下载FrozenJS的代码。任何建议也可以再github上给我们反馈。</p>
 <p><a href="https://github.com/frozenui/frozenjs">github地址</a></p>
 <h2 id="调用方式">调用方式</h2><p>FrozenJS的调用方式很简单，跟熟知的jQuery插件很相似，比如dialog的调用：</p>
-<div class="md-iframe">
-<iframe src="iframe-how-1.html" allowtransparency="true" 
-frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-center"</span>&gt;</span>
-    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-btn"</span> <span class="attribute">id</span>=<span class="value">"btn1"</span>&gt;</span>点击打开弹窗<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<div class="highlight"><pre><code class="javascript">
+&lt;div class=<span class="string">"ui-center"</span>&gt;
+    <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-btn"</span> <span class="attribute">id</span>=<span class="value">"btn1"</span>&gt;</span>点击打开弹窗<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
 $(<span class="string">"#btn1"</span>).tap(<span class="keyword">function</span>(){
@@ -110,7 +109,7 @@ $(<span class="string">"#btn1"</span>).tap(<span class="keyword">function</span>
         }
     })
 })
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div>
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></code></pre></div>
           </div>
           
       </div>
