@@ -11,6 +11,7 @@ module.exports = function(grunt){
     ];
 
     var navs=[];
+
     function getPath(origin){
       var oriArr=origin.split("/");
       var split="";
@@ -19,6 +20,7 @@ module.exports = function(grunt){
       }
       return split;
     }
+
     function getData(){
       var mds=grunt.file.expand(modulesFile);
       var navs=[];
@@ -36,17 +38,23 @@ module.exports = function(grunt){
             url:cur.replace(".md",".html")
           })
         }
-      }
-      
+      }  
       return navs;
     };
+
+
     var pkg=grunt.file.readJSON("package.json");
+
     grunt.initConfig({
+
       pkg:pkg,
+
       uglify:{
+
         options: {
             
         },
+
         basic: {
           files: {
             "<%= pkg.version %>/basic.js": ['basic/*/src/*.js']
@@ -57,6 +65,7 @@ module.exports = function(grunt){
           src: ['basic/*/src/*.js','ui/*/src/*.js'],
           dest: "<%= pkg.version %>/frozen.js"
         },
+
         single:{
           // files: [{
           //   expand: true,
@@ -67,12 +76,15 @@ module.exports = function(grunt){
         }
 
       },
+
+
       concat: {
-        
+
         basic: {
           src: ['basic/*/src/*.js'],
           dest: "<%= pkg.version %>/basic-debug.js",
         },
+
         ui: {
           src: ['basic/*/src/*.js','ui/*/src/*.js'],
           dest: "<%= pkg.version %>/frozen-debug.js"
@@ -81,8 +93,12 @@ module.exports = function(grunt){
         single:{
 
         }
+
       },
+
+
       markdown: {
+
         options: {
           template: '_themes/templates/page.html',
           iframeTemplate:'_themes/templates/iframe.html',
@@ -104,9 +120,9 @@ module.exports = function(grunt){
             var srcs=grunt.file.expand(input+"src/*.js");
 
             context.srcs=srcs;
-            
           }
         },
+
         all: {
           files: [{
             expand: true,
@@ -126,13 +142,17 @@ module.exports = function(grunt){
         }
         
       },
+
+
       copy:{
+
         static:{
           files: [
             {expand: true, cwd: '_themes/static/', src: ['**'], dest: '_site/static'},
             {expand: true, src: ['*/*/src/*.js'], dest: '_site/'},
           ]
         },
+
         single:{
           files: [{
             expand: true,
@@ -140,13 +160,18 @@ module.exports = function(grunt){
             dest: '_site/'
           }]
         }
+
       },
+
+
       connect: {
+
         options: {
           port: 8000,
           // hostname: 'localhost', //默认就是这个值，可配置为本机某个 IP，localhost 或域名
           livereload: 35729  //声明给 watch 监听的端口
         },
+
         server: {
           options: {
             base: [
@@ -154,8 +179,12 @@ module.exports = function(grunt){
             ]
           }
         }
+
       },
+
+
       watch: {
+
         livereload: {
           options: {
               spawn: false,
@@ -169,16 +198,25 @@ module.exports = function(grunt){
             '**/src/*.js'
           ]
         }
+
       }
+
     });
+
+
     grunt.registerTask('docs',function(type){
+
       navs=getData();
       grunt.task.run("copy:static");
       grunt.task.run('markdown:all');
       grunt.task.run('connect:server');
       grunt.task.run('watch');
+      
     });
+
+
     grunt.registerTask('build',function(file){
+
       grunt.task.run("uglify");
       grunt.task.run("concat");
       var arr=file.split("/");
@@ -190,15 +228,20 @@ module.exports = function(grunt){
       grunt.config('concat.single.src',arr.join("/")+"/*.js");
       grunt.config('concat.single.dest',pkg.version+"/"+cat+"."+arr[1]+"-debug.js");
       grunt.task.run('concat:single');
+
     });
+
+
     grunt.registerTask('default',function(){
+
       var files=grunt.file.expand(['ui/*/src/*.js','effect/*/src/*js']);
       for(var i=0;i<files.length;i++){
         grunt.task.run('build:'+files[i]);
       }
-     
-      
+
     });
+
+
     grunt.registerTask('build-single',function(file){
       // grunt.task.run("uglify");
       // grunt.task.run("concat");
@@ -219,7 +262,10 @@ module.exports = function(grunt){
       // }
 
     });
+
+
     grunt.event.on('watch', function(action, filepath, target) {
+
       if(action!="deleted"){
         if(filepath.indexOf(".md")>0){
           grunt.config('currentPath',filepath);

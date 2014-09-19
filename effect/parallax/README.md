@@ -2,7 +2,7 @@
 
 ---
 
-Parallax 滚动视差动画组件，提供基础滑动、事件回调及内置动画支持。
+Parallax 滚动视差动画组件，提供基础滑动、事件回调及内置动画支持。GitHub 地址：https://github.com/hahnzhu/parallax.js
 
 
 ### 一、使用
@@ -10,7 +10,6 @@ Parallax 滚动视差动画组件，提供基础滑动、事件回调及内置�
 #### 1、HTML ####
 
 ```html
-
 <!-- 这里的每个标签和每个类都是必须的 -->
 <div class="wrapper">
 	<div class="pages">
@@ -34,8 +33,9 @@ Parallax 滚动视差动画组件，提供基础滑动、事件回调及内置�
 </div>
 ```
 
+
 CSS 引用：
-```css
+```html
 <style rel="stylesheet" href="{your path}/parallax.css"></style>
 
 /* 如果需要使用内置动画，需要引用下面的内容 */
@@ -77,9 +77,8 @@ $('.pages').parallax({
 	 * {String}		orientation: landscape / protrait
 	 */
 	orientationchange: function(orientation) {
-		
+		// code here...	
 	}
-
 });
 
 </script>
