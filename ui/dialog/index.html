@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
+    <link rel="stylesheet" href="http://frozenui.github.io/static/solarized.css" />
+    <link rel="stylesheet" href="../../static/css/theme.css" />
+    <script type="text/javascript" src="http://zeptojs.com/zepto.min.js"></script>
+    <script type="text/javascript" src="http://frozenui.github.io/static/layout.js"></script>
+    <script type="text/javascript" src="../../static/js/theme.js"></script>
+  </head>
+  <body>
+    <div id="body-wrapper">
+      <div class="head-area">
+        <script type="text/javascript">
+          write_header();
+        </script>
+      </div>
+      <div class="main-area entry-content" id="content">
+          <div class="side-area">
+              
+              <dl id="navigation" role="navigation">
+                
+                
+                  
+                  
+                    
+                    <dd><a href="../../index.html"> 关于FrozenJS </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="../../how.html"> 如何使用 </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+
+                    <dt>基础</dt>
+                    
+                    <dd><a href="../../basic/core/index.html"> Core </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="../../basic/tap/index.html"> Tap </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+
+                    <dt>UI</dt>
+                    
+                      <dd class="side-highlight"><a href="../../ui/dialog/index.html"> Dialog </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+
+                    <dt>特效</dt>
+                    
+                    <dd><a href="../../effect/cover/index.html"> Cover </a></dd>
+                    
+                  
+                
+                
+              </dl>
+          </div>
+          
+          <div class="content-area">
+            <h1 id="dialog">Dialog</h1><hr>
+<h2 id="调用方式">调用方式</h2><p>dialog支持三种不同的调用方式，一般使用<code>$.dialog(options)</code>即可，不同的方式配置options后都会直接toggle弹窗。</p>
+<div class="highlight"><pre><code class="javascript"><span class="comment">//最简单的方式，组件会根据默认模板输出dom结构</span>
+$.dialog(options);
+
+<span class="comment">//通过传入模板字符串的方式</span>
+$(<span class="string">'&lt;div&gt;&lt;%=title%&gt;&lt;&lt;/div&gt;'</span>).dialog(options);
+
+<span class="comment">//通过传入css选择器的方式</span>
+$(<span class="string">"#id"</span>).dialog(options);</code></pre></div><h2 id="配置说明">配置说明</h2><table>
+    <tr>
+        <th>name</th>
+        <th>type</th>
+        <th>default</th>
+        <th>description</th>
+    </tr>
+    <tr>
+        <td>title</td>
+        <td>string</td>
+        <td>&#39;&#39;</td>
+        <td>浮层标题，用来填充模板</td>
+    </tr>
+    <tr>
+        <td>content</td>
+        <td>string</td>
+        <td>&#39;&#39;</td>
+        <td>浮层内容，用来填充模板</td>
+    </tr>
+    <tr>
+        <td>button</td>
+        <td>array</td>
+        <td>[&#39;确认&#39;]</td>
+        <td>浮层底部按钮的文字数组，建议不超过两个，与callback的index相互对应</td>
+    </tr>
+    <tr>
+        <td>select</td>
+        <td>int</td>
+        <td>0</td>
+        <td>需要高亮的按钮索引（与button相互对应），高亮的按钮会添加类名<code>select</code></td>
+    </tr>
+    <tr>
+        <td>allowScroll</td>
+        <td>bool</td>
+        <td>false</td>
+        <td>弹窗弹出后是否允许页面滚动</td>
+    </tr>
+    <tr>
+        <td>callback</td>
+        <td>funtion</td>
+        <td>function(){}</td>
+        <td>点击底部按钮后的回调函数，可以通过函数的第一个参数来获取点击的按钮索引（与button对应）</td>
+    </tr>
+    <tr>
+        <td>animation</td>
+        <td>string</td>
+        <td>&#39;pop&#39;</td>
+        <td>弹窗弹出的动画类名，会自动为弹窗外层加上该类名</td>
+    </tr>
+    <tr>
+        <td>end</td>
+        <td>function</td>
+        <td>function(){}</td>
+        <td>弹窗弹出后或者消失后的回调，可以通过函数第一个参数来获取状态（&#39;show&#39;为弹出后，&#39;hide&#39;为消失后）</td>
+    </tr>
+
+
+</table>
+
+
+
+<h2 id="模板规则">模板规则</h2><ol>
+<li>模板弹出时自动为顶级加上<code>show</code>类名，隐藏时自动去掉<code>show</code>，所以一般需要通过<code>show</code>类名来控制模板的显示隐藏。</li>
+<li>模板约定底部按钮的标签必须设置属性<code>data-role=&#39;button&#39;</code></li>
+<li>模板约定需要触发关闭的按钮或元素必须设置属性<code>data-role=&#39;dismiss&#39;</code></li>
+<li>建议使用默认模板</li>
+</ol>
+<h2 id="demo演示">DEMO演示</h2><div class="md-iframe">
+<iframe src="iframe-readme-1.html" allowtransparency="true" 
+frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code class="xml"> <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-center"</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-btn"</span> <span class="attribute">id</span>=<span class="value">"btn1"</span>&gt;</span>模板创建弹窗<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-btn"</span> <span class="attribute">id</span>=<span class="value">"btn2"</span>&gt;</span>DOM创建弹窗<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-dialog"</span>&gt;</span>
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-dialog-cnt"</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-dialog-bd"</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">div</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">h4</span>&gt;</span>标题<span class="tag">&lt;/<span class="title">h4</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">div</span>&gt;</span>内容<span class="tag">&lt;/<span class="title">div</span>&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+        <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+        <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-dialog-ft ui-btn-group"</span>&gt;</span>
+            <span class="tag">&lt;<span class="title">button</span> <span class="attribute">type</span>=<span class="value">"button"</span> <span class="attribute">data-role</span>=<span class="value">"button"</span>  <span class="attribute">class</span>=<span class="value">"select"</span> <span class="attribute">id</span>=<span class="value">"dialogButton&lt;%=i%&gt;"</span>&gt;</span>关闭<span class="tag">&lt;/<span class="title">button</span>&gt;</span> 
+        <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+    <span class="tag">&lt;/<span class="title">div</span>&gt;</span>        
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+$(<span class="string">"#btn1"</span>).tap(<span class="keyword">function</span>(){
+    $.dialog({
+        title:<span class="string">'温馨提示'</span>,
+        content:<span class="string">'温馨提示内容'</span>,
+        button:[<span class="string">"确认"</span>,<span class="string">"取消"</span>],
+        callback:<span class="keyword">function</span>(type,index){
+            console.log(<span class="string">"type:"</span>+type+<span class="string">";index:"</span>+index);
+        }
+    })
+
+})
+$(<span class="string">"#btn2"</span>).tap(<span class="keyword">function</span>(){
+    $(<span class="string">".ui-dialog"</span>).dialog();
+
+})
+
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div>
+          </div>
+          
+      </div>
+      <div class="footer-area">
+        <script type="text/javascript">
+          write_footer();
+        </script>
+      </div>
+    </div>
+    
+  </body>
+ 
+</html>
