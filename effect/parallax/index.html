@@ -1,30 +1,30 @@
 <!DOCTYPE HTML>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    
-    <title></title>
+    <meta charset="UTF-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
     <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
     <link rel="stylesheet" href="http://frozenui.github.io/static/solarized.css" />
     <link rel="stylesheet" href="../../static/css/theme.css" />
-    <script type="text/javascript" src="http://zeptojs.com/zepto.min.js"></script>
+    <script type="text/javascript" src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js"></script>
     <script type="text/javascript" src="http://frozenui.github.io/static/layout.js"></script>
     <script type="text/javascript" src="../../static/js/theme.js"></script>
+    <title></title>
   </head>
   <body>
     <div id="body-wrapper">
       <div class="head-area">
+
         <script type="text/javascript">
           write_header();
         </script>
+
       </div>
       <div class="main-area entry-content" id="content">
           <div class="side-area">
               
               <dl id="navigation" role="navigation">
+
                 
                 
                   
@@ -71,6 +71,20 @@
                   
                   
                     
+                    <dd><a href="../../ui/slider/index.html"> Slider </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="../../ui/tab/index.html"> Tab </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
 
                     <dt>特效</dt>
                     
@@ -91,9 +105,8 @@
           
           <div class="content-area">
             <h1 id="parallax">Parallax</h1><hr>
-<p>Parallax 滚动视差动画组件，提供基础滑动、事件回调及内置动画支持。</p>
-<h3 id="一、使用">一、使用</h3><h4 id="1、html">1、HTML</h4><div class="highlight"><pre><code class="xml">
-<span class="comment">&lt;!-- 这里的每个标签和每个类都是必须的 --&gt;</span>
+<p>Parallax 滚动视差动画组件，提供基础滑动、事件回调及内置动画支持。GitHub 地址：<a href="https://github.com/hahnzhu/parallax.js">https://github.com/hahnzhu/parallax.js</a></p>
+<h3 id="一、使用">一、使用</h3><h4 id="1、html">1、HTML</h4><div class="highlight"><pre><code class="xml"><span class="comment">&lt;!-- 这里的每个标签和每个类都是必须的 --&gt;</span>
 <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"wrapper"</span>&gt;</span>
     <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"pages"</span>&gt;</span>
 
@@ -114,10 +127,10 @@
 
     <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><p>CSS 引用：</p>
-<div class="highlight"><pre><code class="css">&lt;style rel="stylesheet" href="{your path}/parallax.css"&gt;&lt;/style&gt;
+<div class="highlight"><pre><code class="xml"><span class="tag">&lt;<span class="title">style</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"{your path}/parallax.css"</span>&gt;</span><span class="css"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
 
 /* 如果需要使用内置动画，需要引用下面的内容 */
-&lt;style rel="stylesheet" href="{your path}/parallax-animation.css"&gt;&lt;/style&gt;</code></pre></div><p>JS 引用：</p>
+<span class="tag">&lt;<span class="title">style</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">href</span>=<span class="value">"{your path}/parallax-animation.css"</span>&gt;</span><span class="css"></span><span class="tag">&lt;/<span class="title">style</span>&gt;</span></code></pre></div><p>JS 引用：</p>
 <div class="highlight"><pre><code class="javascript">&lt;script src=<span class="string">"{your path}/zepto.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
 <span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"{your path}/parallax.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
 <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
@@ -146,9 +159,8 @@ $(<span class="string">'.pages'</span>).parallax({
      * {String}        orientation: landscape / protrait
      */</span>
     orientationchange: <span class="keyword">function</span>(orientation) {
-
+        <span class="comment">// code here...    </span>
     }
-
 });
 
 <span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></code></pre></div><h4 id="具体参数演示">具体参数演示</h4><div class="highlight"><pre><code class="javascript"><span class="comment">// DEMO1(默认)</span>
@@ -300,12 +312,12 @@ $(<span class="string">'.pages'</span>).parallax({
           
       </div>
       <div class="footer-area">
+
         <script type="text/javascript">
           write_footer();
         </script>
+
       </div>
-    </div>
-    
+    </div>q
   </body>
- 
 </html>
