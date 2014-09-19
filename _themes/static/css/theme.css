@@ -1,16 +1,6 @@
 
 /* reset of style.css */
-a:link,
-a:visited {
-    color: #5899d0;
-}
-.title-area h1 a {
-    color: #5899d0;
-}
-.content-area {
-    margin-left: 240px;
-    width: 840px;
-}
+
 @font-face {
     font-family: "rei";
     src: url("https://i.alipayobjects.com/common/fonts/rei.eot?20130423"); /* IE9 */
