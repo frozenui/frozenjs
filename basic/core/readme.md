@@ -1,8 +1,5 @@
 # Core
 
----
-
-
 core包含了frozenJS的一些常用方法，包括zepto的`data`的扩展和模板引擎。
 
 ## data

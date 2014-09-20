@@ -1,7 +1,5 @@
 # Tap
 
----
-
 > zepto默认未包含touch，而且zepto中touch模块的tap实现并不完美，会出现`点透`的bug。
 
 > 除了zepto的touch模块，还可以用[fastclick](https://github.com/ftlabs/fastclick)来实现，但fastclick代码量较大。

@@ -1,7 +1,5 @@
 # Parallax
 
----
-
 Parallax 滚动视差动画组件，提供基础滑动、事件回调及内置动画支持。GitHub 地址：https://github.com/hahnzhu/parallax.js
 
 

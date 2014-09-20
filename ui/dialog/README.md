@@ -1,7 +1,5 @@
 # Dialog
 
----
-
 ## 调用方式
 
 dialog支持三种不同的调用方式，一般使用`$.dialog(options)`即可，不同的方式配置options后都会直接toggle弹窗。
