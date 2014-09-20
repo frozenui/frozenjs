@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /* sticky */
 .sticky {
     position: fixed;
@@ -8,6 +9,10 @@
     color: #5899d0;
 }
 
+=======
+
+/* reset of style.css */
+>>>>>>> efd739185509bfe56a60836fc6b7e619e6fe1a98
 
 @font-face {
     font-family: "rei";
