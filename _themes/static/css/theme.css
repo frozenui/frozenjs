@@ -1,16 +1,14 @@
-
-/* reset of style.css */
-a:link,
-a:visited {
-    color: #5899d0;
+/* sticky */
+.sticky {
+    position: fixed;
+    top: 0;
 }
+
 .title-area h1 a {
     color: #5899d0;
 }
-.content-area {
-    margin-left: 240px;
-    width: 840px;
-}
+
+
 @font-face {
     font-family: "rei";
     src: url("https://i.alipayobjects.com/common/fonts/rei.eot?20130423"); /* IE9 */
@@ -26,13 +24,11 @@ a:visited {
     cursor: default;
     -webkit-font-smoothing: antialiased;
 }
-
-
 .side-area dt{padding:20px 15px 5px;font-size: 14px;}
 .side-area{border-right: 1px solid #eee;}
 
 #content{
-    font-size: 14px; 
+    font-size: 14px;
 }
 #content h2 {
     margin-top: 40px;

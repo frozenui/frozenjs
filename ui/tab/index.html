@@ -6,9 +6,9 @@
     <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
     <link rel="stylesheet" href="http://frozenui.github.io/static/solarized.css" />
     <link rel="stylesheet" href="../../static/css/theme.css" />
-    <script type="text/javascript" src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js"></script>
-    <script type="text/javascript" src="http://frozenui.github.io/static/layout.js"></script>
-    <script type="text/javascript" src="../../static/js/theme.js"></script>
+    <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js"></script>
+    <script src="http://frozenui.github.io/static/layout.js"></script>
+    <script src="../../static/js/theme.js"></script>
     <title></title>
   </head>
   <body>
@@ -117,6 +117,23 @@
         </script>
 
       </div>
-    </div>q
-  </body>
+    </div>
+
+
+<script>
+  !function($) {
+    $(window).on('load', function() {
+
+      var nav = $('.side-area');
+      var oldTop = nav.offset().top;
+      
+      $(document).on('scroll', function() {
+        window.scrollY >= oldTop ? 
+              nav.addClass('sticky') :
+              nav.removeClass('sticky');
+      });
+    })
+  }(Zepto);
+</script>
+</body>
 </html>
