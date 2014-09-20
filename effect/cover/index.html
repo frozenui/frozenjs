@@ -302,17 +302,16 @@ $(<span class="string">".ui-frozen-cover"</span>).cover({
 
 <script>
   !function($) {
-    $(window).on('load', function() {
 
-      var nav = $('.side-area');
-      var oldTop = nav.offset().top;
-      
-      $(document).on('scroll', function() {
-        window.scrollY >= oldTop ? 
-              nav.addClass('sticky') :
-              nav.removeClass('sticky');
-      });
-    })
+    var nav = $('.side-area');
+    var oldTop = nav.offset().top;
+
+    $(document).on('scroll', function() {
+      window.scrollY >= oldTop ? 
+            nav.addClass('sticky') :
+            nav.removeClass('sticky');
+    });
+    
   }(Zepto);
 </script>
 </body>
