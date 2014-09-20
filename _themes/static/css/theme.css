@@ -3,11 +3,13 @@
     position: fixed;
     top: 0;
 }
-/* reset of color of title */
+/* reset of style.css */
 .title-area h1 a {
     color: #5899d0;
 }
-
+.content-area h1 {
+    margin-bottom: 20px;
+}
 
 @font-face {
     font-family: "rei";
