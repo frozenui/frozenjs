@@ -1,7 +1,7 @@
 {
-  "name": "frozenjs",
+  "name": "FrozenJS",
   "version": "1.0.0",
-  "family": "frozen",
+  "family": "FrozenUI",
   "homepage": "http://frozenui.github.io/frozenjs/",
   "devDependencies": {
     "grunt": "~0.4.0",
