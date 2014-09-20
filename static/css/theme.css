@@ -1,18 +1,13 @@
-<<<<<<< HEAD
 /* sticky */
 .sticky {
     position: fixed;
     top: 0;
 }
-
+/* reset of color of title */
 .title-area h1 a {
     color: #5899d0;
 }
 
-=======
-
-/* reset of style.css */
->>>>>>> efd739185509bfe56a60836fc6b7e619e6fe1a98
 
 @font-face {
     font-family: "rei";
