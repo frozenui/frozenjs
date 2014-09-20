@@ -1,5 +1,13 @@
+/* sticky */
+.sticky {
+    position: fixed;
+    top: 0;
+}
 
-/* reset of style.css */
+.title-area h1 a {
+    color: #5899d0;
+}
+
 
 @font-face {
     font-family: "rei";
@@ -16,8 +24,6 @@
     cursor: default;
     -webkit-font-smoothing: antialiased;
 }
-
-
 .side-area dt{padding:20px 15px 5px;font-size: 14px;}
 .side-area{border-right: 1px solid #eee;}
 
