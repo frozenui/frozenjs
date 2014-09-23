@@ -1,30 +1,31 @@
 <!DOCTYPE HTML>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    
-    <title></title>
+    <meta charset="UTF-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
     <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
     <link rel="stylesheet" href="http://frozenui.github.io/static/solarized.css" />
     <link rel="stylesheet" href="static/css/theme.css" />
-    <script type="text/javascript" src="http://localhost/vipstyle/frozenjs/lib/zepto.min.js"></script>
-    <script type="text/javascript" src="http://frozenui.github.io/static/layout.js"></script>
-    <script type="text/javascript" src="static/js/theme.js"></script>
+    <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js"></script>
+    <script src="http://frozenui.github.io/static/layout.js"></script>
+    <script src="static/js/theme.js"></script>
+    <title>FrozenUI - JavaScript</title>
   </head>
   <body>
     <div id="body-wrapper">
       <div class="head-area">
+
         <script type="text/javascript">
           write_header();
         </script>
+
       </div>
       <div class="main-area entry-content" id="content">
           <div class="side-area">
               
               <dl id="navigation" role="navigation">
+
                 
                 
                   
@@ -71,10 +72,31 @@
                   
                   
                     
+                    <dd><a href="ui/slider/index.html"> Slider </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="ui/tab/index.html"> Tab </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
 
                     <dt>特效</dt>
                     
                     <dd><a href="effect/cover/index.html"> Cover </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="effect/parallax/index.html"> Parallax </a></dd>
                     
                   
                 
@@ -83,35 +105,52 @@
           </div>
           
           <div class="content-area">
-            <h1 id="关于frozenjs">关于FrozenJS</h1><hr>
-<h2 id="什么是frozenjs">什么是FrozenJS</h2><p>FrozenJS是针对移动端开发的js组件库，其依赖<a href="http://zeptojs.com">zepto.js</a>和FronzenUI。</p>
-<p>FrozenJS的所有组件均以zepto的插件的形式存在。</p>
-<p>FrozenJS包括：</p>
+            <div class="content">
+                <h1 id="关于frozenjs">关于FrozenJS</h1><h2 id="什么是frozenjs">什么是FrozenJS</h2><p>FrozenJS 是针对移动端开发的 js 组件库，其依赖 <a href="http://zeptojs.com">zepto.js</a> 和 FronzenUI。</p>
+<p>FrozenJS 的所有组件均以 zepto 的插件的形式存在。</p>
+<p>FrozenJS 包括：</p>
 <ol>
-<li>basic：FrozenJS的一些基础功能，包括模板引擎、tap支持等。</li>
-<li>ui：主要是一些触屏常用的UI组件，包括dialog等。</li>
+<li>basic：FrozenJS 的一些基础功能，包括模板引擎、tap 支持等。</li>
+<li>ui：主要是一些触屏常用的 UI 组件，包括 dialog 等。</li>
 <li>effect：非常用的特效库，特殊场景使用到是可以单独调用。</li>
 </ol>
-<h2 id="frozenjs能做什么">FrozenJS能做什么</h2><p>FrozenJS针对移动端而生，可以处理大部分移动端的UI呈现。而且还可以满足某些特殊场景的特效展示。</p>
-<h2 id="frozenjs的优势">FrozenJS的优势</h2><ol>
-<li>体积小，js只依赖zepto。</li>
+<h2 id="frozenjs-能做什么">FrozenJS 能做什么</h2><p>FrozenJS 针对移动端而生，可以处理大部分移动端的UI呈现。而且还可以满足某些特殊场景的特效展示。</p>
+<h2 id="frozenjs-的优势">FrozenJS 的优势</h2><ol>
+<li>体积小，js 只依赖 zepto。</li>
 <li>调用简单。</li>
 </ol>
-<h2 id="frozenjs的理念">FrozenJS的理念</h2><ol>
+<h2 id="frozenjs-的理念">FrozenJS 的理念</h2><ol>
 <li>为移动而生</li>
 <li>轻量，可复用</li>
 </ol>
 
+            </div>
           </div>
           
       </div>
       <div class="footer-area">
+
         <script type="text/javascript">
           write_footer();
         </script>
+
       </div>
     </div>
+
+
+<script>
+  !function($) {
+
+    var nav = $('.side-area');
+    var oldTop = nav.offset().top;
+
+    $(document).on('scroll', function() {
+      window.scrollY >= oldTop ? 
+            nav.addClass('sticky') :
+            nav.removeClass('sticky');
+    });
     
-  </body>
- 
+  }(Zepto);
+</script>
+</body>
 </html>

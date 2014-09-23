@@ -1,30 +1,31 @@
 <!DOCTYPE HTML>
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    
-    <title></title>
+    <meta charset="UTF-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
     <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
     <link rel="stylesheet" href="http://frozenui.github.io/static/solarized.css" />
     <link rel="stylesheet" href="../../static/css/theme.css" />
-    <script type="text/javascript" src="http://localhost/vipstyle/frozenjs/lib/zepto.min.js"></script>
-    <script type="text/javascript" src="http://frozenui.github.io/static/layout.js"></script>
-    <script type="text/javascript" src="../../static/js/theme.js"></script>
+    <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js"></script>
+    <script src="http://frozenui.github.io/static/layout.js"></script>
+    <script src="../../static/js/theme.js"></script>
+    <title>FrozenUI - JavaScript</title>
   </head>
   <body>
     <div id="body-wrapper">
       <div class="head-area">
+
         <script type="text/javascript">
           write_header();
         </script>
+
       </div>
       <div class="main-area entry-content" id="content">
           <div class="side-area">
               
               <dl id="navigation" role="navigation">
+
                 
                 
                   
@@ -71,10 +72,31 @@
                   
                   
                     
+                    <dd><a href="../../ui/slider/index.html"> Slider </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="../../ui/tab/index.html"> Tab </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
 
                     <dt>特效</dt>
                     
                     <dd><a href="../../effect/cover/index.html"> Cover </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="../../effect/parallax/index.html"> Parallax </a></dd>
                     
                   
                 
@@ -83,8 +105,8 @@
           </div>
           
           <div class="content-area">
-            <h1 id="tap">Tap</h1><hr>
-<blockquote>
+            <div class="content">
+                <h1 id="tap">Tap</h1><blockquote>
 <p>zepto默认未包含touch，而且zepto中touch模块的tap实现并不完美，会出现<code>点透</code>的bug。</p>
 <p>除了zepto的touch模块，还可以用<a href="https://github.com/ftlabs/fastclick">fastclick</a>来实现，但fastclick代码量较大。</p>
 <p>frozenJS中tap使用精简的代码解决了zepto中touch模块的<code>点透</code>的bug。</p>
@@ -99,16 +121,33 @@ $(<span class="string">".tap-element"</span>).on(<span class="string">"tap"</spa
 $(<span class="string">".tap-element"</span>).tap(<span class="keyword">function</span>(){
 
 });</code></pre></div>
+            </div>
           </div>
           
       </div>
       <div class="footer-area">
+
         <script type="text/javascript">
           write_footer();
         </script>
+
       </div>
     </div>
+
+
+<script>
+  !function($) {
+
+    var nav = $('.side-area');
+    var oldTop = nav.offset().top;
+
+    $(document).on('scroll', function() {
+      window.scrollY >= oldTop ? 
+            nav.addClass('sticky') :
+            nav.removeClass('sticky');
+    });
     
-  </body>
- 
+  }(Zepto);
+</script>
+</body>
 </html>
