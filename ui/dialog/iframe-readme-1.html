@@ -8,14 +8,15 @@
     <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js"></script>
 
     
-      <script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/basic-debug.js"></script>
+      <script src="../../basic/core/src/core.js"></script>
+      <script src="../../basic/tap/src/tap.js"></script>
     
     
     
       <script src="../../ui/dialog/src/dialog.js"></script>
     
 
-    <link rel="stylesheet" href="http://i.gtimg.cn/vipstyle/frozenui/1.0.0/css/basic.css?_bid=256" />    
+    <link rel="stylesheet" href="http://i.gtimg.cn/vipstyle/frozenui/1.1.0/css/frozen.css?_bid=256" />    
   </head>
   <body>
 
@@ -49,8 +50,7 @@ $("#btn1").tap(function(){
 
 })
 $("#btn2").tap(function(){
-    $(".ui-dialog").dialog();
-
+    $(".ui-dialog").dialog("show");
 })
 
 </script>

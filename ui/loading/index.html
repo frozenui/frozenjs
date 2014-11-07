@@ -66,14 +66,14 @@
                   
                   
                     
-                    <dd><a href="../../ui/loading/index.html"> Loading </a></dd>
+                      <dd class="side-highlight"><a href="../../ui/loading/index.html"> Loading </a></dd>
                     
                   
                 
                   
                   
                     
-                      <dd class="side-highlight"><a href="../../ui/slider/index.html"> Slider </a></dd>
+                    <dd><a href="../../ui/slider/index.html"> Slider </a></dd>
                     
                   
                 
@@ -114,8 +114,56 @@
           
           <div class="content-area">
             <div class="content">
-                <h1 id="slider">Slider</h1><p>整理中...</p>
+                <h1 id="loading">Loading</h1><h2 id="调用方式">调用方式</h2><p>tips支持三种不同的调用方式，一般使用<code>$.tips(options)</code>即可。</p>
+<div class="highlight"><pre><code class="javascript"><span class="comment">//最简单的方式，组件会根据默认模板输出dom结构</span>
+$.loading(options);
 
+<span class="comment">//通过传入模板字符串的方式</span>
+$(<span class="string">'&lt;div&gt;&lt;%=content%&gt;&lt;&lt;/div&gt;'</span>).loading(options);
+
+<span class="comment">//通过传入css选择器的方式</span>
+$(<span class="string">"#id"</span>).loading(options);</code></pre></div><h2 id="配置说明">配置说明</h2><table>
+    <tr>
+        <th>name</th>
+        <th>type</th>
+        <th>default</th>
+        <th>description</th>
+    </tr>
+    <tr>
+        <td>content</td>
+        <td>string</td>
+        <td>&#39;加载中...&#39;</td>
+        <td>提示内容，用来填充模板</td>
+    </tr>
+</table>
+
+
+
+
+
+<h2 id="demo演示">DEMO演示</h2><div class="md-iframe">
+<iframe src="iframe-readme-1.html" allowtransparency="true" 
+frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code class="xml"> <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-center"</span>&gt;</span>
+
+    <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-btn"</span> <span class="attribute">id</span>=<span class="value">"btn1"</span>&gt;</span>弹出loading<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+
+
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+$(<span class="string">"#btn1"</span>).tap(<span class="keyword">function</span>(){
+    <span class="keyword">var</span> el=$.loading({
+        content:<span class="string">'加载中...'</span>,
+    })
+    setTimeout(<span class="keyword">function</span>(){
+        el.hide();
+    },<span class="number">2000</span>);
+
+});
+
+
+
+</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div>
             </div>
           </div>
           
