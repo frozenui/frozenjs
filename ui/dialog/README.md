@@ -122,8 +122,7 @@ $("#btn1").tap(function(){
 	
 })
 $("#btn2").tap(function(){
-	$(".ui-dialog").dialog();
-
+	$(".ui-dialog").dialog("show");
 })
 
 </script>

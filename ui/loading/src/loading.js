@@ -1,0 +1,44 @@
+/**
+ * User: jeakeyliang
+ * Date: 14-11-07
+ * Time: 下午9:20
+ */
+
+!function($){
+
+	// 默认模板
+	var _loadingTpl='<div class="ui-dialog ui-dialog-notice show">'+
+		    '<div class="ui-dialog-cnt">'+
+		      '<i class="ui-loading-bright"></i>'+
+		      '<p><%=content%></p>'+
+		   '</div>'+
+		 '</div>';
+	
+	// 默认参数
+	var defaults={
+		content:'加载中...'
+	}
+	// 构造函数
+	var Loading   = function (el,option,isFromTpl) {
+		var self=this;
+		this.element=$(el);
+		this._isFromTpl=isFromTpl;
+		this.option=$.extend(defaults,option);
+		this.show();
+	}
+	Loading.prototype={
+		show:function(){
+			this.element.show();
+		},
+		hide :function () {
+			this.element.hide();
+		}
+	}
+	function Plugin(option) {
+
+		return $.adaptObject(this, defaults, option,_loadingTpl,Loading,"loading");
+	}
+	$.fn.loading=$.loading= Plugin;
+}(window.Zepto)
+	
+
