@@ -111,9 +111,54 @@
 
 		return data ? fn(data, env) : fn; // 如果传入了数据，则直接返回渲染结果HTML文本，否则返回一个渲染函数
 	};
-	
+	$.adaptObject =  function (element, defaults, option,template,plugin,pluginName) {
+    var $this= element;
+
+    if (typeof option != 'string'){
+    
+    // 获得配置信息
+    var context=$.extend({}, defaults,  typeof option == 'object' && option);
+
+    var isFromTpl=false;
+    // 如果传入script标签的选择器
+    if($.isArray($this) && $this.length && $($this)[0].nodeName.toLowerCase()=="script"){
+      // 根据模板获得对象并插入到body中
+      $this=$($.tpl($this[0].innerHTML,context)).appendTo("body");
+      isFromTpl=true;
+    }
+    // 如果传入模板字符串
+    else if($.isArray($this) && $this.length && $this.selector== ""){
+      // 根据模板获得对象并插入到body中
+      $this=$($.tpl($this[0].outerHTML,context)).appendTo("body");
+      isFromTpl=true;
+    }
+    // 如果通过$.dialog()的方式调用
+    else if(!$.isArray($this)){
+      // 根据模板获得对象并插入到body中
+      $this=$($.tpl(template,context)).appendTo("body");
+      isFromTpl=true;
+    }
+
+    }
+
+    return $this.each(function () {
+
+      var el = $(this);
+      // 读取对象缓存
+  
+      var data  = el.data('fz.'+pluginName);
+      
+
+
+      if (!data) el.data('fz.'+pluginName, 
+        (data = new plugin(this,$.extend({}, defaults,  typeof option == 'object' && option),isFromTpl)
+
+      ));
+
+      if (typeof option == 'string') data[option]();
+    })
+  }
 }(window.Zepto);
-	
 
 
 
@@ -281,20 +326,23 @@
 	}
 	// 构造函数
 	var Dialog   = function (el,option,isFromTpl) {
-		console.log(option)
+
 		this.option=$.extend(defaults,option);
 		this.element=$(el);
 		this._isFromTpl=isFromTpl;
 		this.button=$(el).find('[data-role="button"]');
 		this._bindEvent();
-		// this.toggle();
+		this.toggle();
 	}
 	Dialog.prototype={
 		_bindEvent:function(){
 			var self=this;
 			self.button.on("tap",function(){
 				var index=$(self.button).index($(this));
-				self.option.callback("button",index);
+				// self.option.callback("button",index);
+				var e=$.Event("dialog:action");
+				e.index=index;
+				self.element.trigger(e);
 				self.hide.apply(self);
 			});
 		},
@@ -307,17 +355,19 @@
 		},
 		show:function(){
 			var self=this;
-			self.option.callback("show");
+			// self.option.callback("show");
+			self.element.trigger($.Event("dialog:show"));
 			self.element.addClass("show");
 			this.option.allowScroll && self.element.on("touchmove" , _stopScroll);
 
 		},
 		hide :function () {
 			var self=this;
-			self.option.callback("hide");
+			// self.option.callback("hide");
+			self.element.trigger($.Event("dialog:hide"));
 			self.element.off("touchmove" , _stopScroll);
 			self.element.removeClass("show");
-			console.log(self._isFromTpl)
+			
 			self._isFromTpl&&self.element.remove();
 		}
 	}
@@ -327,43 +377,58 @@
 	}
 	function Plugin(option) {
 
-		var $this= this;
-		// 获得配置信息
-		var context=$.extend({}, defaults,  typeof option == 'object' && option);
-
-		var isFromTpl=false;
-		// 如果传入script标签的选择器
-		if($.isArray(this) && this.length && $(this)[0].nodeName.toLowerCase()=="script"){
-			// 根据模板获得对象并插入到body中
-			$this=$($.tpl(this[0].innerHTML,context)).appendTo("body");
-			isFromTpl=true;
-		}
-		// 如果传入模板字符串
-		else if($.isArray(this) && this.length && $this.selector== ""){
-			// 根据模板获得对象并插入到body中
-			$this=$($.tpl(this[0].outerHTML,context)).appendTo("body");
-			isFromTpl=true;
-		}
-		// 如果通过$.dialog()的方式调用
-		else if(!$.isArray(this)){
-			// 根据模板获得对象并插入到body中
-			$this=$($.tpl(_dialogTpl,context)).appendTo("body");
-			isFromTpl=true;
-		}
-
-
-		return $this.each(function () {
-			var el = $(this);
-			// 读取对象缓存
-			var data  = el.data('fz.dialog');
-			if (!data) el.data('fz.dialog', 
-				(data = new Dialog(this,$.extend({}, defaults,  typeof option == 'object' && option),isFromTpl)
-			));
-			data.toggle();
-			// if (typeof option == 'string') data[option].call($this);
-		})
+		return $.adaptObject(this, defaults, option,_dialogTpl,Dialog,"dialog");
 	}
 	$.fn.dialog=$.dialog= Plugin;
+}(window.Zepto)
+	
+
+
+/**
+ * User: jeakeyliang
+ * Date: 14-11-07
+ * Time: 下午9:20
+ */
+
+!function($){
+
+	// 默认模板
+	var _loadingTpl='<div class="ui-dialog ui-dialog-notice show">'+
+		    '<div class="ui-dialog-cnt">'+
+		      '<i class="ui-loading-bright"></i>'+
+		      '<p><%=content%></p>'+
+		   '</div>'+
+		 '</div>';
+	
+	// 默认参数
+	var defaults={
+		content:'加载中...'
+	}
+	// 构造函数
+	var Loading   = function (el,option,isFromTpl) {
+		var self=this;
+		this.element=$(el);
+		this._isFromTpl=isFromTpl;
+		this.option=$.extend(defaults,option);
+		this.show();
+	}
+	Loading.prototype={
+		show:function(){
+			var e=$.Event('loading:show');
+			this.element.trigger(e);
+			this.element.show();
+		},
+		hide :function () {
+			var e=$.Event('loading:hide');
+			this.element.trigger(e);
+			this.element.remove();
+		}
+	}
+	function Plugin(option) {
+
+		return $.adaptObject(this, defaults, option,_loadingTpl,Loading,"loading");
+	}
+	$.fn.loading=$.loading= Plugin;
 }(window.Zepto)
 	
 
@@ -385,6 +450,83 @@
 
 !function($){
 
+}(window.Zepto)
+	
+
+
+/**
+ * User: jeakeyliang
+ * Date: 14-11-07
+ * Time: 下午9:20
+ */
+
+!function($){
+
+	// 默认模板
+	var _tipsTpl='<div class="ui-poptips ui-poptips-<%=type%>">'+
+					'<div class="ui-poptips-cnt">'+
+    				'<i></i><%=content%>'+
+					'</div>'+
+				'</div>';
+	
+	// 默认参数
+	var defaults={
+		content:'',
+		stayTime:1000,
+		type:'info',
+		callback:function(){}
+	}
+	// 构造函数
+	var Tips   = function (el,option,isFromTpl) {
+		var self=this;
+		this.element=$(el);
+		this._isFromTpl=isFromTpl;
+		this.elementHeight=$(el).height();
+
+		this.option=$.extend(defaults,option);
+		$(el).css({
+			"-webkit-transform":"translateY(-"+this.elementHeight+"px)"
+		});
+		setTimeout(function(){
+			$(el).css({
+				"-webkit-transition":"all .5s"
+			});
+			self.show();
+		},20);
+		
+	}
+	Tips.prototype={
+		show:function(){
+			var self=this;
+			// self.option.callback("show");
+			self.element.trigger($.Event("tips:show"));
+			this.element.css({
+				"-webkit-transform":"translateY(0px)"
+			});
+			if(self.option.stayTime>0){
+				setTimeout(function(){
+					self.hide();
+				},self.option.stayTime)
+			}
+		},
+		hide :function () {
+			var self=this;
+			self.element.trigger($.Event("tips:hide"));
+			this.element.css({
+				"-webkit-transform":"translateY(-"+this.elementHeight+"px)"
+			});
+			setTimeout(function(){
+				self._isFromTpl&&self.element.remove();
+			},500)
+				
+			
+		}
+	}
+	function Plugin(option) {
+
+		return $.adaptObject(this, defaults, option,_tipsTpl,Tips,"tips");
+	}
+	$.fn.tips=$.tips= Plugin;
 }(window.Zepto)
 	
 

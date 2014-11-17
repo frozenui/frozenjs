@@ -111,19 +111,24 @@ $("#id").dialog(options);
 </div>
 <script type="text/javascript">
 $("#btn1").tap(function(){
-	$.dialog({
+	var dia=$.dialog({
 	    title:'温馨提示',
 	    content:'温馨提示内容',
-	    button:["确认","取消"],
-	    callback:function(type,index){
-	        console.log("type:"+type+";index:"+index);
-	    }
-	})
+	    button:["确认","取消"]
+	});
+	
+	dia.on("dialog:action",function(e){
+		console.log(e.index)
+	});
+	dia.on("dialog:hide",function(e){
+		console.log("dialog hide")
+	});
 	
 })
 $("#btn2").tap(function(){
 	$(".ui-dialog").dialog("show");
 })
+
 
 </script>
 ```
