@@ -42,7 +42,8 @@
 	Tips.prototype={
 		show:function(){
 			var self=this;
-			self.option.callback("show");
+			// self.option.callback("show");
+			self.element.trigger($.Event("tips:show"));
 			this.element.css({
 				"-webkit-transform":"translateY(0px)"
 			});
@@ -54,16 +55,15 @@
 		},
 		hide :function () {
 			var self=this;
-
-			if(self.option.callback("hide")!=false){
-				this.element.css({
-					"-webkit-transform":"translateY(-"+this.elementHeight+"px)"
-				});
-				setTimeout(function(){
-					self._isFromTpl&&self.element.remove();
-				},500)
+			self.element.trigger($.Event("tips:hide"));
+			this.element.css({
+				"-webkit-transform":"translateY(-"+this.elementHeight+"px)"
+			});
+			setTimeout(function(){
+				self._isFromTpl&&self.element.remove();
+			},500)
 				
-			}
+			
 		}
 	}
 	function Plugin(option) {

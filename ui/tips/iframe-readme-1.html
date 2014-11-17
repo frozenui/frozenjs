@@ -33,12 +33,11 @@ $("#btn1").tap(function(){
     el=$.tips({
         content:'温馨提示内容',
         stayTime:2000,
-        type:"success",
-        callback:function(type){
-            console.log("type:"+type);
-        }
+        type:"success"
     })
-
+    el.on("tips:hide",function(){
+        console.log("tips hide");
+    })
 
 });
 

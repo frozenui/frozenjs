@@ -210,19 +210,24 @@ frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code 
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
 $(<span class="string">"#btn1"</span>).tap(<span class="keyword">function</span>(){
-    $.dialog({
+    <span class="keyword">var</span> dia=$.dialog({
         title:<span class="string">'温馨提示'</span>,
         content:<span class="string">'温馨提示内容'</span>,
-        button:[<span class="string">"确认"</span>,<span class="string">"取消"</span>],
-        callback:<span class="keyword">function</span>(type,index){
-            console.log(<span class="string">"type:"</span>+type+<span class="string">";index:"</span>+index);
-        }
-    })
+        button:[<span class="string">"确认"</span>,<span class="string">"取消"</span>]
+    });
+
+    dia.on(<span class="string">"dialog:action"</span>,<span class="keyword">function</span>(e){
+        console.log(e.index)
+    });
+    dia.on(<span class="string">"dialog:hide"</span>,<span class="keyword">function</span>(e){
+        console.log(<span class="string">"dialog hide"</span>)
+    });
 
 })
 $(<span class="string">"#btn2"</span>).tap(<span class="keyword">function</span>(){
     $(<span class="string">".ui-dialog"</span>).dialog(<span class="string">"show"</span>);
 })
+
 
 </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div>
             </div>

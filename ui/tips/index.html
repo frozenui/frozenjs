@@ -179,12 +179,11 @@ $(<span class="string">"#btn1"</span>).tap(<span class="keyword">function</span>
     el=$.tips({
         content:<span class="string">'温馨提示内容'</span>,
         stayTime:<span class="number">2000</span>,
-        type:<span class="string">"success"</span>,
-        callback:<span class="keyword">function</span>(type){
-            console.log(<span class="string">"type:"</span>+type);
-        }
+        type:<span class="string">"success"</span>
     })
-
+    el.on(<span class="string">"tips:hide"</span>,<span class="keyword">function</span>(){
+        console.log(<span class="string">"tips hide"</span>);
+    })
 
 });
 

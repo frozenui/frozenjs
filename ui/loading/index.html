@@ -156,8 +156,11 @@ $(<span class="string">"#btn1"</span>).tap(<span class="keyword">function</span>
         content:<span class="string">'加载中...'</span>,
     })
     setTimeout(<span class="keyword">function</span>(){
-        el.hide();
+        el.loading(<span class="string">"hide"</span>);
     },<span class="number">2000</span>);
+    el.on(<span class="string">"loading:hide"</span>,<span class="keyword">function</span>(){
+        console.log(<span class="string">"loading hide"</span>);
+    });
 
 });
 
