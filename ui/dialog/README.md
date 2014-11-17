@@ -110,6 +110,10 @@ $("#id").dialog(options);
     </div>        
 </div>
 <script type="text/javascript">
+
+
+
+
 $("#btn1").tap(function(){
 	var dia=$.dialog({
 	    title:'温馨提示',
@@ -128,7 +132,5 @@ $("#btn1").tap(function(){
 $("#btn2").tap(function(){
 	$(".ui-dialog").dialog("show");
 })
-
-
 </script>
 ```

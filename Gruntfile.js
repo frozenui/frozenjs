@@ -154,6 +154,7 @@ module.exports = function(grunt){
           files: [
             {expand: true, cwd: '_themes/static/', src: ['**'], dest: '_site/static'},
             {expand: true, src: ['*/*/src/*.js'], dest: '_site/'},
+            {expand: true, src: ['lib/*.js'], dest: '_site/'}
           ]
         },
 
