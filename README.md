@@ -105,6 +105,6 @@ FrozenJS 通过grunt来管理，首先应确保grunt的运行环境，可参照h
 
 使用`grunt docs`会将文档生成到`_site`目录，提交当前目录到https://github.com/frozenui/baseui.git
 
-_site目录下的内容提交到gh-pages分支，参考https://github.com/frozenui/baseui/issues/
+_site目录下的内容提交到gh-pages分支，参考 https://github.com/frozenui/baseui/issues/2
 
-页面会显示在frozen的js组件菜单项中http://frozenui.github.io/frozenjs/
+页面会显示在frozen的js组件菜单项中 http://frozenui.github.io/frozenjs/
