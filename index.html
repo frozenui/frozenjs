@@ -73,6 +73,13 @@
                   
                   
                     
+                    <dd><a href="ui/scroller/index.html"> Scroller </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
                     <dd><a href="ui/slider/index.html"> Slider </a></dd>
                     
                   
@@ -122,16 +129,56 @@
 <li>ui：主要是一些触屏常用的 UI 组件，包括 dialog 等。</li>
 <li>effect：非常用的特效库，特殊场景使用到是可以单独调用。</li>
 </ol>
+<p>更多文档请查看：<a href="http://frozenui.github.io/frozenjs/">http://frozenui.github.io/frozenjs/</a></p>
 <h2 id="frozenjs-能做什么">FrozenJS 能做什么</h2><p>FrozenJS 针对移动端而生，可以处理大部分移动端的UI呈现。而且还可以满足某些特殊场景的特效展示。</p>
-<h2 id="frozenjs-的优势">FrozenJS 的优势</h2><ol>
+<h2 id="frozenjs-的特点">FrozenJS 的特点</h2><ol>
 <li>体积小，js 只依赖 zepto。</li>
 <li>调用简单。</li>
+<li>可移植性强（支持模块化与非模块化调用方式）</li>
 </ol>
 <h2 id="frozenjs-的理念">FrozenJS 的理念</h2><ol>
 <li>为移动而生</li>
-<li>轻量，可复用</li>
+<li>轻量，可复用可扩展</li>
 </ol>
+<h2 id="frozenjs-的基本调用方式">FrozenJS 的基本调用方式</h2><h3 id="非模块化方式">非模块化方式</h3><p>引用js</p>
+<div class="highlight"><pre><code class="javascript">&lt;script src=<span class="string">"http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js?_bid=304"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></code></pre></div><p>js调用</p>
+<div class="highlight"><pre><code class="javascript"><span class="keyword">var</span> myDialog=$.dialog({
+    title:<span class="string">"温馨提示"</span>,
+    content:<span class="string">'温馨提示内容'</span>,
+    button:[<span class="string">"确认"</span>,<span class="string">"取消"</span>]
+})
+myDialog.on(<span class="string">"dialog:hide"</span>,<span class="keyword">function</span>(e){
+    <span class="comment">// To do sth when dialog hide</span>
+})</code></pre></div><h3 id="模块化方式">模块化方式</h3><p>引用js</p>
+<div class="highlight"><pre><code class="javascript">&lt;script src=<span class="string">"http://i.gtimg.cn/vipstyle/frozenjs/lib/sea.js?_bid=304"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></code></pre></div><p>js调用</p>
+<div class="highlight"><pre><code class="javascript">seajs.config({
+    alias:{
+        <span class="string">"zepto"</span>:<span class="string">"http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"</span>,
+        <span class="string">"frozen"</span>:<span class="string">"http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js?_bid=304"</span>
+    }
+});
+seajs.use([<span class="string">"zepto"</span>,<span class="string">"frozen"</span>],<span class="keyword">function</span>(z,fz){
+    <span class="keyword">var</span> $=z;
+    <span class="keyword">var</span> myDialog=$.dialog({
+        title:<span class="string">"温馨提示"</span>,
+        content:<span class="string">'温馨提示内容'</span>,
+        button:[<span class="string">"确认"</span>,<span class="string">"取消"</span>]
+    })
+    myDialog.on(<span class="string">"dialog:hide"</span>,<span class="keyword">function</span>(e){
+        <span class="comment">// To do sth when dialog hide</span>
+    })
+})</code></pre></div><p>这里对zepto进行了模块化操作，建议引用<a href="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304">http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304</a></p>
+<p>若还是想要引用自己项目的zepto，请通过以下方式对zepto进行模块化：</p>
+<div class="highlight"><pre><code class="javascript">window.Zepto = Zepto
+window.$ === <span class="literal">undefined</span> &amp;&amp; (window.$ = Zepto)
 
+<span class="comment">// exports to module</span>
+<span class="keyword">if</span>($.isFunction(window.define)) {
+    define(<span class="keyword">function</span>(require, exports, module) {
+        module.exports = window.Zepto
+    })
+}</code></pre></div>
             </div>
           </div>
           

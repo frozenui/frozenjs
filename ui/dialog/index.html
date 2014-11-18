@@ -73,6 +73,13 @@
                   
                   
                     
+                    <dd><a href="../../ui/scroller/index.html"> Scroller </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
                     <dd><a href="../../ui/slider/index.html"> Slider </a></dd>
                     
                   
@@ -191,7 +198,7 @@ $(<span class="string">"#id"</span>).dialog(options);</code></pre></div><h2 id="
 </ol>
 <h2 id="demo演示">DEMO演示</h2><div class="md-iframe">
 <iframe src="iframe-readme-1.html" allowtransparency="true" 
-frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code class="xml"> <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-center"</span>&gt;</span>
+frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-center"</span>&gt;</span>
 
     <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-btn"</span> <span class="attribute">id</span>=<span class="value">"btn1"</span>&gt;</span>模板创建弹窗<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
     <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-btn"</span> <span class="attribute">id</span>=<span class="value">"btn2"</span>&gt;</span>DOM创建弹窗<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
@@ -209,6 +216,8 @@ frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code 
     <span class="tag">&lt;/<span class="title">div</span>&gt;</span>        
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+
+
 $(<span class="string">"#btn1"</span>).tap(<span class="keyword">function</span>(){
     <span class="keyword">var</span> dia=$.dialog({
         title:<span class="string">'温馨提示'</span>,
@@ -227,8 +236,6 @@ $(<span class="string">"#btn1"</span>).tap(<span class="keyword">function</span>
 $(<span class="string">"#btn2"</span>).tap(<span class="keyword">function</span>(){
     $(<span class="string">".ui-dialog"</span>).dialog(<span class="string">"show"</span>);
 })
-
-
 </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div>
             </div>
           </div>

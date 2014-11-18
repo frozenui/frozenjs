@@ -31,6 +31,7 @@
 			var e=$.Event('loading:show');
 			this.element.trigger(e);
 			this.element.show();
+			
 		},
 		hide :function () {
 			var e=$.Event('loading:hide');

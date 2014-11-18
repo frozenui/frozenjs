@@ -73,6 +73,13 @@
                   
                   
                     
+                    <dd><a href="ui/scroller/index.html"> Scroller </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
                     <dd><a href="ui/slider/index.html"> Slider </a></dd>
                     
                   
@@ -123,22 +130,20 @@
 <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span> <span class="attribute">src</span>=<span class="value">"http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/effect.cover.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
 <span class="tag">&lt;<span class="title">link</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span> <span class="attribute">type</span>=<span class="value">"text/css"</span> <span class="attribute">href</span>=<span class="value">"http://i.gtimg.cn/vipstyle/frozenui/1.0.0/css/basic.css?_bid=256"</span>&gt;</span></code></pre></div><h2 id="github">GitHub</h2><p>你也可以去 GitHub 上查看和下载 FrozenJS 的代码。任何建议也可以在 GitHub 上给我们反馈：<a href="https://github.com/frozenui/frozenjs">FrozenJS</a>。</p>
 <h2 id="调用方式">调用方式</h2><p>FrozenJS 的调用方式很简单，跟熟知的 jQuery 插件很相似，比如 dialog 的调用：</p>
-<div class="highlight"><pre><code class="javascript">&lt;div class=<span class="string">"ui-center"</span>&gt;
-    <span class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-btn"</span> <span class="attribute">id</span>=<span class="value">"btn1"</span>&gt;</span>点击打开弹窗<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
-
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
-$(<span class="string">"#btn1"</span>).tap(<span class="keyword">function</span>(){
-    $.dialog({
-        title:<span class="string">'温馨提示'</span>,
-        content:<span class="string">'温馨提示内容'</span>,
-        button:[<span class="string">"确认"</span>,<span class="string">"取消"</span>],
-        callback:<span class="keyword">function</span>(type,index){
-            console.log(<span class="string">"type:"</span>+type+<span class="string">";index:"</span>+index);
-        }
-    })
+<div class="highlight"><pre><code class="javascript">&lt;!-- 使用默认模版 --&gt;
+$.dialog({
+    title:<span class="string">'温馨提示'</span>,
+    content:<span class="string">'温馨提示内容'</span>,
+    button:[<span class="string">"确认"</span>,<span class="string">"取消"</span>]
 })
-</span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></code></pre></div>
+
+&lt;!-- 使用选择器 --&gt;
+$(<span class="string">"#dialog"</span>).dialog();
+
+<span class="xml"><span class="comment">&lt;!-- 使用选择器 --&gt;</span>
+$("<span class="tag">&lt;<span class="title">div</span>&gt;</span><span class="vbscript">&lt;%=content%&gt;</span><span class="tag">&lt;/<span class="title">div</span>&gt;</span>").dialog({
+    content:'温馨提示内容'
+})</span></code></pre></div>
             </div>
           </div>
           
