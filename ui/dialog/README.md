@@ -92,7 +92,7 @@ $("#id").dialog(options);
 
 ## DEMO演示
 ```iframe
- <div class="ui-center">
+<div class="ui-center">
 
     <div class="ui-btn" id="btn1">模板创建弹窗</div>
     <div class="ui-btn" id="btn2">DOM创建弹窗</div>
@@ -110,8 +110,6 @@ $("#id").dialog(options);
     </div>        
 </div>
 <script type="text/javascript">
-
-
 
 
 $("#btn1").tap(function(){
