@@ -178,7 +178,13 @@ window.$ === <span class="literal">undefined</span> &amp;&amp; (window.$ = Zepto
     define(<span class="keyword">function</span>(require, exports, module) {
         module.exports = window.Zepto
     })
-}</code></pre></div>
+}</code></pre></div><h2 id="frozenjs-的维护与开发">FrozenJS 的维护与开发</h2><p>FrozenJS 通过grunt来管理，首先应确保grunt的运行环境，可参照<a href="https://github.com/QQVIPTeam/team/issues/5">https://github.com/QQVIPTeam/team/issues/5</a></p>
+<p><code>grunt</code>：合并压缩代码</p>
+<p><code>grunt docs</code>：文档生成与调试</p>
+<p>使用<code>grunt docs</code>会将文档生成到<code>_site</code>目录，提交当前目录到<a href="https://github.com/frozenui/baseui.git">https://github.com/frozenui/baseui.git</a></p>
+<p>_site目录下的内容提交到gh-pages分支，参考<a href="https://github.com/frozenui/baseui/issues/">https://github.com/frozenui/baseui/issues/</a></p>
+<p>页面会显示在frozen的js组件菜单项中<a href="http://frozenui.github.io/frozenjs/">http://frozenui.github.io/frozenjs/</a></p>
+
             </div>
           </div>
           
