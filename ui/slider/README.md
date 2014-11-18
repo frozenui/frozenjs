@@ -103,9 +103,9 @@ window.addEventListener('load', function(){
 <style>
 	.ui-slider {overflow:hidden;position:relative;}
 	.ui-slider-content {height: 200px; white-space:nowrap; font-size:0;}
-	.ui-slider-content li:nth-child(1) {background-color: red;}
-	.ui-slider-content li:nth-child(2) {background-color: green;}
-	.ui-slider-content li:nth-child(3) {background-color: blue;}
+	.ui-slider-content li:nth-child(1) {background-color: #ff8c81;}
+	.ui-slider-content li:nth-child(2) {background-color: #00c7fc;}
+	.ui-slider-content li:nth-child(3) {background-color: #77bb3f;}
 	.ui-slider-content li {display:inline-block;width:100%;height:200px;color:#fff;font-size:14px;}
 	
 	.ui-slider-indicators {position:absolute;bottom:0;right:10px;}

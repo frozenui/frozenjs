@@ -101,9 +101,9 @@ window.addEventListener('load', function(){
 	.ui-tab-nav li.current {color: #00a5e0;border-bottom: 3px #00a5e0 solid;}
 	
 	.ui-tab-content {white-space:nowrap;font-size:0;}
-	.ui-tab-content li:nth-child(1) {background-color: red;}
-	.ui-tab-content li:nth-child(2) {background-color: green;}
-	.ui-tab-content li:nth-child(3) {background-color: blue;}
+	.ui-tab-content li:nth-child(1) {background-color: #ff8c81;}
+	.ui-tab-content li:nth-child(2) {background-color: #00c7fc;}
+	.ui-tab-content li:nth-child(3) {background-color: #77bb3f;}
 	.ui-tab-content li {display:inline-block;width:100%;height:200px;color:#fff;font-size:14px;}
 </style>
 

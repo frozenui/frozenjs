@@ -49,7 +49,10 @@
 			var self=this;
 			self.button.on("tap",function(){
 				var index=$(self.button).index($(this));
-				self.option.callback("button",index);
+				// self.option.callback("button",index);
+				var e=$.Event("dialog:action");
+				e.index=index;
+				self.element.trigger(e);
 				self.hide.apply(self);
 			});
 		},
@@ -62,14 +65,16 @@
 		},
 		show:function(){
 			var self=this;
-			self.option.callback("show");
+			// self.option.callback("show");
+			self.element.trigger($.Event("dialog:show"));
 			self.element.addClass("show");
 			this.option.allowScroll && self.element.on("touchmove" , _stopScroll);
 
 		},
 		hide :function () {
 			var self=this;
-			self.option.callback("hide");
+			// self.option.callback("hide");
+			self.element.trigger($.Event("dialog:hide"));
 			self.element.off("touchmove" , _stopScroll);
 			self.element.removeClass("show");
 			

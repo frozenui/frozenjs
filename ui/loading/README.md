@@ -56,9 +56,12 @@ $("#btn1").tap(function(){
 	    content:'加载中...',
 	})
 	setTimeout(function(){
-		el.hide();
+		el.loading("hide");
 	},2000);
-	
+	el.on("loading:hide",function(){
+		console.log("loading hide");
+	});
+
 });
 
 

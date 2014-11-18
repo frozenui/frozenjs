@@ -25,20 +25,19 @@
 FrozenJS 的调用方式很简单，跟熟知的 jQuery 插件很相似，比如 dialog 的调用：
 
 ```js
-<div class="ui-center">
-    <div class="ui-btn" id="btn1">点击打开弹窗</div>
-</div>
-
-<script type="text/javascript">
-$("#btn1").tap(function(){
-	$.dialog({
-	    title:'温馨提示',
-	    content:'温馨提示内容',
-	    button:["确认","取消"],
-	    callback:function(type,index){
-	        console.log("type:"+type+";index:"+index);
-	    }
-	})
+<!-- 使用默认模版 -->
+$.dialog({
+    title:'温馨提示',
+    content:'温馨提示内容',
+    button:["确认","取消"]
 })
-</script>
+
+<!-- 使用选择器 -->
+$("#dialog").dialog();
+
+<!-- 使用选择器 -->
+$("<div><%=content%></div>").dialog({
+    content:'温馨提示内容'
+})
+
 ```

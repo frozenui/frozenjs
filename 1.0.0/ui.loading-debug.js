@@ -28,10 +28,15 @@
 	}
 	Loading.prototype={
 		show:function(){
+			var e=$.Event('loading:show');
+			this.element.trigger(e);
 			this.element.show();
+			
 		},
 		hide :function () {
-			this.element.hide();
+			var e=$.Event('loading:hide');
+			this.element.trigger(e);
+			this.element.remove();
 		}
 	}
 	function Plugin(option) {

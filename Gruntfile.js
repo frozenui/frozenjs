@@ -65,7 +65,11 @@ module.exports = function(grunt){
           src: ['basic/*/src/*.js','ui/*/src/*.js'],
           dest: "<%= pkg.version %>/frozen.js"
         },
-
+        lib:{
+          files: {
+          "lib/zepto.min.js": ['lib/zepto.js']
+        }
+        },
         single:{
           // files: [{
           //   expand: true,
@@ -150,6 +154,7 @@ module.exports = function(grunt){
           files: [
             {expand: true, cwd: '_themes/static/', src: ['**'], dest: '_site/static'},
             {expand: true, src: ['*/*/src/*.js'], dest: '_site/'},
+            {expand: true, src: ['lib/*.js'], dest: '_site/'}
           ]
         },
 
@@ -229,6 +234,8 @@ module.exports = function(grunt){
       grunt.config('concat.single.dest',pkg.version+"/"+cat+"."+arr[1]+"-debug.js");
       grunt.task.run('concat:single');
 
+      
+
     });
 
 
@@ -238,7 +245,7 @@ module.exports = function(grunt){
       for(var i=0;i<files.length;i++){
         grunt.task.run('build:'+files[i]);
       }
-
+      grunt.task.run('uglify:lib');
     });
 
 
