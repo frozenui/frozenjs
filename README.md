@@ -3,7 +3,7 @@
 
 ## 什么是FrozenJS
 
-FrozenJS 是针对移动端开发的 js 组件库，其依赖 [zepto.js](http://zeptojs.com) 和 FronzenUI。
+FrozenJS 是针对移动端开发的 js 组件库，其依赖 [zepto.js](http://zeptojs.com) 和 FrozenUI。
 
 FrozenJS 的所有组件均以 zepto 的插件的形式存在。
 
@@ -103,7 +103,7 @@ FrozenJS 通过grunt来管理，首先应确保grunt的运行环境，可参照h
 
 `grunt docs`：文档生成与调试
 
-使用`grunt docs`会将文档生成到`_site`目录，提交当前目录到https://github.com/frozenui/baseui.git
+使用`grunt docs`会将文档生成到`_site`目录，提交当前目录到https://github.com/frozenui/frozenjs.git
 
 _site目录下的内容提交到gh-pages分支，参考 https://github.com/frozenui/baseui/issues/2
 
