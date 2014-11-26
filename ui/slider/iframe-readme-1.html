@@ -17,10 +17,9 @@
   </head>
   <body>
 
-     
-<style>
+     <style>
     .ui-slider {overflow:hidden;position:relative;}
-    .ui-slider-content {height: 200px; white-space:nowrap; font-size:0;}
+    .ui-slider-content {height:200px;white-space:nowrap;font-size:0;}
     .ui-slider-content li:nth-child(1) {background-color: #ff8c81;}
     .ui-slider-content li:nth-child(2) {background-color: #00c7fc;}
     .ui-slider-content li:nth-child(3) {background-color: #77bb3f;}
@@ -30,6 +29,7 @@
     .ui-slider-indicators li {display:inline-block;text-indent:100%;white-space:nowrap;overflow:hidden;width:6px;height:6px;background-color:rgba(255,255,255,0.3);border-radius:10px;}
     .ui-slider-indicators li.current {background-color:rgba(255,255,255,1);}
 </style>
+
 
 <div class="ui-slider">
     <ul class="ui-slider-content">
@@ -44,10 +44,11 @@
     </ul>
 </div>
 
+
 <script>
 window.addEventListener('load', function(){
 
-    var myScroll = new Slide('.ui-slider', {
+    var myScroll = new Scroll('.ui-slider', {
         role: 'slider',
         indicator: true,
         autoplay: true,

@@ -25,14 +25,14 @@
                   
                   
                     
-                    <dd><a href="../../index.html"> 关于FrozenJS </a></dd>
+                    <dd><a href="../../index.html"> 关于FrozenJS </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../how.html"> 如何使用 </a></dd>
+                    <dd><a href="../../how.html"> 如何使用 </a></dd>
                     
                   
                 
@@ -42,14 +42,14 @@
 
                     <dt>基础</dt>
                     
-                    <dd><a href="../../basic/core/index.html"> Core </a></dd>
+                    <dd><a href="../../basic/core/index.html"> Core </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../basic/tap/index.html"> Tap </a></dd>
+                    <dd><a href="../../basic/tap/index.html"> Tap </a></dd>
                     
                   
                 
@@ -59,42 +59,42 @@
 
                     <dt>UI</dt>
                     
-                    <dd><a href="../../ui/dialog/index.html"> Dialog </a></dd>
+                    <dd><a href="../../ui/dialog/index.html"> Dialog </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../ui/loading/index.html"> Loading </a></dd>
+                    <dd><a href="../../ui/loading/index.html"> Loading </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../ui/scroller/index.html"> Scroller </a></dd>
+                    <dd><a href="../../ui/scroller/index.html"> Scroller </a></dd>
                     
                   
                 
                   
                   
                     
-                      <dd class="side-highlight"><a href="../../ui/slider/index.html"> Slider </a></dd>
+                      <dd class="side-highlight"><a href="../../ui/slider/index.html"> Slider </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../ui/tab/index.html"> Tab </a></dd>
+                    <dd><a href="../../ui/tab/index.html"> Tab </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../ui/tips/index.html"> Tips </a></dd>
+                    <dd><a href="../../ui/tips/index.html"> Tips </a></dd>
                     
                   
                 
@@ -104,14 +104,14 @@
 
                     <dt>特效</dt>
                     
-                    <dd><a href="../../effect/cover/index.html"> Cover </a></dd>
+                    <dd><a href="../../effect/cover/index.html"> Cover </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../effect/parallax/index.html"> Parallax </a></dd>
+                    <dd><a href="../../effect/parallax/index.html"> Parallax </a></dd>
                     
                   
                 
@@ -121,7 +121,7 @@
           
           <div class="content-area">
             <div class="content">
-                <h1 id="slider">Slider</h1><h2 id="介绍">介绍</h2><p>轮播组件，主要使用场景有网页中的运营广告。scroller、tab、slider 组件皆使用 Slide.js，源码修改自 IScroll。下载地址：<a href="https://github.com/hahnzhu/slide.js">https://github.com/hahnzhu/slide.js</a></p>
+                <h1 id="slider">Slider</h1><p>轮播组件，主要使用场景有网页中的运营广告。</p>
 <h2 id="调用方式">调用方式</h2><p>HTML 示意：</p>
 <div class="highlight"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-slider"</span>&gt;</span>
     <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"ui-slider-content"</span>&gt;</span>
@@ -134,10 +134,10 @@
         <span class="tag">&lt;<span class="title">li</span>&gt;</span>2<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
         <span class="tag">&lt;<span class="title">li</span>&gt;</span>3<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
     <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><p>组件初始化的时候需要传入 wrapper (&#39;.ui-slider&#39;)。实际滚动的是内部的 scroller (&#39;.ui-slider-content&#39;)。因为样式结合了 Frozen UI，所以类名固定。如需其它样式可自行覆盖。</p>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><p>组件初始化的时候需要传入 <code>wrapper (&#39;.ui-slider&#39;)</code>。实际滚动的是内部的 <code>scroller (&#39;.ui-slider-content&#39;)</code>。因为样式结合了 Frozen UI，所以类名固定。如需其它样式可自行覆盖。</p>
 <div class="highlight"><pre><code class="javascript">window.addEventListener(<span class="string">'load'</span>, <span class="keyword">function</span>(){
 
-    <span class="keyword">var</span> slider = <span class="keyword">new</span> Slide(<span class="string">'.ui-slider'</span>, {
+    <span class="keyword">var</span> slider = <span class="keyword">new</span> Scroll(<span class="string">'.ui-slider'</span>, {
         role: <span class="string">'slider'</span>,
         indicator: <span class="literal">true</span>,
         autoplay: <span class="literal">true</span>,
@@ -153,7 +153,7 @@
     })
 
 })
-&lt;<span class="regexp">/script&gt;</code></pre></div><h2 id="配置说明">配置说明</h2><table>
+&lt;<span class="regexp">/script&gt;</code></pre></div><h2 id="配置说明">配置说明</h2><table width="100%">
     <tr>
         <th>name</th>
         <th>type</th>
@@ -202,10 +202,9 @@
 
 <h2 id="demo演示">DEMO演示</h2><div class="md-iframe">
 <iframe src="iframe-readme-1.html" allowtransparency="true" 
-frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code class="xml">
-<span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code class="xml"><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
     <span class="class">.ui-slider</span> <span class="rules">{<span class="rule"><span class="attribute">overflow</span>:<span class="value">hidden;</span></span><span class="rule"><span class="attribute">position</span>:<span class="value">relative;</span></span><span class="rule">}</span></span>
-    <span class="class">.ui-slider-content</span> <span class="rules">{<span class="rule"><span class="attribute">height</span>:<span class="value"> <span class="number">200</span>px;</span></span> <span class="rule"><span class="attribute">white-space</span>:<span class="value">nowrap;</span></span> <span class="rule"><span class="attribute">font-size</span>:<span class="value"><span class="number">0</span>;</span></span><span class="rule">}</span></span>
+    <span class="class">.ui-slider-content</span> <span class="rules">{<span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">200</span>px;</span></span><span class="rule"><span class="attribute">white-space</span>:<span class="value">nowrap;</span></span><span class="rule"><span class="attribute">font-size</span>:<span class="value"><span class="number">0</span>;</span></span><span class="rule">}</span></span>
     <span class="class">.ui-slider-content</span> <span class="tag">li</span><span class="pseudo">:nth-child(1)</span> <span class="rules">{<span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#ff8c81</span>;</span></span><span class="rule">}</span></span>
     <span class="class">.ui-slider-content</span> <span class="tag">li</span><span class="pseudo">:nth-child(2)</span> <span class="rules">{<span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#00c7fc</span>;</span></span><span class="rule">}</span></span>
     <span class="class">.ui-slider-content</span> <span class="tag">li</span><span class="pseudo">:nth-child(3)</span> <span class="rules">{<span class="rule"><span class="attribute">background-color</span>:<span class="value"> <span class="hexcolor">#77bb3f</span>;</span></span><span class="rule">}</span></span>
@@ -215,6 +214,7 @@ frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code 
     <span class="class">.ui-slider-indicators</span> <span class="tag">li</span> <span class="rules">{<span class="rule"><span class="attribute">display</span>:<span class="value">inline-block;</span></span><span class="rule"><span class="attribute">text-indent</span>:<span class="value"><span class="number">100</span>%;</span></span><span class="rule"><span class="attribute">white-space</span>:<span class="value">nowrap;</span></span><span class="rule"><span class="attribute">overflow</span>:<span class="value">hidden;</span></span><span class="rule"><span class="attribute">width</span>:<span class="value"><span class="number">6</span>px;</span></span><span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">6</span>px;</span></span><span class="rule"><span class="attribute">background-color</span>:<span class="value"><span class="function">rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">0.3</span>)</span>;</span></span><span class="rule"><span class="attribute">border-radius</span>:<span class="value"><span class="number">10</span>px;</span></span><span class="rule">}</span></span>
     <span class="class">.ui-slider-indicators</span> <span class="tag">li</span><span class="class">.current</span> <span class="rules">{<span class="rule"><span class="attribute">background-color</span>:<span class="value"><span class="function">rgba(<span class="number">255</span>,<span class="number">255</span>,<span class="number">255</span>,<span class="number">1</span>)</span>;</span></span><span class="rule">}</span></span>
 </span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+
 
 <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-slider"</span>&gt;</span>
     <span class="tag">&lt;<span class="title">ul</span> <span class="attribute">class</span>=<span class="value">"ui-slider-content"</span>&gt;</span>
@@ -229,10 +229,11 @@ frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code 
     <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 
+
 <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
 window.addEventListener(<span class="string">'load'</span>, <span class="keyword">function</span>(){
 
-    <span class="keyword">var</span> myScroll = <span class="keyword">new</span> Slide(<span class="string">'.ui-slider'</span>, {
+    <span class="keyword">var</span> myScroll = <span class="keyword">new</span> Scroll(<span class="string">'.ui-slider'</span>, {
         role: <span class="string">'slider'</span>,
         indicator: <span class="literal">true</span>,
         autoplay: <span class="literal">true</span>,

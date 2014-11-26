@@ -25,14 +25,14 @@
                   
                   
                     
-                      <dd class="side-highlight"><a href="index.html"> 关于FrozenJS </a></dd>
+                      <dd class="side-highlight"><a href="index.html"> 关于FrozenJS </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="how.html"> 如何使用 </a></dd>
+                    <dd><a href="how.html"> 如何使用 </a></dd>
                     
                   
                 
@@ -42,14 +42,14 @@
 
                     <dt>基础</dt>
                     
-                    <dd><a href="basic/core/index.html"> Core </a></dd>
+                    <dd><a href="basic/core/index.html"> Core </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="basic/tap/index.html"> Tap </a></dd>
+                    <dd><a href="basic/tap/index.html"> Tap </a></dd>
                     
                   
                 
@@ -59,42 +59,42 @@
 
                     <dt>UI</dt>
                     
-                    <dd><a href="ui/dialog/index.html"> Dialog </a></dd>
+                    <dd><a href="ui/dialog/index.html"> Dialog </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="ui/loading/index.html"> Loading </a></dd>
+                    <dd><a href="ui/loading/index.html"> Loading </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="ui/scroller/index.html"> Scroller </a></dd>
+                    <dd><a href="ui/scroller/index.html"> Scroller </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="ui/slider/index.html"> Slider </a></dd>
+                    <dd><a href="ui/slider/index.html"> Slider </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="ui/tab/index.html"> Tab </a></dd>
+                    <dd><a href="ui/tab/index.html"> Tab </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="ui/tips/index.html"> Tips </a></dd>
+                    <dd><a href="ui/tips/index.html"> Tips </a></dd>
                     
                   
                 
@@ -104,14 +104,14 @@
 
                     <dt>特效</dt>
                     
-                    <dd><a href="effect/cover/index.html"> Cover </a></dd>
+                    <dd><a href="effect/cover/index.html"> Cover </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="effect/parallax/index.html"> Parallax </a></dd>
+                    <dd><a href="effect/parallax/index.html"> Parallax </a></dd>
                     
                   
                 
@@ -121,7 +121,7 @@
           
           <div class="content-area">
             <div class="content">
-                <h1 id="关于frozenjs">关于FrozenJS</h1><h2 id="什么是frozenjs">什么是FrozenJS</h2><p>FrozenJS 是针对移动端开发的 js 组件库，其依赖 <a href="http://zeptojs.com">zepto.js</a> 和 FronzenUI。</p>
+                <h1 id="关于frozenjs">关于FrozenJS</h1><h2 id="什么是frozenjs">什么是FrozenJS</h2><p>FrozenJS 是针对移动端开发的 js 组件库，其依赖 <a href="http://zeptojs.com">zepto.js</a> 和 FrozenUI。</p>
 <p>FrozenJS 的所有组件均以 zepto 的插件的形式存在。</p>
 <p>FrozenJS 包括：</p>
 <ol>
@@ -168,7 +168,7 @@ seajs.use([<span class="string">"zepto"</span>,<span class="string">"frozen"</sp
     myDialog.on(<span class="string">"dialog:hide"</span>,<span class="keyword">function</span>(e){
         <span class="comment">// To do sth when dialog hide</span>
     })
-})</code></pre></div><p>这里对zepto进行了模块化操作，建议引用<a href="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304">http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304</a></p>
+})</code></pre></div><p>这里对 zepto 进行了模块化操作，建议引用 <a href="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304">http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304</a></p>
 <p>若还是想要引用自己项目的zepto，请通过以下方式对zepto进行模块化：</p>
 <div class="highlight"><pre><code class="javascript">window.Zepto = Zepto
 window.$ === <span class="literal">undefined</span> &amp;&amp; (window.$ = Zepto)
@@ -178,12 +178,12 @@ window.$ === <span class="literal">undefined</span> &amp;&amp; (window.$ = Zepto
     define(<span class="keyword">function</span>(require, exports, module) {
         module.exports = window.Zepto
     })
-}</code></pre></div><h2 id="frozenjs-的维护与开发">FrozenJS 的维护与开发</h2><p>FrozenJS 通过grunt来管理，首先应确保grunt的运行环境，可参照<a href="https://github.com/QQVIPTeam/team/issues/5">https://github.com/QQVIPTeam/team/issues/5</a></p>
+}</code></pre></div><h2 id="frozenjs-的维护与开发">FrozenJS 的维护与开发</h2><p>FrozenJS 通过 grunt 来管理，首先应确保 grunt 的运行环境，可参照 <a href="https://github.com/QQVIPTeam/team/issues/5">https://github.com/QQVIPTeam/team/issues/5</a></p>
 <p><code>grunt</code>：合并压缩代码</p>
 <p><code>grunt docs</code>：文档生成与调试</p>
-<p>使用<code>grunt docs</code>会将文档生成到<code>_site</code>目录，提交当前目录到<a href="https://github.com/frozenui/baseui.git">https://github.com/frozenui/baseui.git</a></p>
-<p>_site目录下的内容提交到gh-pages分支，参考 <a href="https://github.com/frozenui/baseui/issues/2">https://github.com/frozenui/baseui/issues/2</a></p>
-<p>页面会显示在frozen的js组件菜单项中 <a href="http://frozenui.github.io/frozenjs/">http://frozenui.github.io/frozenjs/</a></p>
+<p>使用 <code>grunt docs</code> 会将文档生成到 <code>_site</code> 目录，提交当前目录到 <a href="https://github.com/frozenui/baseui.git">https://github.com/frozenui/baseui.git</a></p>
+<p><code>_site</code> 目录下的内容提交到 <code>gh-pages</code> 分支，参考 <a href="https://github.com/frozenui/baseui/issues/2">https://github.com/frozenui/baseui/issues/2</a></p>
+<p>页面会显示在 frozen 的 js 组件菜单项中 <a href="http://frozenui.github.io/frozenjs/">http://frozenui.github.io/frozenjs/</a></p>
 
             </div>
           </div>

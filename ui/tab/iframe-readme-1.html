@@ -17,12 +17,11 @@
   </head>
   <body>
 
-     
-<style>
-    .ui-tabs { width: 100%; overflow: hidden;}
-    .ui-tab-nav {height: 44px;line-height: 44px;display: -webkit-box;display: box;font-size: 16px;}
-    .ui-tab-nav li {min-width: 70px;-webkit-box-flex: 1;box-flex: 1;text-align: center;color: #808080;}
-    .ui-tab-nav li.current {color: #00a5e0;border-bottom: 3px #00a5e0 solid;}
+     <style>
+    .ui-tabs { width:100%;overflow:hidden;}
+    .ui-tab-nav {height:44px;line-height:44px;display:-webkit-box;display:box;font-size:16px;}
+    .ui-tab-nav li {min-width:70px;-webkit-box-flex:1;box-flex:1;text-align:center;color:#808080;}
+    .ui-tab-nav li.current {color:#00a5e0;border-bottom:3px #00a5e0 solid;}
 
     .ui-tab-content {white-space:nowrap;font-size:0;}
     .ui-tab-content li:nth-child(1) {background-color: #ff8c81;}
@@ -47,7 +46,7 @@
 <script>
 window.addEventListener('load', function(){
 
-    var myScroll = new Slide('.ui-tabs', {
+    var myScroll = new Scroll('.ui-tabs', {
         role: 'tab',
         autoplay: true,
         interval: 3000

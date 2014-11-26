@@ -25,14 +25,14 @@
                   
                   
                     
-                    <dd><a href="../../index.html"> 关于FrozenJS </a></dd>
+                    <dd><a href="../../index.html"> 关于FrozenJS </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../how.html"> 如何使用 </a></dd>
+                    <dd><a href="../../how.html"> 如何使用 </a></dd>
                     
                   
                 
@@ -42,14 +42,14 @@
 
                     <dt>基础</dt>
                     
-                    <dd><a href="../../basic/core/index.html"> Core </a></dd>
+                    <dd><a href="../../basic/core/index.html"> Core </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../basic/tap/index.html"> Tap </a></dd>
+                    <dd><a href="../../basic/tap/index.html"> Tap </a></dd>
                     
                   
                 
@@ -59,42 +59,42 @@
 
                     <dt>UI</dt>
                     
-                    <dd><a href="../../ui/dialog/index.html"> Dialog </a></dd>
+                    <dd><a href="../../ui/dialog/index.html"> Dialog </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../ui/loading/index.html"> Loading </a></dd>
+                    <dd><a href="../../ui/loading/index.html"> Loading </a></dd>
                     
                   
                 
                   
                   
                     
-                      <dd class="side-highlight"><a href="../../ui/scroller/index.html"> Scroller </a></dd>
+                      <dd class="side-highlight"><a href="../../ui/scroller/index.html"> Scroller </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../ui/slider/index.html"> Slider </a></dd>
+                    <dd><a href="../../ui/slider/index.html"> Slider </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../ui/tab/index.html"> Tab </a></dd>
+                    <dd><a href="../../ui/tab/index.html"> Tab </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../ui/tips/index.html"> Tips </a></dd>
+                    <dd><a href="../../ui/tips/index.html"> Tips </a></dd>
                     
                   
                 
@@ -104,14 +104,14 @@
 
                     <dt>特效</dt>
                     
-                    <dd><a href="../../effect/cover/index.html"> Cover </a></dd>
+                    <dd><a href="../../effect/cover/index.html"> Cover </a></dd>
                     
                   
                 
                   
                   
                     
-                    <dd><a href="../../effect/parallax/index.html"> Parallax </a></dd>
+                    <dd><a href="../../effect/parallax/index.html"> Parallax </a></dd>
                     
                   
                 
@@ -121,7 +121,7 @@
           
           <div class="content-area">
             <div class="content">
-                <h1 id="scroller">Scroller</h1><h2 id="介绍">介绍</h2><p>自然滚动组件，主要的应用场景有 弹窗内长规则、视察滚动动画的内部滚动（竖向滚动），还有应用下载页的介绍缩略图的浏览（水平滚动）。scroller、tab、slider 组件皆使用 Slide.js，源码修改自 IScroll。下载地址：<a href="https://github.com/hahnzhu/slide.js">https://github.com/hahnzhu/slide.js</a></p>
+                <h1 id="scroller">Scroller</h1><p>自然滚动组件，主要的应用场景有 弹窗内长规则、视差滚动页面的内部滚动（竖向滚动），还有应用下载页的介绍缩略图的浏览（水平滚动）</p>
 <h2 id="调用方式">调用方式</h2><p>HTML 示意：</p>
 <div class="highlight"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-scroller"</span>&gt;</span>
     <span class="tag">&lt;<span class="title">ul</span>&gt;</span>
@@ -129,20 +129,20 @@
         <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
         <span class="tag">&lt;<span class="title">li</span>&gt;</span><span class="tag">&lt;/<span class="title">li</span>&gt;</span>
     <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><p>组件初始化的时候需要传入 wrapper (&#39;.ui-scroller&#39;)，类名无限制。实际滚动的是内部的 scroller (&lt;ul&gt;)。</p>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><p>组件初始化的时候需要传入 <code>wrapper (&#39;.ui-scroller&#39;)</code>，类名无限制。实际滚动的是内部的 <code>scroller (&lt;ul&gt;)</code>。对于 scroller 的标签无要求。</p>
 <p>调用方式相对简单。需要注意的是：</p>
 <p>1、scroller 的宽/高必须大于 wrapper 的宽/高才能发生滚动</p>
 <p>2、若要水平滚动，则 scrollY: false</p>
-<div class="highlight"><pre><code class="javascript"><span class="keyword">var</span> scroller = <span class="keyword">new</span> Slide(<span class="string">'.ui-scroller'</span>, {
+<div class="highlight"><pre><code class="javascript"><span class="keyword">var</span> scroller = <span class="keyword">new</span> Scroll(<span class="string">'.ui-scroller'</span>, {
 <span class="comment">/* 竖直滚动 */</span>
     scrollY: <span class="literal">true</span>
 });
 
 <span class="comment">/* 水平滚动 */</span>
-<span class="keyword">var</span> scroller = <span class="keyword">new</span> Slide(<span class="string">'.ui-scroller'</span>, {
+<span class="keyword">var</span> scroller = <span class="keyword">new</span> Scroll(<span class="string">'.ui-scroller'</span>, {
     scrollY: <span class="literal">false</span>,
     scrollX: <span class="literal">true</span>
-});</code></pre></div><h2 id="配置说明">配置说明</h2><table>
+});</code></pre></div><h2 id="配置说明">配置说明</h2><table width="100%">
     <tr>
         <th>name</th>
         <th>type</th>
@@ -167,7 +167,12 @@
 
 <h2 id="demo演示">DEMO演示</h2><div class="md-iframe">
 <iframe src="iframe-readme-1.html" allowtransparency="true" 
-frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-scroller"</span> <span class="attribute">style</span>=<span class="value">"width:auto;height: 300px;margin:20px;padding:10px;overflow:hidden;-box-sizing:border-box;box-sizing:border-box;border:1px solid #ccc;"</span>&gt;</span>
+frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code class="xml"><span class="tag">&lt;<span class="title">style</span>&gt;</span><span class="css">
+     <span class="class">.ui-scroller</span> <span class="rules">{<span class="rule"><span class="attribute">width</span>:<span class="value">auto;</span></span><span class="rule"><span class="attribute">height</span>:<span class="value"><span class="number">300</span>px;</span></span><span class="rule"><span class="attribute">margin</span>:<span class="value"><span class="number">20</span>px;</span></span><span class="rule"><span class="attribute">padding</span>:<span class="value"><span class="number">10</span>px;</span></span><span class="rule"><span class="attribute">overflow</span>:<span class="value">hidden;</span></span><span class="rule"><span class="attribute">border</span>:<span class="value"><span class="number">1</span>px solid <span class="hexcolor">#ccc</span>;</span></span><span class="rule">}</span></span>
+     <span class="class">.ui-scroller</span> <span class="tag">li</span> <span class="rules">{<span class="rule"><span class="attribute">margin-bottom</span>:<span class="value"><span class="number">10</span>px;</span></span><span class="rule">}</span></span>
+</span><span class="tag">&lt;/<span class="title">style</span>&gt;</span>
+
+<span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-scroller"</span>&gt;</span>
     <span class="tag">&lt;<span class="title">ul</span>&gt;</span>
         <span class="tag">&lt;<span class="title">li</span>&gt;</span>1、活动时间：2014.09.25 - 2014.10.31<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
         <span class="tag">&lt;<span class="title">li</span>&gt;</span>2、活动面向“预付费（Q点Q币、QQ卡、财付通/银行卡）开通超级QQ”的用户。以下支付方式的用户不 在本次活动范围内，“同时开通预付费超级QQ和短信版超级QQ”、“同时开通预付费超级QQ与短信版 会员”、“同时开通预付费超级QQ与iOS会员”、“开通短信版超级QQ”及“宽带/固定电话/超级/”（相关活动可留意超级QQ官网消息）。<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
@@ -179,7 +184,7 @@ frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code 
 <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
 window.addEventListener(<span class="string">'load'</span>, <span class="keyword">function</span>(){
 
-    <span class="keyword">var</span> myScroll = <span class="keyword">new</span> Slide(<span class="string">'.ui-scroller'</span>, {
+    <span class="keyword">var</span> myScroll = <span class="keyword">new</span> Scroll(<span class="string">'.ui-scroller'</span>, {
         scrollY: <span class="literal">true</span>
     });
 
