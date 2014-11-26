@@ -80,7 +80,7 @@ seajs.use(["zepto","frozen"],function(z,fz){
 	})
 })
 ```
-这里对zepto进行了模块化操作，建议引用http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304
+这里对 zepto 进行了模块化操作，建议引用 http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304
 
 若还是想要引用自己项目的zepto，请通过以下方式对zepto进行模块化：
 ```javascript
@@ -97,14 +97,14 @@ if($.isFunction(window.define)) {
 
 ## FrozenJS 的维护与开发
 
-FrozenJS 通过grunt来管理，首先应确保grunt的运行环境，可参照https://github.com/QQVIPTeam/team/issues/5
+FrozenJS 通过 grunt 来管理，首先应确保 grunt 的运行环境，可参照 https://github.com/QQVIPTeam/team/issues/5
 
 `grunt`：合并压缩代码
 
 `grunt docs`：文档生成与调试
 
-使用`grunt docs`会将文档生成到`_site`目录，提交当前目录到https://github.com/frozenui/baseui.git
+使用 `grunt docs` 会将文档生成到 `_site` 目录，提交当前目录到 https://github.com/frozenui/baseui.git
 
-_site目录下的内容提交到gh-pages分支，参考 https://github.com/frozenui/baseui/issues/2
+`_site` 目录下的内容提交到 `gh-pages` 分支，参考 https://github.com/frozenui/baseui/issues/2
 
-页面会显示在frozen的js组件菜单项中 http://frozenui.github.io/frozenjs/
+页面会显示在 frozen 的 js 组件菜单项中 http://frozenui.github.io/frozenjs/

@@ -1,8 +1,6 @@
 # Tab
 
-## 介绍
-
-选项卡组件，主要使用场景有单页承载多内容。scroller、tab、slider 组件皆使用 Slide.js，源码修改自 IScroll。下载地址：https://github.com/hahnzhu/slide.js
+选项卡组件。
 
 ## 调用方式
 
@@ -23,12 +21,14 @@ HTML 示意：
 
 ```
 
-组件初始化的时候需要传入 wrapper ('.ui-tab')。实际滚动的是内部的 scroller ('.ui-tab-content')。因为样式结合了 Frozen UI，所以类名固定。如需其它样式可自行覆盖。
+组件初始化的时候需要传入 `wrapper ('.ui-tab')`。实际滚动的是内部的 `scroller ('.ui-tab-content')`。因为样式结合了 Frozen UI，所以类名固定。如需其它样式可自行覆盖。
 
+
+JS 代码示意：
 ```js
 window.addEventListener('load', function(){
 	
-	var slider = new Slide('.ui-slider', {
+	var slider = new Scroll('.ui-slider', {
 		role: 'tab',
 		autoplay: true,
 		interval: 3000
@@ -49,7 +49,7 @@ window.addEventListener('load', function(){
 
 ## 配置说明
 
-<table>
+<table width="100%">
 	<tr>
 		<th>name</th>
 		<th>type</th>
@@ -93,12 +93,11 @@ window.addEventListener('load', function(){
 ## DEMO演示
 
 ```iframe
-
 <style>
-	.ui-tabs { width: 100%; overflow: hidden;}
-	.ui-tab-nav {height: 44px;line-height: 44px;display: -webkit-box;display: box;font-size: 16px;}
-	.ui-tab-nav li {min-width: 70px;-webkit-box-flex: 1;box-flex: 1;text-align: center;color: #808080;}
-	.ui-tab-nav li.current {color: #00a5e0;border-bottom: 3px #00a5e0 solid;}
+	.ui-tabs { width:100%;overflow:hidden;}
+	.ui-tab-nav {height:44px;line-height:44px;display:-webkit-box;display:box;font-size:16px;}
+	.ui-tab-nav li {min-width:70px;-webkit-box-flex:1;box-flex:1;text-align:center;color:#808080;}
+	.ui-tab-nav li.current {color:#00a5e0;border-bottom:3px #00a5e0 solid;}
 	
 	.ui-tab-content {white-space:nowrap;font-size:0;}
 	.ui-tab-content li:nth-child(1) {background-color: #ff8c81;}
@@ -123,7 +122,7 @@ window.addEventListener('load', function(){
 <script>
 window.addEventListener('load', function(){
 	
-	var myScroll = new Slide('.ui-tabs', {
+	var myScroll = new Scroll('.ui-tabs', {
 		role: 'tab',
 		autoplay: true,
 		interval: 3000

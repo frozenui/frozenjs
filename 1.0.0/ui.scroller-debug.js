@@ -365,13 +365,12 @@ var utils = (function () {
 
 
 /*
- * Slide 构造函数
+ * Scroll 构造函数
  */
-function Slide (el, options) {
+function Scroll (el, options) {
 
 	// 通过 querySelector 只获取第一个元素
 	this.wrapper = typeof el == 'string' ? document.querySelector(el) : el;
-
 
 
 	// 默认属性
@@ -474,7 +473,6 @@ function Slide (el, options) {
 	this.scrollerStyle = this.scroller.style;
 
 
-
 	// 这里的设置会覆盖用户的设置，主要是最一些不合理的设置进行重置
 
 	// 有了 perspective 之后开启硬件加速才有效？
@@ -539,9 +537,9 @@ function Slide (el, options) {
 
 
 /* 
- * Slide 原型扩展
+ * Scroll 原型扩展
  */
-Slide.prototype = {
+Scroll.prototype = {
 	// version: '5.1.3',
 
 	_init: function () {
@@ -621,8 +619,20 @@ Slide.prototype = {
 		this.wrapperWidth	= this.wrapper.clientWidth;
 		this.wrapperHeight	= this.wrapper.clientHeight;
 
-		this.scrollerWidth	= this.scroller.offsetWidth;
-		this.scrollerHeight	= this.scroller.offsetHeight;
+
+		var matrix = window.getComputedStyle(this.wrapper, null);
+
+		var pt = matrix['padding-top'].replace(/[^-\d.]/g, ''),
+			pb = matrix['padding-bottom'].replace(/[^-\d.]/g, ''),
+			pl = matrix['padding-left'].replace(/[^-\d.]/g, ''),
+			pr = matrix['padding-right'].replace(/[^-\d.]/g, '');
+
+
+		this.scrollerWidth	= this.scroller.offsetWidth+parseInt(pl)+parseInt(pr);
+		this.scrollerHeight	= this.scroller.offsetHeight+parseInt(pt)+parseInt(pb);
+
+		// this.scrollerWidth	= this.scroller.scrollWidth;
+		// this.scrollerHeight	= this.scroller.scrollHeight;
 
 
 		// slide
@@ -1160,7 +1170,7 @@ Slide.prototype = {
 	/*
 	 * 执行事件
 	 * 这个事件的牛逼指出在于，如果你没有设置 on 的话，那么事件是不会执行的。
-	 * 就是说 var myScroll = new Slide(..); myScroll.on('xxx', functino(){}) 注册后才会有这个xxx事件
+	 * 就是说 var myScroll = new Scroll(..); myScroll.on('xxx', functino(){}) 注册后才会有这个xxx事件
 	 */
 	_execEvent: function (type) {
 
@@ -1393,7 +1403,7 @@ Slide.prototype = {
 
 
 
-Slide.utils = utils;
+Scroll.utils = utils;
 
 
 /*
@@ -1401,11 +1411,12 @@ Slide.utils = utils;
  */
 if (typeof define === "function") {
 	define(function(require, exports, module) {
-		module.exports = Slide;
+		module.exports = Scroll;
 	})
+} else {
+	window.Scroll = Scroll;
 }
 
-window.Slide = Slide;
 
 
 })(window, document, Math);

@@ -1,8 +1,6 @@
 # Slider
 
-## 介绍
-
-轮播组件，主要使用场景有网页中的运营广告。scroller、tab、slider 组件皆使用 Slide.js，源码修改自 IScroll。下载地址：https://github.com/hahnzhu/slide.js
+轮播组件，主要使用场景有网页中的运营广告。
 
 ## 调用方式
 
@@ -22,12 +20,12 @@ HTML 示意：
 </div>
 ```
 
-组件初始化的时候需要传入 wrapper ('.ui-slider')。实际滚动的是内部的 scroller ('.ui-slider-content')。因为样式结合了 Frozen UI，所以类名固定。如需其它样式可自行覆盖。
+组件初始化的时候需要传入 `wrapper ('.ui-slider')`。实际滚动的是内部的 `scroller ('.ui-slider-content')`。因为样式结合了 Frozen UI，所以类名固定。如需其它样式可自行覆盖。
 
 ```js
 window.addEventListener('load', function(){
 	
-	var slider = new Slide('.ui-slider', {
+	var slider = new Scroll('.ui-slider', {
 		role: 'slider',
 		indicator: true,
 		autoplay: true,
@@ -49,7 +47,7 @@ window.addEventListener('load', function(){
 
 ## 配置说明
 
-<table>
+<table width="100%">
 	<tr>
 		<th>name</th>
 		<th>type</th>
@@ -99,10 +97,9 @@ window.addEventListener('load', function(){
 ## DEMO演示
 
 ```iframe
-
 <style>
 	.ui-slider {overflow:hidden;position:relative;}
-	.ui-slider-content {height: 200px; white-space:nowrap; font-size:0;}
+	.ui-slider-content {height:200px;white-space:nowrap;font-size:0;}
 	.ui-slider-content li:nth-child(1) {background-color: #ff8c81;}
 	.ui-slider-content li:nth-child(2) {background-color: #00c7fc;}
 	.ui-slider-content li:nth-child(3) {background-color: #77bb3f;}
@@ -112,6 +109,7 @@ window.addEventListener('load', function(){
 	.ui-slider-indicators li {display:inline-block;text-indent:100%;white-space:nowrap;overflow:hidden;width:6px;height:6px;background-color:rgba(255,255,255,0.3);border-radius:10px;}
 	.ui-slider-indicators li.current {background-color:rgba(255,255,255,1);}
 </style>
+
 
 <div class="ui-slider">
 	<ul class="ui-slider-content">
@@ -126,10 +124,11 @@ window.addEventListener('load', function(){
     </ul>
 </div>
 
+
 <script>
 window.addEventListener('load', function(){
 	
-	var myScroll = new Slide('.ui-slider', {
+	var myScroll = new Scroll('.ui-slider', {
 		role: 'slider',
 		indicator: true,
 		autoplay: true,
