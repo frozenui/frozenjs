@@ -3,7 +3,7 @@
 
 ## 什么是FrozenJS
 
-FrozenJS 是针对移动端开发的 js 组件库，其依赖 [zepto.js](http://zeptojs.com) 和 FronzenUI。
+FrozenJS 是针对移动端开发的 js 组件库，其依赖 [zepto.js](http://zeptojs.com) 和 FrozenUI。
 
 FrozenJS 的所有组件均以 zepto 的插件的形式存在。
 
