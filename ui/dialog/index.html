@@ -4,6 +4,10 @@
     <meta charset="UTF-8">    
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+    <script type="text/javascript">
+    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F3c5e509616a8353ee908823c8b29510c' type='text/javascript'%3E%3C/script%3E"));
+    </script>
     <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
     <link rel="stylesheet" href="http://frozenui.github.io/static/solarized.css" />
     <link rel="stylesheet" href="../../static/css/theme.css" />
@@ -66,6 +70,20 @@
                   
                   
                     
+                    <dd><a href="../../ui/loading/index.html"> Loading </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="../../ui/scroller/index.html"> Scroller </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
                     <dd><a href="../../ui/slider/index.html"> Slider </a></dd>
                     
                   
@@ -74,6 +92,13 @@
                   
                     
                     <dd><a href="../../ui/tab/index.html"> Tab </a></dd>
+                    
+                  
+                
+                  
+                  
+                    
+                    <dd><a href="../../ui/tips/index.html"> Tips </a></dd>
                     
                   
                 
@@ -177,7 +202,7 @@ $(<span class="string">"#id"</span>).dialog(options);</code></pre></div><h2 id="
 </ol>
 <h2 id="demo演示">DEMO演示</h2><div class="md-iframe">
 <iframe src="iframe-readme-1.html" allowtransparency="true" 
-frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code class="xml"> <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-center"</span>&gt;</span>
+frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code class="xml"><span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-center"</span>&gt;</span>
 
     <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-btn"</span> <span class="attribute">id</span>=<span class="value">"btn1"</span>&gt;</span>模板创建弹窗<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
     <span class="tag">&lt;<span class="title">div</span> <span class="attribute">class</span>=<span class="value">"ui-btn"</span> <span class="attribute">id</span>=<span class="value">"btn2"</span>&gt;</span>DOM创建弹窗<span class="tag">&lt;/<span class="title">div</span>&gt;</span>
@@ -195,22 +220,26 @@ frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code 
     <span class="tag">&lt;/<span class="title">div</span>&gt;</span>        
 <span class="tag">&lt;/<span class="title">div</span>&gt;</span>
 <span class="tag">&lt;<span class="title">script</span> <span class="attribute">type</span>=<span class="value">"text/javascript"</span>&gt;</span><span class="javascript">
+
+
 $(<span class="string">"#btn1"</span>).tap(<span class="keyword">function</span>(){
-    $.dialog({
+    <span class="keyword">var</span> dia=$.dialog({
         title:<span class="string">'温馨提示'</span>,
         content:<span class="string">'温馨提示内容'</span>,
-        button:[<span class="string">"确认"</span>,<span class="string">"取消"</span>],
-        callback:<span class="keyword">function</span>(type,index){
-            console.log(<span class="string">"type:"</span>+type+<span class="string">";index:"</span>+index);
-        }
-    })
+        button:[<span class="string">"确认"</span>,<span class="string">"取消"</span>]
+    });
+
+    dia.on(<span class="string">"dialog:action"</span>,<span class="keyword">function</span>(e){
+        console.log(e.index)
+    });
+    dia.on(<span class="string">"dialog:hide"</span>,<span class="keyword">function</span>(e){
+        console.log(<span class="string">"dialog hide"</span>)
+    });
 
 })
 $(<span class="string">"#btn2"</span>).tap(<span class="keyword">function</span>(){
-    $(<span class="string">".ui-dialog"</span>).dialog();
-
+    $(<span class="string">".ui-dialog"</span>).dialog(<span class="string">"show"</span>);
 })
-
 </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div>
             </div>
           </div>

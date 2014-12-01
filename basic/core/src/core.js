@@ -111,8 +111,53 @@
 
 		return data ? fn(data, env) : fn; // 如果传入了数据，则直接返回渲染结果HTML文本，否则返回一个渲染函数
 	};
-	
+	$.adaptObject =  function (element, defaults, option,template,plugin,pluginName) {
+    var $this= element;
+
+    if (typeof option != 'string'){
+    
+    // 获得配置信息
+    var context=$.extend({}, defaults,  typeof option == 'object' && option);
+
+    var isFromTpl=false;
+    // 如果传入script标签的选择器
+    if($.isArray($this) && $this.length && $($this)[0].nodeName.toLowerCase()=="script"){
+      // 根据模板获得对象并插入到body中
+      $this=$($.tpl($this[0].innerHTML,context)).appendTo("body");
+      isFromTpl=true;
+    }
+    // 如果传入模板字符串
+    else if($.isArray($this) && $this.length && $this.selector== ""){
+      // 根据模板获得对象并插入到body中
+      $this=$($.tpl($this[0].outerHTML,context)).appendTo("body");
+      isFromTpl=true;
+    }
+    // 如果通过$.dialog()的方式调用
+    else if(!$.isArray($this)){
+      // 根据模板获得对象并插入到body中
+      $this=$($.tpl(template,context)).appendTo("body");
+      isFromTpl=true;
+    }
+
+    }
+
+    return $this.each(function () {
+
+      var el = $(this);
+      // 读取对象缓存
+  
+      var data  = el.data('fz.'+pluginName);
+      
+
+
+      if (!data) el.data('fz.'+pluginName, 
+        (data = new plugin(this,$.extend({}, defaults,  typeof option == 'object' && option),isFromTpl)
+
+      ));
+
+      if (typeof option == 'string') data[option]();
+    })
+  }
 }(window.Zepto);
-	
 
 
