@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html lang="cn">
+  <head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+    
+    
+    <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/sea.js?_bid=304"></script>
+    <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"></script>
+    <script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js?_bid=304"></script>
+    
+    
+      <script src="../../../_site/ui/loading/src/loading.js"></script>
+    
+      <script src="../../../_site/ui/loading/src/tips.js"></script>
+    
+
+    <link rel="stylesheet" href="http://i.gtimg.cn/vipstyle/frozenui/1.1.0/css/frozen.css?_bid=256" />    
+  </head>
+  <body>
+
+      <div class="ui-center">
+
+    <div class="ui-btn" id="btn1">弹出loading</div>
+
+
+</div>
+
+<script type="text/javascript">
+$("#btn1").tap(function(){
+    var el=$.loading({
+        content:'加载中...',
+    })
+    setTimeout(function(){
+        el.loading("hide");
+    },2000);
+    el.on("loading:hide",function(){
+        console.log("loading hide");
+    });
+
+});
+
+
+
+</script>
+
+  </body>
+</html>
