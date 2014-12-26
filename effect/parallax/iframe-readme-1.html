@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://i.gtimg.cn/vipstyle/frozenui/1.1.0/css/frozen.css?_bid=256" />    
+
+  
+    <link rel="stylesheet" href="../../effect/parallax/src/normalize.css" />
+  
+    <link rel="stylesheet" href="../../effect/parallax/src/parallax-animation.css" />
+  
+    <link rel="stylesheet" href="../../effect/parallax/src/parallax.css" />
+  
+
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/sea.js?_bid=304"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js?_bid=304"></script>
+  
+  
+    <script src="../../effect/parallax/src/parallax.js"></script>
+  
+</head>
+
+<body>
+   <!-- CSS -->
+<style>
+section[data-id="1"] {
+    background-color: #3498db;
+}
+section[data-id="2"] {
+    background-color: #40d47e;
+}
+section[data-id="3"] {
+    background-color: #ff8c81;
+}
+section[data-id="4"] {
+    background-color: #3498db;
+}
+.box1 {
+    width: 100px;
+    height: 200px;
+    background-color: #ecf0f1;
+    position: absolute;
+    left: 160px; top: 126px;
+}
+.box2 {
+    width: 200px;
+    height: 100px;
+    background-color: #8e44ad;
+    position: absolute;
+    left: 60px; top: 226px;
+}
+.box3 {
+    width: 100px;
+    height: 100px;
+    background-color: #34495e;
+    position: absolute;
+    left: 160px; top: 226px;
+}
+.box4 {
+    width: 50px;
+    height: 50px;
+    background-color: #e74c3c;
+    position: absolute;
+    left: 185px; top: 250px;
+}
+</style>
+
+<!-- HTML -->
+<div class="wrapper">
+    <div class="pages">
+
+        <!-- 第一屏 -->
+        <section class="page">
+            <div class="box1" data-animation="slideToBottom" data-timing-function="ease-in"></div>
+            <div class="box2" data-animation="slideToTop" data-delay="300" data-timing-function="ease-out"></div>
+            <div class="box3" data-animation="slideToRight" data-delay="600" data-timing-function="linear"></div>
+            <div class="box4" data-animation="slideToLeft" data-delay="900" data-timing-function="cubic-bezier(.12,.73,.62,1.38)"></div>
+        </section>
+
+        <!-- 第二屏 -->
+        <section class="page">
+            <div class="box1" data-animation="followSlide" data-duration="1000"></div>
+            <div class="box2" data-animation="followSlide" data-delay="200" data-duration="1000"></div>
+            <div class="box3" data-animation="followSlide" data-delay="400" data-duration="1000"></div>
+            <div class="box4" data-animation="followSlide" data-delay="600" data-duration="1000"></div>
+        </section>
+
+        <!-- 第三屏 -->
+        <section class="page">
+            <div class="box1" data-animation="fadeInToBottom"></div>
+            <div class="box2" data-animation="fadeInToTop" data-delay="200"></div>
+            <div class="box3" data-animation="fadeInToLeft" data-delay="400"></div>
+            <div class="box4" data-animation="fadeInToRight" data-delay="600"></div>
+        </section>
+
+        <!-- 第四屏 -->
+        <section class="page">
+            <div class="box1" data-animation="fadeIn"></div>
+            <div class="box2" data-animation="fadeOut" data-delay="800"></div>
+        </section>
+
+    </div>
+</div>
+
+<!-- JS -->
+<script>
+$('.pages').parallax();
+</script>
+</body>
+</html>

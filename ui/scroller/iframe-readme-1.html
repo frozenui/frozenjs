@@ -1,25 +1,31 @@
 <!DOCTYPE HTML>
 <html lang="cn">
-  <head>
-    <meta charset="UTF-8">
-    <title></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
-    
-    
-    <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/sea.js?_bid=304"></script>
-    <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"></script>
-    <script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js?_bid=304"></script>
-    
-    
-      <script src="../../ui/scroller/src/Slide.js"></script>
-    
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://i.gtimg.cn/vipstyle/frozenui/1.1.0/css/frozen.css?_bid=256" />    
 
-    <link rel="stylesheet" href="http://i.gtimg.cn/vipstyle/frozenui/1.1.0/css/frozen.css?_bid=256" />    
-  </head>
-  <body>
+  
 
-     <div class="ui-scroller" style="width:auto;height: 300px;margin:20px;padding:10px;overflow:hidden;-box-sizing:border-box;box-sizing:border-box;border:1px solid #ccc;">
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/sea.js?_bid=304"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js?_bid=304"></script>
+  
+  
+    <script src="../../ui/scroller/src/scroll.js"></script>
+  
+</head>
+
+<body>
+   <!-- css -->
+<style>
+     .ui-scroller {width:auto;height:300px;margin:20px;padding:10px;overflow:hidden;border:1px solid #ccc;}
+     .ui-scroller li {margin-bottom:10px;}
+</style>
+
+<!-- html -->
+<div class="ui-scroller">
     <ul>
         <li>1、活动时间：2014.09.25 - 2014.10.31</li>
         <li>2、活动面向“预付费（Q点Q币、QQ卡、财付通/银行卡）开通超级QQ”的用户。以下支付方式的用户不 在本次活动范围内，“同时开通预付费超级QQ和短信版超级QQ”、“同时开通预付费超级QQ与短信版 会员”、“同时开通预付费超级QQ与iOS会员”、“开通短信版超级QQ”及“宽带/固定电话/超级/”（相关活动可留意超级QQ官网消息）。</li>
@@ -28,15 +34,19 @@
     </ul>
 </div>
 
+<!-- js -->
 <script>
 window.addEventListener('load', function(){
-
-    var myScroll = new Slide('.ui-scroller', {
+    var scroll = new fz.Scroll('.ui-scroller', {
         scrollY: true
     });
 
+    // scroll.scrollTo(0, 200);
+
+    // scroll.scrollToElement("li:nth-child(5)", 1000, true, true);
+
+    // scroll.xxx
 })
 </script>
-
-  </body>
+</body>
 </html>
