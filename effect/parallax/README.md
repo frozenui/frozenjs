@@ -82,75 +82,6 @@ $('.pages').parallax({
 </script>
 ```
 
-#### 具体参数演示
-```js
-// DEMO1(默认)
-<script>
-$('.pages').parallax({
-	loading:   false,
-	indicator: false,
-	arrow:     false
-});
-</script>
-
-// DEMO2
-<script>
-$('.pages').parallax({
-	loading:   true,
-	indicator: true,
-	arrow:     true
-});
-</script>
-
-// DEMO3
-<script>
-$('.pages').parallax({
-	direction: 'horizontal',
-	loading:   true,
-	indicator: true,
-	arrow:     true
-});
-</script>
-```
-
-__DEMO1__
-
-![DEMO1](https://raw.githubusercontent.com/hahnzhu/parallax.js/master/assets/gif/demo1.gif)
-
-__DEMO2__
-
-![DEMO2](https://raw.githubusercontent.com/hahnzhu/parallax.js/master/assets/gif/demo2.gif)
-
-__DEMO3__
-
-![DEMO3](https://raw.githubusercontent.com/hahnzhu/parallax.js/master/assets/gif/demo3.gif)
-
-
-```js
-// DEMO4(默认)
-<script>
-$('.pages').parallax({
-	swipeAnim: 'default'
-});
-</script>
-
-// DEMO5
-<script>
-$('.pages').parallax({
-	swipeAnim: 'cover'
-});
-</script>
-```
-
-__DEMO4__
-
-![DEMO4](https://raw.githubusercontent.com/hahnzhu/parallax.js/master/assets/gif/demo4.gif)
-
-__DEMO5__
-
-![DEMO5](https://raw.githubusercontent.com/hahnzhu/parallax.js/master/assets/gif/demo5.gif)
-
-
 
 ### 三、DOM 接口
 
@@ -177,53 +108,25 @@ __DEMO5__
 ### 四、内置动画
 有四种内置动画，分别是 `slideToTop/Bottom/Left/Right`、 `fadeInToTop/Bottom/Left/Right`、 `followSlide` 和 `fadeIn/Out`，动画参数可通过 `data-animation`、 `data-duration`、 `data-delay` 和 `data-timing-function` 进行配置。
 
-可看以下实例：
 
 __EXAMPLE__
 
 ![EXAMPLE](https://raw.githubusercontent.com/hahnzhu/parallax.js/master/assets/gif/example.gif)
 
-```html
-<div class="wrapper">
-	<div class="pages">
+注：followSlide 效果会根据翻页方向的不同而改变，如下：
 
-		<!-- 第一屏 -->
-		<section class="page">
-			<div class="box1" data-animation="slideToBottom" data-timing-function="ease-in"></div>
-			<div class="box2" data-animation="slideToTop" data-delay="300" data-timing-function="ease-out"></div>
-			<div class="box3" data-animation="slideToRight" data-delay="600" data-timing-function="linear"></div>
-			<div class="box4" data-animation="slideToLeft" data-delay="900" data-timing-function="cubic-bezier(.12,.73,.62,1.38)"></div>
-		</section>
+![followSlide1](https://raw.githubusercontent.com/hahnzhu/parallax.js/master/assets/gif/followSlide1.gif) &nbsp;&nbsp;&nbsp;&nbsp;
+![followSlide2](https://raw.githubusercontent.com/hahnzhu/parallax.js/master/assets/gif/followSlide2.gif)
 
-        <!-- 第二屏 -->
-		<section class="page">
-			<div class="box1" data-animation="followSlide" data-duration="1000"></div>
-			<div class="box2" data-animation="followSlide" data-delay="200" data-duration="1000"></div>
-			<div class="box3" data-animation="followSlide" data-delay="400" data-duration="1000"></div>
-			<div class="box4" data-animation="followSlide" data-delay="600" data-duration="1000"></div>
-		</section>
 
-        <!-- 第三屏 -->
-		<section class="page">
-			<div class="box1" data-animation="fadeInToBottom"></div>
-			<div class="box2" data-animation="fadeInToTop" data-delay="200"></div>
-			<div class="box3" data-animation="fadeInToLeft" data-delay="400"></div>
-			<div class="box4" data-animation="fadeInToRight" data-delay="600"></div>
-		</section>
 
-		<!-- 第四屏 -->
-		<section class="page">
-			<div class="box1" data-animation="fadeIn"></div>
-			<div class="box2" data-animation="fadeOut" data-delay="800"></div>
-		</section>
+### Demo 演示
 
-	</div>
-</div>
-```
+请模拟 touch 事件体验：
 
-CSS：
-```css
-/* custom */
+```iframe
+<!-- CSS -->
+<style>
 section[data-id="1"] {
 	background-color: #3498db;
 }
@@ -264,10 +167,48 @@ section[data-id="4"] {
 	position: absolute;
 	left: 185px; top: 250px;
 }
+</style>
+
+<!-- HTML -->
+<div class="wrapper">
+	<div class="pages">
+
+		<!-- 第一屏 -->
+		<section class="page">
+			<div class="box1" data-animation="slideToBottom" data-timing-function="ease-in"></div>
+			<div class="box2" data-animation="slideToTop" data-delay="300" data-timing-function="ease-out"></div>
+			<div class="box3" data-animation="slideToRight" data-delay="600" data-timing-function="linear"></div>
+			<div class="box4" data-animation="slideToLeft" data-delay="900" data-timing-function="cubic-bezier(.12,.73,.62,1.38)"></div>
+		</section>
+
+        <!-- 第二屏 -->
+		<section class="page">
+			<div class="box1" data-animation="followSlide" data-duration="1000"></div>
+			<div class="box2" data-animation="followSlide" data-delay="200" data-duration="1000"></div>
+			<div class="box3" data-animation="followSlide" data-delay="400" data-duration="1000"></div>
+			<div class="box4" data-animation="followSlide" data-delay="600" data-duration="1000"></div>
+		</section>
+
+        <!-- 第三屏 -->
+		<section class="page">
+			<div class="box1" data-animation="fadeInToBottom"></div>
+			<div class="box2" data-animation="fadeInToTop" data-delay="200"></div>
+			<div class="box3" data-animation="fadeInToLeft" data-delay="400"></div>
+			<div class="box4" data-animation="fadeInToRight" data-delay="600"></div>
+		</section>
+
+		<!-- 第四屏 -->
+		<section class="page">
+			<div class="box1" data-animation="fadeIn"></div>
+			<div class="box2" data-animation="fadeOut" data-delay="800"></div>
+		</section>
+
+	</div>
+</div>
+
+<!-- JS -->
+<script>
+$('.pages').parallax();
+</script>
 ```
-
-注：followSlide 效果会根据翻页方向的不同而改变，如下：
-
-![followSlide1](https://raw.githubusercontent.com/hahnzhu/parallax.js/master/assets/gif/followSlide1.gif) &nbsp;&nbsp;&nbsp;&nbsp;
-![followSlide2](https://raw.githubusercontent.com/hahnzhu/parallax.js/master/assets/gif/followSlide2.gif)
 

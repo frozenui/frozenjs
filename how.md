@@ -2,18 +2,20 @@
 
 ## 直接引用
 
-使用 FrozenJS 需引入 zepto.js、frozen.js、frozenUI。
+使用 FrozenJS 需引入 FrozenUI (CSS)、zepto.js、frozen.js。如果要使用特效组件，需要引入相应的特效组件的 js。
 
-如果要使用特效组件，需要引入相应的特效组件的 js。
-
-直接引用可以使用手机 QQ 的离线包，可以大幅提升加载速度。
+直接引用可以使用手机 QQ 的离线包，离线包机制可以在第一次下载之后缓存到本地，以后无需请求，大幅提升加载速度。
 
 ```html
-<script type="text/javascript" src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js"></script>
-<script type="text/javascript" src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js"></script>
-<!-- 特效组件 -->
-<script type="text/javascript" src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/effect.cover.js"></script>
-<link rel="stylesheet" type="text/css" href="http://i.gtimg.cn/vipstyle/frozenui/1.0.0/css/basic.css?_bid=256">
+<!-- 引入 CSS -->
+ <link media="all" href="http://i.gtimg.cn/vipstyle/frozenui/1.2.0/css/frozen.css?_bid=306" rel="stylesheet">
+
+<!-- 引入 JS -->
+<script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"></script>
+<script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js?_bid=304"></script>
+
+<!-- 特效组件需要另外引用 -->
+<script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/effect.cover.js"></script>
 ```
 
 ## GitHub
