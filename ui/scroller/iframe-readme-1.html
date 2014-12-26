@@ -1,29 +1,30 @@
 <!DOCTYPE HTML>
 <html lang="cn">
-  <head>
-    <meta charset="UTF-8">
-    <title></title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
-    
-    
-    <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/sea.js?_bid=304"></script>
-    <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"></script>
-    <script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js?_bid=304"></script>
-    
-    
-      <script src="../../ui/scroller/src/scroll.js"></script>
-    
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://i.gtimg.cn/vipstyle/frozenui/1.1.0/css/frozen.css?_bid=256" />    
 
-    <link rel="stylesheet" href="http://i.gtimg.cn/vipstyle/frozenui/1.1.0/css/frozen.css?_bid=256" />    
-  </head>
-  <body>
+  
 
-     <style>
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/sea.js?_bid=304"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js?_bid=304"></script>
+  
+  
+    <script src="../../ui/scroller/src/scroll.js"></script>
+  
+</head>
+
+<body>
+   <!-- css -->
+<style>
      .ui-scroller {width:auto;height:300px;margin:20px;padding:10px;overflow:hidden;border:1px solid #ccc;}
      .ui-scroller li {margin-bottom:10px;}
 </style>
 
+<!-- html -->
 <div class="ui-scroller">
     <ul>
         <li>1、活动时间：2014.09.25 - 2014.10.31</li>
@@ -33,15 +34,19 @@
     </ul>
 </div>
 
+<!-- js -->
 <script>
 window.addEventListener('load', function(){
-
-    var myScroll = new Scroll('.ui-scroller', {
+    var scroll = new fz.Scroll('.ui-scroller', {
         scrollY: true
     });
 
+    // scroll.scrollTo(0, 200);
+
+    // scroll.scrollToElement("li:nth-child(5)", 1000, true, true);
+
+    // scroll.xxx
 })
 </script>
-
-  </body>
+</body>
 </html>
