@@ -103,3 +103,18 @@
     padding: 5px 8px;
     text-align: left;
 }
+
+
+/* 列表样式 */
+ul,
+ol {
+    margin-bottom: 20px;
+}
+ol li {
+    list-style: outside decimal;
+    margin-left: 40px;
+}
+ul li {
+    list-style: outside square;
+    margin-left: 40px;
+}

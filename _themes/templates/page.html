@@ -1,72 +1,71 @@
 <!DOCTYPE HTML>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">    
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
-    <script type="text/javascript">
-    var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-    document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F3c5e509616a8353ee908823c8b29510c' type='text/javascript'%3E%3C/script%3E"));
-    </script>
-    <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
-    <link rel="stylesheet" href="http://frozenui.github.io/static/solarized.css" />
-    <link rel="stylesheet" href="<%=root%>static/css/theme.css" />
-    <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js"></script>
-    <script src="<%=root%>static/js/theme.js"></script>
-    <title>FrozenUI - JavaScript</title>
-  </head>
-  <body>
-    <div id="body-wrapper">
-      <div class="head-area">
-      </div>
-      <div class="main-area entry-content" id="content">
-          <div class="side-area">
+<head>
+  <meta charset="UTF-8">    
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+  <script type="text/javascript">
+  var _bdhmProtocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+  document.write(unescape("%3Cscript src='" + _bdhmProtocol + "hm.baidu.com/h.js%3F3c5e509616a8353ee908823c8b29510c' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <link rel="stylesheet" href="http://frozenui.github.io/static/style.css" />
+  <link rel="stylesheet" href="http://frozenui.github.io/static/solarized.css" />
+  <link rel="stylesheet" href="<%=root%>static/css/theme.css" />
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js"></script>
+  <script src="<%=root%>static/js/theme.js"></script>
+  <title>FrozenUI - JavaScript</title>
+</head>
+<body>
+  <div id="body-wrapper">
+    <div class="head-area"></div>
+    <div class="main-area entry-content" id="content">
+        <div class="side-area">
+            
+            <dl id="navigation" role="navigation">
+
+              <% var nowCat="index" %>
+              <% _.forEach(navs, function(item) { %>
+                <% var cat=item.url.split("/").length==1?"index" : item.url.split("/")[0]; %>
+                <% if(nowCat==cat){ %>
+                  <% if(current==item.url){ %>
+                    <dd class="side-highlight"><a href="<%=root%><%- item.url %>"> <%- item.title %> </a></dd>
+                  <% }else{ %>
+                  <dd><a href="<%=root%><%- item.url %>"> <%- item.title %> </a></dd>
+                  <% } %>
+                <% }else{  %>
+                  <% 
+                    var name="基础";
+                    if(cat=="effect"){ 
+                      name="特效";
+                    }
+                    if(cat=="ui"){
+                      name="UI";
+                    }
+                    nowCat=cat;
+                  %>
+
+                  <dt><%- name %></dt>
+                  <% if(current==item.url){ %>
+                    <dd class="side-highlight"><a href="<%=root%><%- item.url %>"> <%- item.title %> </a></dd>
+                  <% }else{ %>
+                  <dd><a href="<%=root%><%- item.url %>"> <%- item.title %> </a></dd>
+                  <% } %>
+                <% }%>
+              <% }); %>
               
-              <dl id="navigation" role="navigation">
-
-                <% var nowCat="index" %>
-                <% _.forEach(navs, function(item) { %>
-                  <% var cat=item.url.split("/").length==1?"index" : item.url.split("/")[0]; %>
-                  <% if(nowCat==cat){ %>
-                    <% if(current==item.url){ %>
-                      <dd class="side-highlight"><a href="<%=root%><%- item.url %>"> <%- item.title %> </a></dd>
-                    <% }else{ %>
-                    <dd><a href="<%=root%><%- item.url %>"> <%- item.title %> </a></dd>
-                    <% } %>
-                  <% }else{  %>
-                    <% 
-                      var name="基础";
-                      if(cat=="effect"){ 
-                        name="特效";
-                      }
-                      if(cat=="ui"){
-                        name="UI";
-                      }
-                      nowCat=cat;
-                    %>
-
-                    <dt><%- name %></dt>
-                    <% if(current==item.url){ %>
-                      <dd class="side-highlight"><a href="<%=root%><%- item.url %>"> <%- item.title %> </a></dd>
-                    <% }else{ %>
-                    <dd><a href="<%=root%><%- item.url %>"> <%- item.title %> </a></dd>
-                    <% } %>
-                  <% }%>
-                <% }); %>
-                
-              </dl>
+            </dl>
+        </div>
+        
+        <div class="content-area">
+          <div class="content">
+              <%=content%>
           </div>
-          
-          <div class="content-area">
-            <div class="content">
-                <%=content%>
-            </div>
-          </div>
-          
-      </div>
-      <div class="footer-area">
-      </div>
+        </div>
+        
     </div>
+    <div class="footer-area">
+    </div>
+  </div>
 
 <script src="http://frozenui.github.io/static/layout.js"></script>
 <script>
@@ -76,9 +75,7 @@
     var oldTop = nav.offset().top;
 
     $(document).on('scroll', function() {
-      window.scrollY >= oldTop ? 
-            nav.addClass('sticky') :
-            nav.removeClass('sticky');
+      window.scrollY >= oldTop ? nav.addClass('sticky') : nav.removeClass('sticky');
     });
     
   }(Zepto);

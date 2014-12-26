@@ -1,6 +1,6 @@
 # Slider
 
-轮播组件，主要使用场景有网页中的运营广告。
+轮播组件，主要使用场景有网页中的运营广告 Banner。
 
 ## 调用方式
 
@@ -8,24 +8,22 @@ HTML 示意：
 ```html
 <div class="ui-slider">
 	<ul class="ui-slider-content">
-		<li>热门推荐</li>
+		<li class="current">热门推荐</li>
         <li>限时免费</li>
         <li>全部表情</li>
-    </ul>
-    <ul class="ui-slider-indicators">
-    	<li class="current">1</li>
-    	<li>2</li>
-    	<li>3</li>
     </ul>
 </div>
 ```
 
-组件初始化的时候需要传入 `wrapper ('.ui-slider')`。实际滚动的是内部的 `scroller ('.ui-slider-content')`。因为样式结合了 Frozen UI，所以类名固定。如需其它样式可自行覆盖。
+这里定义两个概念：wrapper 和 scroller。wrapper 即外层的包含 DOM，如 `div.ui-slider`；scroller 即内部滚动的元素，如 `ul.ui-slider-content`。组件初始化的时候需要传入 `wrapper ('.ui-slider')`。实际滚动的是内部的 `scroller ('.ui-slider-content')`。小圆点指示器会自动生成。
+
+JS 示意：
 
 ```js
 window.addEventListener('load', function(){
 	
-	var slider = new Scroll('.ui-slider', {
+	/* fz 即 FrozenJS 的意思 */
+	var slider = new fz.Scroll('.ui-slider', {
 		role: 'slider',
 		indicator: true,
 		autoplay: true,
@@ -33,11 +31,11 @@ window.addEventListener('load', function(){
 	});
 
 	/* 滑动开始前 */
-	slider.on('slideStart', function() {
+	slider.on('beforeScrollStart', function() {
 	})
 
 	/* 滑动结束 */
-	slider.on('slideEnd', function() {
+	slider.on('scrollEnd', function() {
 	})
 
 })
@@ -53,12 +51,6 @@ window.addEventListener('load', function(){
 		<th>type</th>
 		<th>default</th>
 		<th>description</th>
-	</tr>
-	<tr>
-		<td>role</td>
-		<td>string</td>
-		<td>''</td>
-		<td>角色(slider、tab)</td>
 	</tr>
 	<tr>
 		<td>indicator</td>
@@ -79,13 +71,13 @@ window.addEventListener('load', function(){
 		<td>自动播放间隔时间</td>
 	</tr>
 	<tr>
-		<td>slideStart</td>
+		<td>beforeScrollStart</td>
 		<td>function</td>
 		<td>function(){}</td>
 		<td>滑动开始前调用</td>
 	</tr>
 	<tr>
-		<td>slideEnd</td>
+		<td>scrollEnd</td>
 		<td>function</td>
 		<td>function(){}</td>
 		<td>滑动结束时调用</td>
@@ -97,6 +89,7 @@ window.addEventListener('load', function(){
 ## DEMO演示
 
 ```iframe
+<!-- css -->
 <style>
 	.ui-slider {overflow:hidden;position:relative;}
 	.ui-slider-content {height:200px;white-space:nowrap;font-size:0;}
@@ -111,35 +104,32 @@ window.addEventListener('load', function(){
 </style>
 
 
+<!-- html -->
 <div class="ui-slider">
 	<ul class="ui-slider-content">
 		<li>热门推荐</li>
         <li>限时免费</li>
         <li>全部表情</li>
     </ul>
-    <ul class="ui-slider-indicators">
-    	<li class="current">1</li>
-    	<li>2</li>
-    	<li>3</li>
-    </ul>
 </div>
 
 
+<!-- js -->
 <script>
 window.addEventListener('load', function(){
 	
-	var myScroll = new Scroll('.ui-slider', {
+	var slider = new fz.Scroll('.ui-slider', {
 		role: 'slider',
 		indicator: true,
 		autoplay: true,
 		interval: 3000
 	});
 
-	myScroll.on('slideStart', function() {
+	slider.on('beforeScrollStart', function() {
 		console.log('start')
 	});
 
-	myScroll.on('slideEnd', function() {
+	slider.on('scrollEnd', function() {
 		console.log('end')
 	});
 })

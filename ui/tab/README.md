@@ -13,33 +13,33 @@ HTML 示意：
     	<li>选项3</li>
     </ul>
 	<ul class="ui-tab-content">
-		<li>热门推荐</li>
-        <li>限时免费</li>
-        <li>全部表情</li>
+		<li>选项1内容</li>
+        <li>选项2内容</li>
+        <li>选项3内容</li>
     </ul>
 </div>
 
 ```
 
-组件初始化的时候需要传入 `wrapper ('.ui-tab')`。实际滚动的是内部的 `scroller ('.ui-tab-content')`。因为样式结合了 Frozen UI，所以类名固定。如需其它样式可自行覆盖。
+这里定义两个概念：wrapper 和 scroller。wrapper 即外层的包含 DOM，如 `div.ui-tab`；scroller 即内部滚动的元素，如 `ul.ui-tab-content`。组件初始化的时候需要传入 `wrapper ('.ui-tab')`。实际滚动的是内部的 `scroller ('.ui-tab-content')`。
 
 
 JS 代码示意：
 ```js
 window.addEventListener('load', function(){
 	
-	var slider = new Scroll('.ui-slider', {
+	var tab = new fz.Scroll('.ui-tab', {
 		role: 'tab',
 		autoplay: true,
 		interval: 3000
 	});
 
 	/* 滑动开始前 */
-	slider.on('slideStart', function() {
+	tab.on('beforeScrollStart', function() {
 	})
 
 	/* 滑动结束 */
-	slider.on('slideEnd', function() {
+	tab.on('slideEnd', function() {
 	})
 
 })
@@ -57,12 +57,6 @@ window.addEventListener('load', function(){
 		<th>description</th>
 	</tr>
 	<tr>
-		<td>role</td>
-		<td>string</td>
-		<td>''</td>
-		<td>角色(slider、tab)</td>
-	</tr>
-	<tr>
 		<td>autopaly</td>
 		<td>boolean</td>
 		<td>false</td>
@@ -75,13 +69,13 @@ window.addEventListener('load', function(){
 		<td>自动播放间隔时间</td>
 	</tr>
 	<tr>
-		<td>slideStart</td>
+		<td>beforeScrollStart</td>
 		<td>function</td>
 		<td>function(){}</td>
 		<td>滑动开始前调用</td>
 	</tr>
 	<tr>
-		<td>slideEnd</td>
+		<td>scrollEnd</td>
 		<td>function</td>
 		<td>function(){}</td>
 		<td>滑动结束时调用</td>
@@ -93,6 +87,7 @@ window.addEventListener('load', function(){
 ## DEMO演示
 
 ```iframe
+<!-- css -->
 <style>
 	.ui-tabs { width:100%;overflow:hidden;}
 	.ui-tab-nav {height:44px;line-height:44px;display:-webkit-box;display:box;font-size:16px;}
@@ -106,6 +101,7 @@ window.addEventListener('load', function(){
 	.ui-tab-content li {display:inline-block;width:100%;height:200px;color:#fff;font-size:14px;}
 </style>
 
+<!-- html -->
 <div class="ui-tabs">
 	<ul class="ui-tab-nav">
     	<li class="current">选项卡1</li>
@@ -113,26 +109,27 @@ window.addEventListener('load', function(){
     	<li>选项卡3</li>
     </ul>
 	<ul class="ui-tab-content">
-		<li>热门推荐</li>
+		<li class="current">热门推荐</li>
         <li>限时免费</li>
         <li>全部表情</li>
     </ul>
 </div>
 
+<!-- js -->
 <script>
 window.addEventListener('load', function(){
 	
-	var myScroll = new Scroll('.ui-tabs', {
+	var tab = new fz.Scroll('.ui-tabs', {
 		role: 'tab',
 		autoplay: true,
 		interval: 3000
 	});
 
-	myScroll.on('slideStart', function() {
+	tab.on('beforeScrollStart', function() {
 		console.log('start')
 	});
 
-	myScroll.on('slideEnd', function() {
+	tab.on('scrollEnd', function() {
 		console.log('end')
 	});
 })

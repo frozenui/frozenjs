@@ -122,8 +122,10 @@ module.exports = function(grunt){
               context.options=options;
             }
             var srcs=grunt.file.expand(input+"src/*.js");
+            var css=grunt.file.expand(input+"src/*.css");
 
             context.srcs=srcs;
+            context.css = css;
           }
         },
 
@@ -154,6 +156,7 @@ module.exports = function(grunt){
           files: [
             {expand: true, cwd: '_themes/static/', src: ['**'], dest: '_site/static'},
             {expand: true, src: ['*/*/src/*.js'], dest: '_site/'},
+            {expand: true, src: ['*/*/src/*.css'], dest: '_site/'},
             {expand: true, src: ['lib/*.js'], dest: '_site/'}
           ]
         },

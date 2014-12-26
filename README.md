@@ -3,9 +3,7 @@
 
 ## 什么是FrozenJS
 
-FrozenJS 是针对移动端开发的 js 组件库，其依赖 [zepto.js](http://zeptojs.com) 和 FrozenUI。
-
-FrozenJS 的所有组件均以 zepto 的插件的形式存在。
+FrozenJS 是针对移动端开发的 js 组件库，其依赖 [zepto.js](http://zeptojs.com) 和 [FrozenUI](http://frozenui.github.io/frozenui/)。FrozenJS 的所有组件均以 zepto 的插件的形式存在。
 
 FrozenJS 包括：
 
@@ -21,8 +19,8 @@ FrozenJS 针对移动端而生，可以处理大部分移动端的UI呈现。而
 
 ## FrozenJS 的特点
 
-1. 体积小，js 只依赖 zepto。
-2. 调用简单。
+1. 调用简单。
+2. 体积小，js 只依赖 zepto。
 3. 可移植性强（支持模块化与非模块化调用方式）
 
 ## FrozenJS 的理念
@@ -99,12 +97,13 @@ if($.isFunction(window.define)) {
 
 FrozenJS 通过 grunt 来管理，首先应确保 grunt 的运行环境，可参照 https://github.com/QQVIPTeam/team/issues/5
 
-`grunt`：合并压缩代码
+```js
+grunt：合并压缩代码
+grunt docs：文档生成与调试
+```
 
-`grunt docs`：文档生成与调试
+使用 `grunt` 会合并压缩代码，提交当前目录到 `master` 分支；
 
-使用 `grunt docs` 会将文档生成到 `_site` 目录，提交当前目录到 https://github.com/frozenui/baseui.git
-
-`_site` 目录下的内容提交到 `gh-pages` 分支，参考 https://github.com/frozenui/baseui/issues/2
+使用 `grunt docs` 会将文档生成到 `_site` 目录，提交 `_site` 目录到 `gh-pages` 分支。
 
 页面会显示在 frozen 的 js 组件菜单项中 http://frozenui.github.io/frozenjs/
