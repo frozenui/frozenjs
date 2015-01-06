@@ -28,14 +28,14 @@
                 
                 
                   
-                  <dd><a href="../../index.html"> 关于FrozenJS </a></dd>
+                  <dd><a href="../../index.html"> 关于FrozenJS </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../how.html"> 如何使用 </a></dd>
+                  <dd><a href="../../how.html"> 如何使用 </a></dd>
                   
                 
               
@@ -45,14 +45,14 @@
 
                   <dt>基础</dt>
                   
-                  <dd><a href="../../basic/core/index.html"> Core </a></dd>
+                  <dd><a href="../../basic/core/index.html"> Core </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../basic/tap/index.html"> Tap </a></dd>
+                  <dd><a href="../../basic/tap/index.html"> Tap </a></dd>
                   
                 
               
@@ -62,42 +62,42 @@
 
                   <dt>UI</dt>
                   
-                  <dd><a href="../../ui/dialog/index.html"> Dialog </a></dd>
+                  <dd><a href="../../ui/dialog/index.html"> Dialog </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../ui/loading/index.html"> Loading </a></dd>
+                  <dd><a href="../../ui/loading/index.html"> Loading </a></dd>
                   
                 
               
                 
                 
                   
-                    <dd class="side-highlight"><a href="../../ui/scroller/index.html"> Scroller </a></dd>
+                    <dd class="side-highlight"><a href="../../ui/scroller/index.html"> Scroller </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../ui/slider/index.html"> Slider </a></dd>
+                  <dd><a href="../../ui/slider/index.html"> Slider </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../ui/tab/index.html"> Tab </a></dd>
+                  <dd><a href="../../ui/tab/index.html"> Tab </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../ui/tips/index.html"> Tips </a></dd>
+                  <dd><a href="../../ui/tips/index.html"> Tips </a></dd>
                   
                 
               
@@ -107,14 +107,14 @@
 
                   <dt>特效</dt>
                   
-                  <dd><a href="../../effect/cover/index.html"> Cover </a></dd>
+                  <dd><a href="../../effect/cover/index.html"> Cover </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../effect/parallax/index.html"> Parallax </a></dd>
+                  <dd><a href="../../effect/parallax/index.html"> Parallax </a></dd>
                   
                 
               
@@ -176,7 +176,7 @@
         <td>scrollToElement(el, time, offsetX, offsetY)</td>
         <td>function</td>
         <td>-</td>
-        <td>滚动到具体坐标：el: 元素；time：滚动时间(ms)；offsetX：水平偏移量；offsetY：垂直偏移量，若 offsetX 和 offsetY 都是 true，则滚动到屏幕中央；</td>
+        <td>滚动到具体坐标：el: 元素；time：滚动时间(ms)；offsetX：水平偏移量；offsetY：垂直偏移量。</td>
     </tr>
     <tr>
         <td>getComputedPosition()</td>
@@ -240,9 +240,8 @@ window.addEventListener(<span class="string">'load'</span>, <span class="keyword
 
     <span class="comment">// scroll.scrollTo(0, 200);</span>
 
-    <span class="comment">// scroll.scrollToElement("li:nth-child(5)", 1000, true, true);</span>
-
-    <span class="comment">// scroll.xxx</span>
+    <span class="comment">// 若 offsetX 和 offsetY 都是 true，则滚动到元素位于屏幕中央的位置；</span>
+    scroll.scrollToElement(<span class="string">"li:nth-child(3)"</span>, <span class="number">1000</span>, <span class="literal">true</span>, <span class="literal">true</span>);
 })
 </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div>
           </div>

@@ -52,12 +52,11 @@ window.addEventListener('load', function(){
         interval: 3000
     });
 
-    slider.on('beforeScrollStart', function() {
-        console.log('start')
+    slider.on('beforeScrollStart', function(from, to) {
+        console.log(from, to);
     });
 
     slider.on('scrollEnd', function() {
-        console.log('end')
     });
 })
 </script>

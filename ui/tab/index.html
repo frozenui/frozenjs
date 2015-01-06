@@ -28,14 +28,14 @@
                 
                 
                   
-                  <dd><a href="../../index.html"> 关于FrozenJS </a></dd>
+                  <dd><a href="../../index.html"> 关于FrozenJS </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../how.html"> 如何使用 </a></dd>
+                  <dd><a href="../../how.html"> 如何使用 </a></dd>
                   
                 
               
@@ -45,14 +45,14 @@
 
                   <dt>基础</dt>
                   
-                  <dd><a href="../../basic/core/index.html"> Core </a></dd>
+                  <dd><a href="../../basic/core/index.html"> Core </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../basic/tap/index.html"> Tap </a></dd>
+                  <dd><a href="../../basic/tap/index.html"> Tap </a></dd>
                   
                 
               
@@ -62,42 +62,42 @@
 
                   <dt>UI</dt>
                   
-                  <dd><a href="../../ui/dialog/index.html"> Dialog </a></dd>
+                  <dd><a href="../../ui/dialog/index.html"> Dialog </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../ui/loading/index.html"> Loading </a></dd>
+                  <dd><a href="../../ui/loading/index.html"> Loading </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../ui/scroller/index.html"> Scroller </a></dd>
+                  <dd><a href="../../ui/scroller/index.html"> Scroller </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../ui/slider/index.html"> Slider </a></dd>
+                  <dd><a href="../../ui/slider/index.html"> Slider </a></dd>
                   
                 
               
                 
                 
                   
-                    <dd class="side-highlight"><a href="../../ui/tab/index.html"> Tab </a></dd>
+                    <dd class="side-highlight"><a href="../../ui/tab/index.html"> Tab </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../ui/tips/index.html"> Tips </a></dd>
+                  <dd><a href="../../ui/tips/index.html"> Tips </a></dd>
                   
                 
               
@@ -107,14 +107,14 @@
 
                   <dt>特效</dt>
                   
-                  <dd><a href="../../effect/cover/index.html"> Cover </a></dd>
+                  <dd><a href="../../effect/cover/index.html"> Cover </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../effect/parallax/index.html"> Parallax </a></dd>
+                  <dd><a href="../../effect/parallax/index.html"> Parallax </a></dd>
                   
                 
               
@@ -148,11 +148,12 @@
     });
 
     <span class="comment">/* 滑动开始前 */</span>
-    tab.on(<span class="string">'beforeScrollStart'</span>, <span class="keyword">function</span>() {
+    tab.on(<span class="string">'beforeScrollStart'</span>, <span class="keyword">function</span>(from, to) {
+        <span class="comment">// from 为当前页，to 为下一页</span>
     })
 
     <span class="comment">/* 滑动结束 */</span>
-    tab.on(<span class="string">'slideEnd'</span>, <span class="keyword">function</span>() {
+    tab.on(<span class="string">'scrollEnd'</span>, <span class="keyword">function</span>() {
     })
 
 })
@@ -231,12 +232,11 @@ window.addEventListener(<span class="string">'load'</span>, <span class="keyword
         interval: <span class="number">3000</span>
     });
 
-    tab.on(<span class="string">'beforeScrollStart'</span>, <span class="keyword">function</span>() {
-        console.log(<span class="string">'start'</span>)
+    tab.on(<span class="string">'beforeScrollStart'</span>, <span class="keyword">function</span>(from, to) {
+        console.log(from, to)
     });
 
     tab.on(<span class="string">'scrollEnd'</span>, <span class="keyword">function</span>() {
-        console.log(<span class="string">'end'</span>)
     });
 })
 </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div>

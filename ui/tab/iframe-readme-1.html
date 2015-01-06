@@ -54,12 +54,11 @@ window.addEventListener('load', function(){
         interval: 3000
     });
 
-    tab.on('beforeScrollStart', function() {
-        console.log('start')
+    tab.on('beforeScrollStart', function(from, to) {
+        console.log(from, to)
     });
 
     tab.on('scrollEnd', function() {
-        console.log('end')
     });
 })
 </script>
