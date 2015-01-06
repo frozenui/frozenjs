@@ -70,7 +70,7 @@ var scroll = new fz.Scroll('.ui-scroller', {
 		<td>scrollToElement(el, time, offsetX, offsetY)</td>
 		<td>function</td>
 		<td>-</td>
-		<td>滚动到具体坐标：el: 元素；time：滚动时间(ms)；offsetX：水平偏移量；offsetY：垂直偏移量，若 offsetX 和 offsetY 都是 true，则滚动到屏幕中央；</td>
+		<td>滚动到具体坐标：el: 元素；time：滚动时间(ms)；offsetX：水平偏移量；offsetY：垂直偏移量。</td>
 	</tr>
 	<tr>
 		<td>getComputedPosition()</td>
@@ -134,9 +134,8 @@ window.addEventListener('load', function(){
 
 	// scroll.scrollTo(0, 200);
 
-	// scroll.scrollToElement("li:nth-child(5)", 1000, true, true);
-
-	// scroll.xxx
+	// 若 offsetX 和 offsetY 都是 true，则滚动到元素位于屏幕中央的位置；
+	scroll.scrollToElement("li:nth-child(3)", 1000, true, true);
 })
 </script>
 ```

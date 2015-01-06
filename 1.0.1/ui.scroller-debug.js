@@ -235,7 +235,6 @@ var utils = (function () {
 	me.click = function (e) {
 		var target = e.target,
 			ev;
-
 		if ( !(/(SELECT|INPUT|TEXTAREA)/i).test(target.tagName) ) {
 			ev = document.createEvent('MouseEvents');
 			ev.initMouseEvent('click', true, true, e.view, 1,
@@ -275,7 +274,7 @@ function Scroll(el, options) {
 		bounceEasing: '',			// 反弹动画类型：'circular'(default), 'quadratic', 'back', 'bounce', 'elastic'
 
 		preventDefault: true,		// 是否阻止默认滚动事件（和冒泡有区别）
-		eventPassthrough: '',		// 穿透，是否不触发原生滑动（取值 true、false、vertical、horizental）
+		eventPassthrough: true,		// 穿透，是否触发原生滑动（取值 true、false、vertical、horizental）
 
 		freeScroll: false,			// 任意方向的滚动。若 scrollX 和 scrollY 同时开启，则相当于 freeScroll
 
@@ -286,8 +285,8 @@ function Scroll(el, options) {
 	    disableTouch : false,		// 是否禁用touch事件
 	    disablePointer : false,		// 是否禁用win系统的pointer事件
 
-		tap: true,					// 模拟 tap 事件
-		click: true,				// 是否允许点击事件
+		tap: true,					// 是否模拟 tap 事件
+		click: false,				// 是否模拟点击事件（false 则使用原生click事件）
 
 		preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/ }, // 当遇到正则内的元素则不阻止冒泡
 
@@ -299,6 +298,13 @@ function Scroll(el, options) {
 
 	for ( var i in options ) {
 		this.options[i] = options[i];
+	}
+
+	// scroller
+	// ==================================
+
+	if (!this.options.role && this.options.scrollX === false) {
+		this.options.eventPassthrough = 'horizontal';	// 竖直滚动的 scroller 不拦截横向原生滚动
 	}
 
 
@@ -407,7 +413,6 @@ function Scroll(el, options) {
 			context._autoplay.apply(context)
 		}, context.options.interval);
 	}
-	
 }
 
 
@@ -508,12 +513,10 @@ Scroll.prototype = {
 			this.scrollerWidth = this.scrollWidth;
 		}
 
-
 		this.maxScrollX		= this.wrapperWidth - this.scrollerWidth;
 		this.maxScrollY		= this.wrapperHeight - this.scrollerHeight;
 
 		
-
 		this.hasHorizontalScroll	= this.options.scrollX && this.maxScrollX < 0;
 		this.hasVerticalScroll		= this.options.scrollY && this.maxScrollY < 0;
 
@@ -591,7 +594,7 @@ Scroll.prototype = {
 
 
 	_start: function (e) {
-		
+
 		if ( utils.eventType[e.type] != 1 ) {	// 如果是鼠标点击，则只响应鼠标左键
 			if ( e.button !== 0 ) {
 				return;
@@ -639,11 +642,6 @@ Scroll.prototype = {
 		this.absStartY = this.y;
 		this.pointX    = point.pageX;
 		this.pointY    = point.pageY;
-
-
-		if (this.options.role === 'slider' || this.options.role === 'tab') {
-			this._execEvent('beforeScrollStart');
-		}
 
 
 		// throttle
@@ -708,7 +706,6 @@ Scroll.prototype = {
 				this.initiated = false;
 				return;
 			}
-
 			deltaY = 0;	// 不断重置垂直偏移量为 0
 		}
 
@@ -719,7 +716,6 @@ Scroll.prototype = {
 				this.initiated = false;
 				return;
 			}
-
 			deltaX = 0;	// 不断重置水平偏移量为 0
 		}
 
@@ -784,14 +780,14 @@ Scroll.prototype = {
 
 		this.scrollTo(newX, newY);	// ensures that the last position is rounded
 
-		if (!this.moved && !this.options.role === 'tab') {	// we scrolled less than 10 pixels
-			if ( this.options.tap ) {
+		if (!this.moved) {	// we scrolled less than 10 pixels
+
+			if (this.options.tap && utils.eventType[e.type] === 1) {
 				utils.tap(e, this.options.tap);
 			}
-			if ( this.options.click ) {
+			if ( this.options.click) {
 				utils.click(e);
 			}
-			return;
 		}
 
 
@@ -822,7 +818,10 @@ Scroll.prototype = {
 		if (this.options.role === 'tab' && $(event.target).closest('ul').hasClass('ui-tab-nav')) {
 			$(this.nav).children().removeClass('current');
 			$(event.target).addClass('current');
+			var tempCurrentPage = this.currentPage;
 			this.currentPage = $(event.target).index();
+
+			this._execEvent('beforeScrollStart', tempCurrentPage, this.currentPage);
 		}
 
 
@@ -833,10 +832,12 @@ Scroll.prototype = {
 			if (distanceX < 30) {
 				this.scrollTo(-this.itemWidth*this.currentPage, 0, this.options.bounceTime, this.options.bounceEasing);
 			}
-			else if (newX-this.startX<0) {
+			else if (newX-this.startX<0) {	// 向前
+				this._execEvent('beforeScrollStart', this.currentPage, this.currentPage+1);
 				this.scrollTo(-this.itemWidth*++this.currentPage, 0, this.options.bounceTime, this.options.bounceEasing);
 			}
-			else if (newX-this.startX>=0) {
+			else if (newX-this.startX>=0) {	// 向后
+				this._execEvent('beforeScrollStart', this.currentPage, this.currentPage-1);
 				this.scrollTo(-this.itemWidth*--this.currentPage, 0, this.options.bounceTime, this.options.bounceEasing);
 			}
 
@@ -1087,11 +1088,13 @@ Scroll.prototype = {
 
 
 	_autoplay: function() {
-		var self = this;
-
-		self._execEvent('beforeScrollStart');
+		var self = this,
+			curPage = self.currentPage;
 		
 		self.currentPage = self.currentPage >= self.count-1 ? 0 : ++self.currentPage;
+
+		self._execEvent('beforeScrollStart', curPage, self.currentPage);	// 对于自动播放的 slider/tab，这个时机就是 beforeScrollStart
+
 		self.scrollTo(-self.itemWidth*self.currentPage, 0, self.options.bounceTime, self.options.bounceEasing);
 
 		if (self.indicator) {

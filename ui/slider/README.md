@@ -15,7 +15,7 @@ HTML 示意：
 </div>
 ```
 
-这里定义两个概念：wrapper 和 scroller。wrapper 即外层的包含 DOM，如 `div.ui-slider`；scroller 即内部滚动的元素，如 `ul.ui-slider-content`。组件初始化的时候需要传入 `wrapper ('.ui-slider')`。实际滚动的是内部的 `scroller ('.ui-slider-content')`。小圆点指示器会自动生成。
+这里定义两个概念：wrapper 和 scroller。wrapper 即外层的包含 DOM，如 `div.ui-slider`；scroller 即内部滚动的元素，如 `ul.ui-slider-content`。组件初始化的时候需要传入 `wrapper ('.ui-slider')`。实际滚动的是内部的 `scroller ('.ui-slider-content')`。小圆点指示器会自动生成。目前对类名有要求，未来将支持自定义类名。
 
 JS 示意：
 
@@ -31,7 +31,8 @@ window.addEventListener('load', function(){
 	});
 
 	/* 滑动开始前 */
-	slider.on('beforeScrollStart', function() {
+	slider.on('beforeScrollStart', function(from, to) {
+		// from 为当前页，to 为下一页
 	})
 
 	/* 滑动结束 */
@@ -125,12 +126,11 @@ window.addEventListener('load', function(){
 		interval: 3000
 	});
 
-	slider.on('beforeScrollStart', function() {
-		console.log('start')
+	slider.on('beforeScrollStart', function(from, to) {
+		console.log(from, to);
 	});
 
 	slider.on('scrollEnd', function() {
-		console.log('end')
 	});
 })
 </script>
