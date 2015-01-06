@@ -35,11 +35,12 @@ window.addEventListener('load', function(){
 	});
 
 	/* 滑动开始前 */
-	tab.on('beforeScrollStart', function() {
+	tab.on('beforeScrollStart', function(from, to) {
+		// from 为当前页，to 为下一页
 	})
 
 	/* 滑动结束 */
-	tab.on('slideEnd', function() {
+	tab.on('scrollEnd', function() {
 	})
 
 })
@@ -125,12 +126,11 @@ window.addEventListener('load', function(){
 		interval: 3000
 	});
 
-	tab.on('beforeScrollStart', function() {
-		console.log('start')
+	tab.on('beforeScrollStart', function(from, to) {
+		console.log(from, to)
 	});
 
 	tab.on('scrollEnd', function() {
-		console.log('end')
 	});
 })
 </script>
