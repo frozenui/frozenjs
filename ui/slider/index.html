@@ -28,14 +28,14 @@
                 
                 
                   
-                  <dd><a href="../../index.html"> 关于FrozenJS </a></dd>
+                  <dd><a href="../../index.html"> 关于FrozenJS </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../how.html"> 如何使用 </a></dd>
+                  <dd><a href="../../how.html"> 如何使用 </a></dd>
                   
                 
               
@@ -45,14 +45,14 @@
 
                   <dt>基础</dt>
                   
-                  <dd><a href="../../basic/core/index.html"> Core </a></dd>
+                  <dd><a href="../../basic/core/index.html"> Core </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../basic/tap/index.html"> Tap </a></dd>
+                  <dd><a href="../../basic/tap/index.html"> Tap </a></dd>
                   
                 
               
@@ -62,42 +62,42 @@
 
                   <dt>UI</dt>
                   
-                  <dd><a href="../../ui/dialog/index.html"> Dialog </a></dd>
+                  <dd><a href="../../ui/dialog/index.html"> Dialog </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../ui/loading/index.html"> Loading </a></dd>
+                  <dd><a href="../../ui/loading/index.html"> Loading </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../ui/scroller/index.html"> Scroller </a></dd>
+                  <dd><a href="../../ui/scroller/index.html"> Scroller </a></dd>
                   
                 
               
                 
                 
                   
-                    <dd class="side-highlight"><a href="../../ui/slider/index.html"> Slider </a></dd>
+                    <dd class="side-highlight"><a href="../../ui/slider/index.html"> Slider </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../ui/tab/index.html"> Tab </a></dd>
+                  <dd><a href="../../ui/tab/index.html"> Tab </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../ui/tips/index.html"> Tips </a></dd>
+                  <dd><a href="../../ui/tips/index.html"> Tips </a></dd>
                   
                 
               
@@ -107,14 +107,14 @@
 
                   <dt>特效</dt>
                   
-                  <dd><a href="../../effect/cover/index.html"> Cover </a></dd>
+                  <dd><a href="../../effect/cover/index.html"> Cover </a></dd>
                   
                 
               
                 
                 
                   
-                  <dd><a href="../../effect/parallax/index.html"> Parallax </a></dd>
+                  <dd><a href="../../effect/parallax/index.html"> Parallax </a></dd>
                   
                 
               
@@ -132,19 +132,21 @@
         <span class="tag">&lt;<span class="title">li</span>&gt;</span>限时免费<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
         <span class="tag">&lt;<span class="title">li</span>&gt;</span>全部表情<span class="tag">&lt;/<span class="title">li</span>&gt;</span>
     <span class="tag">&lt;/<span class="title">ul</span>&gt;</span>
-<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><p>这里定义两个概念：wrapper 和 scroller。wrapper 即外层的包含 DOM，如 <code>div.ui-slider</code>；scroller 即内部滚动的元素，如 <code>ul.ui-slider-content</code>。组件初始化的时候需要传入 <code>wrapper (&#39;.ui-slider&#39;)</code>。实际滚动的是内部的 <code>scroller (&#39;.ui-slider-content&#39;)</code>。小圆点指示器会自动生成。</p>
+<span class="tag">&lt;/<span class="title">div</span>&gt;</span></code></pre></div><p>这里定义两个概念：wrapper 和 scroller。wrapper 即外层的包含 DOM，如 <code>div.ui-slider</code>；scroller 即内部滚动的元素，如 <code>ul.ui-slider-content</code>。组件初始化的时候需要传入 <code>wrapper (&#39;.ui-slider&#39;)</code>。实际滚动的是内部的 <code>scroller (&#39;.ui-slider-content&#39;)</code>。小圆点指示器会自动生成。目前对类名有要求，未来将支持自定义类名。</p>
 <p>JS 示意：</p>
 <div class="highlight"><pre><code class="javascript">window.addEventListener(<span class="string">'load'</span>, <span class="keyword">function</span>(){
 
     <span class="comment">/* fz 即 FrozenJS 的意思 */</span>
     <span class="keyword">var</span> slider = <span class="keyword">new</span> fz.Scroll(<span class="string">'.ui-slider'</span>, {
+        role: <span class="string">'slider'</span>,
         indicator: <span class="literal">true</span>,
         autoplay: <span class="literal">true</span>,
         interval: <span class="number">3000</span>
     });
 
     <span class="comment">/* 滑动开始前 */</span>
-    slider.on(<span class="string">'beforeScrollStart'</span>, <span class="keyword">function</span>() {
+    slider.on(<span class="string">'beforeScrollStart'</span>, <span class="keyword">function</span>(from, to) {
+        <span class="comment">// from 为当前页，to 为下一页</span>
     })
 
     <span class="comment">/* 滑动结束 */</span>
@@ -225,17 +227,17 @@ frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code 
 window.addEventListener(<span class="string">'load'</span>, <span class="keyword">function</span>(){
 
     <span class="keyword">var</span> slider = <span class="keyword">new</span> fz.Scroll(<span class="string">'.ui-slider'</span>, {
+        role: <span class="string">'slider'</span>,
         indicator: <span class="literal">true</span>,
         autoplay: <span class="literal">true</span>,
         interval: <span class="number">3000</span>
     });
 
-    slider.on(<span class="string">'beforeScrollStart'</span>, <span class="keyword">function</span>() {
-        console.log(<span class="string">'start'</span>)
+    slider.on(<span class="string">'beforeScrollStart'</span>, <span class="keyword">function</span>(from, to) {
+        console.log(from, to);
     });
 
     slider.on(<span class="string">'scrollEnd'</span>, <span class="keyword">function</span>() {
-        console.log(<span class="string">'end'</span>)
     });
 })
 </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div>
