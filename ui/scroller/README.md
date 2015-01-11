@@ -61,6 +61,12 @@ var scroll = new fz.Scroll('.ui-scroller', {
 		<td>竖直滚动</td>
 	</tr>
 	<tr>
+		<td>bounce</td>
+		<td>boolean</td>
+		<td>true</td>
+		<td>反弹动画</td>
+	</tr>
+	<tr>
 		<td>scrollTo(x, y)</td>
 		<td>function</td>
 		<td>-</td>
@@ -127,7 +133,7 @@ var scroll = new fz.Scroll('.ui-scroller', {
 
 <!-- js -->
 <script>
-window.addEventListener('load', function(){
+(function() {
 	var scroll = new fz.Scroll('.ui-scroller', {
 		scrollY: true
 	});
@@ -136,7 +142,8 @@ window.addEventListener('load', function(){
 
 	// 若 offsetX 和 offsetY 都是 true，则滚动到元素位于屏幕中央的位置；
 	scroll.scrollToElement("li:nth-child(3)", 1000, true, true);
-})
+
+})();
 </script>
 ```
 
