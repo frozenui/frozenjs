@@ -555,12 +555,12 @@ var utils = (function () {
 		transitionTimingFunction: _prefixStyle('transitionTimingFunction'),
 		transitionDuration: _prefixStyle('transitionDuration'),
 		transitionDelay: _prefixStyle('transitionDelay'),
-		transformOrigin: _prefixStyle('transformOrigin')
+		transformOrigin: _prefixStyle('transformOrigin'),
+		transitionProperty: _prefixStyle('transitionProperty')
 	});
 
 
 	me.offset = function (el) {
-
 		var left = -el.offsetLeft,
 			top = -el.offsetTop;
 
@@ -568,7 +568,6 @@ var utils = (function () {
 			left -= el.offsetLeft;
 			top -= el.offsetTop;
 		}
-
 		return {
 			left: left,
 			top: top
@@ -658,7 +657,6 @@ var utils = (function () {
 		}
 	});
 
-
 	me.tap = function (e, eventName) {
 		var ev = document.createEvent('Event');
 		ev.initEvent(eventName, true, true);
@@ -666,7 +664,6 @@ var utils = (function () {
 		ev.pageY = e.pageY;
 		e.target.dispatchEvent(ev);
 	};
-
 
 	me.click = function (e) {
 		var target = e.target,
@@ -683,7 +680,6 @@ var utils = (function () {
 		}
 	};
 
-
 	return me;
 })();
 
@@ -697,13 +693,14 @@ function Scroll(el, options) {
 	this.wrapper = typeof el == 'string' ? $(el)[0] : el;
 
 	this.options = {
-
 		startX: 0,					// 初始化 X 坐标
 		startY: 0,					// 初始化 Y 坐标
 		scrollY: true,				// 竖向滚动
 		scrollX: false,				// 默认非水平
 		directionLockThreshold: 5,	// 确定滚动方向的阈值
 		momentum: true,				// 是否开启惯性滚动
+
+		duration: 300,				// transition 过渡时间
 
 		bounce: true,				// 是否有反弹动画
 		bounceTime: 600,			// 反弹动画时间
@@ -714,7 +711,7 @@ function Scroll(el, options) {
 
 		freeScroll: false,			// 任意方向的滚动。若 scrollX 和 scrollY 同时开启，则相当于 freeScroll
 
-	    bindToWrapper : false,		// 事件是否绑定到 wrapper 元素上，否则大部分绑定到 window
+	    bindToWrapper : true,		// 事件是否绑定到 wrapper 元素上，否则大部分绑定到 window（若存在嵌套，则绑定在元素上最好）
     	resizePolling : 60,			// resize 时候隔 60ms 就执行 refresh 方法重新获取位置信息(事件节流)
     	
     	disableMouse : false,		// 是否禁用鼠标
@@ -736,13 +733,13 @@ function Scroll(el, options) {
 		this.options[i] = options[i];
 	}
 
+
 	// scroller
 	// ==================================
 
 	if (!this.options.role && this.options.scrollX === false) {
 		this.options.eventPassthrough = 'horizontal';	// 竖直滚动的 scroller 不拦截横向原生滚动
 	}
-
 
 	// slide
 	// ==================================
@@ -758,9 +755,14 @@ function Scroll(el, options) {
 
 		this.currentPage = 0;
 		this.count = this.scroller.children.length;
+
+		this.scroller.style.width = this.count+"00%";
+
 		this.itemWidth = this.scroller.children[0].clientWidth;
 		this.scrollWidth = this.itemWidth * this.count;
+
 		
+
 		if (this.options.indicator) {
 			var temp = '<ul class="ui-slider-indicators">';
 
@@ -777,6 +779,7 @@ function Scroll(el, options) {
 			this.indicator = $('.ui-slider-indicators')[0];
 		}
 	}
+
 
 	// tab
 	// ==================================
@@ -795,13 +798,17 @@ function Scroll(el, options) {
 
 		this.currentPage = 0;
 		this.count = this.scroller.children.length;
+
+		this.scroller.style.width = this.count+"00%";
+
 		this.itemWidth = this.scroller.children[0].clientWidth;
 		this.scrollWidth = this.itemWidth * this.count;
+
+
 	}
 	else {
 		this.scroller = this.wrapper.children[0];
 	}
-
 	this.scrollerStyle = this.scroller.style;
 
 
@@ -826,20 +833,18 @@ function Scroll(el, options) {
 		this.scroller.style.position = 'relative';
 	}
 
-	// Some defaults	
+	// Some defaults
 	this.x = 0;
 	this.y = 0;
 	this.directionX = 0;
 	this.directionY = 0;
 	this._events = {};
 
-
 	this._init();	// 绑定各种事件
 	this.refresh();
 
-	this.scrollTo(this.options.startX, this.options.startY);	// 滚动到指定位置
-	this.enable();	// 设置能否滑动
-
+	this.scrollTo(this.options.startX, this.options.startY);
+	this.enable();
 
 	// 自动播放
 	if (this.options.autoplay) {
@@ -859,9 +864,7 @@ Scroll.prototype = {
 		this._initEvents();
 	},
 
-
 	_initEvents: function (remove) {
-
 		var eventType = remove ? utils.removeEvent : utils.addEvent,
 			target = this.options.bindToWrapper ? this.wrapper : window;
 
@@ -902,7 +905,6 @@ Scroll.prototype = {
 		eventType(this.scroller, 'oTransitionEnd', this);
 		eventType(this.scroller, 'MSTransitionEnd', this);
 
-
 		// tab
 		// =============================
 		if (this.options.role === 'tab') {
@@ -910,9 +912,7 @@ Scroll.prototype = {
 			eventType(this.nav, 'mouseup', this);
 			eventType(this.nav, 'pointerup', this);
 		}
-
 	},
-
 
 	
 	refresh: function () {
@@ -952,10 +952,8 @@ Scroll.prototype = {
 		this.maxScrollX		= this.wrapperWidth - this.scrollerWidth;
 		this.maxScrollY		= this.wrapperHeight - this.scrollerHeight;
 
-		
 		this.hasHorizontalScroll	= this.options.scrollX && this.maxScrollX < 0;
 		this.hasVerticalScroll		= this.options.scrollY && this.maxScrollY < 0;
-
 
 		if ( !this.hasHorizontalScroll ) {
 			this.maxScrollX = 0;
@@ -1057,16 +1055,15 @@ Scroll.prototype = {
 		this.directionY = 0;
 		this.directionLocked = 0;
 
-		this._transitionTime();				// 设置 scroller 的缓动时间
-		this.startTime = utils.getTime();	// 记录滑动开始时间
+		this._transitionTime();
+		this.startTime = utils.getTime();
 
-		// 定住正在滑动的 scroller
-		if ( this.options.useTransition && this.isInTransition ) {
+		// 定住正在滑动的 scroller，slider/tab 不这么做
+		if ( this.options.useTransition && this.isInTransition && this.options.role !== 'slider' && this.options.role !== 'tab') {
 			this.isInTransition = false;
 			pos = this.getComputedPosition();
 			this._translate(Math.round(pos.x), Math.round(pos.y));
 		}
-
 		// 场景：（没有使用 Transition 属性）
 		else if ( !this.options.useTransition && this.isAnimating ) {
 			this.isAnimating = false;
@@ -1079,7 +1076,6 @@ Scroll.prototype = {
 		this.pointX    = point.pageX;
 		this.pointY    = point.pageY;
 
-
 		// throttle
 		// ======================
 		if (this.options.autoplay) {
@@ -1090,7 +1086,8 @@ Scroll.prototype = {
 				context._autoplay.apply(context);
 			}, context.options.interval);
 		}
-		
+
+		event.stopPropagation();
 	},
 
 
@@ -1134,8 +1131,11 @@ Scroll.prototype = {
 				this.directionLocked = 'n';		// no lock
 			}
 		}
-
 		if ( this.directionLocked == 'h' ) {
+			// slider/tab 外层高度自适应
+			if (this.options.role === 'tab') {
+				$(this.scroller).children('li').height('auto');	
+			}
 			if ( this.options.eventPassthrough == 'vertical' ) {
 				e.preventDefault();
 			} else if ( this.options.eventPassthrough == 'horizontal' ) {
@@ -1144,7 +1144,6 @@ Scroll.prototype = {
 			}
 			deltaY = 0;	// 不断重置垂直偏移量为 0
 		}
-
 		else if ( this.directionLocked == 'v' ) {
 			if ( this.options.eventPassthrough == 'horizontal' ) {
 				e.preventDefault();
@@ -1154,7 +1153,6 @@ Scroll.prototype = {
 			}
 			deltaX = 0;	// 不断重置水平偏移量为 0
 		}
-
 
 		deltaX = this.hasHorizontalScroll ? deltaX : 0;
 		deltaY = this.hasVerticalScroll ? deltaY : 0;
@@ -1209,15 +1207,18 @@ Scroll.prototype = {
 		this.isInTransition = 0;
 		this.initiated = 0;
 		this.endTime = utils.getTime();
+	
 
 		if ( this.resetPosition(this.options.bounceTime) ) {	// reset if we are outside of the boundaries
+			if (this.options.role === 'tab') {
+				$(this.scroller.children[this.currentPage]).siblings('li').height(0);	
+			}
 			return;
 		}
 
 		this.scrollTo(newX, newY);	// ensures that the last position is rounded
 
 		if (!this.moved) {	// we scrolled less than 10 pixels
-
 			if (this.options.tap && utils.eventType[e.type] === 1) {
 				utils.tap(e, this.options.tap);
 			}
@@ -1225,7 +1226,6 @@ Scroll.prototype = {
 				utils.click(e);
 			}
 		}
-
 
 		// 300ms 内的滑动要启动惯性滚动
 		if ( this.options.momentum && duration < 300 ) {
@@ -1237,13 +1237,11 @@ Scroll.prototype = {
 			this.isInTransition = 1;
 		}
 
-
 		if ( newX != this.x || newY != this.y ) {
 			// change easing function when scroller goes out of the boundaries
 			if ( newX > 0 || newX < this.maxScrollX || newY > 0 || newY < this.maxScrollY ) {
 				easing = utils.ease.quadratic;
 			}
-
 			this.scrollTo(newX, newY, time, easing);
 			return;
 		}
@@ -1257,8 +1255,10 @@ Scroll.prototype = {
 			var tempCurrentPage = this.currentPage;
 			this.currentPage = $(event.target).index();
 
+			$(this.scroller).children().height('auto');	// tab 外层高度自适应
 			this._execEvent('beforeScrollStart', tempCurrentPage, this.currentPage);
 		}
+
 
 
 		// slider & tab
@@ -1277,6 +1277,11 @@ Scroll.prototype = {
 				this.scrollTo(-this.itemWidth*--this.currentPage, 0, this.options.bounceTime, this.options.bounceEasing);
 			}
 
+			// tab 外层高度自适应
+			if (this.options.role === 'tab') {
+				$(this.scroller.children[this.currentPage]).siblings('li').height(0);
+			}
+
 			if (this.indicator && distanceX >= 30) {
 				$(this.indicator).children().removeClass('current');
 				$(this.indicator.children[this.currentPage]).addClass('current');
@@ -1289,7 +1294,6 @@ Scroll.prototype = {
 			$(this.scroller).children().removeClass('current');
 			$(this.scroller.children[this.currentPage]).addClass('current');
 		}
-		
 	},
 
 
@@ -1307,9 +1311,10 @@ Scroll.prototype = {
 			return;
 		}
 		this._transitionTime();
+
 		if ( !this.resetPosition(this.options.bounceTime) ) {
 			this.isInTransition = false;
-			this._execEvent('scrollEnd');
+			this._execEvent('scrollEnd', this.currentPage);
 		}
 	},
 
@@ -1341,7 +1346,6 @@ Scroll.prototype = {
 			return false;
 		}
 		this.scrollTo(x, y, time, this.options.bounceEasing);
-
 		return true;
 	},
 
@@ -1398,6 +1402,11 @@ Scroll.prototype = {
 		this.isInTransition = this.options.useTransition && time > 0;
 
 		if ( !time || (this.options.useTransition && easing.style) ) {
+
+			if (this.options.role === 'slider' || this.options.role === 'tab') {	// 不添加判断会影响 left/top 的过渡
+				time = this.options.duration;
+				this.scrollerStyle[utils.style.transitionProperty] = utils.style.transform;	
+			}
 			this.scrollerStyle[utils.style.transitionTimingFunction] = easing.style;
 			this._transitionTime(time);
 			this._translate(x, y);
@@ -1413,9 +1422,7 @@ Scroll.prototype = {
 		if ( !el ) {
 			return;
 		}
-
 		var pos = utils.offset(el);
-
 		pos.left -= this.wrapperOffset.left;
 		pos.top  -= this.wrapperOffset.top;
 
@@ -1427,10 +1434,8 @@ Scroll.prototype = {
 		if ( offsetY === true ) {
 			offsetY = Math.round(el.offsetHeight / 2 - this.wrapper.offsetHeight / 2);
 		}
-
 		pos.left -= offsetX || 0;
 		pos.top  -= offsetY || 0;
-
 		pos.left = pos.left > 0 ? 0 : pos.left < this.maxScrollX ? this.maxScrollX : pos.left;
 		pos.top  = pos.top  > 0 ? 0 : pos.top  < this.maxScrollY ? this.maxScrollY : pos.top;
 
@@ -1442,7 +1447,6 @@ Scroll.prototype = {
 
 	_transitionTime: function (time) {
 		time = time || 0;
-
 		this.scrollerStyle[utils.style.transitionDuration] = time + 'ms';
 
 		if ( !time && utils.isBadAndroid ) {
@@ -1460,15 +1464,12 @@ Scroll.prototype = {
 			this.scrollerStyle.left = x + 'px';
 			this.scrollerStyle.top = y + 'px';
 		}
-
 		this.x = x;
 		this.y = y;
 	},
 
 
 	getComputedPosition: function () {
-
-		// getComputedStyle 是一个可以获取当前元素所有最终使用的 CSS 属性值。返回的是一个 CSS 样式声明对象 ([object CSSStyleDeclaration])，只读。
 		var matrix = window.getComputedStyle(this.scroller, null),
 			x, y;
 
@@ -1502,7 +1503,7 @@ Scroll.prototype = {
 				that._translate(destX, destY);
 
 				if ( !that.resetPosition(that.options.bounceTime) ) {
-					that._execEvent('scrollEnd');
+					that._execEvent('scrollEnd', this.currentPage);
 				}
 				return;
 			}
@@ -1517,7 +1518,6 @@ Scroll.prototype = {
 				rAF(step);
 			}
 		}
-
 		this.isAnimating = true;
 		step();
 	},
@@ -1528,9 +1528,13 @@ Scroll.prototype = {
 			curPage = self.currentPage;
 		
 		self.currentPage = self.currentPage >= self.count-1 ? 0 : ++self.currentPage;
-
 		self._execEvent('beforeScrollStart', curPage, self.currentPage);	// 对于自动播放的 slider/tab，这个时机就是 beforeScrollStart
 
+		// tab 外层高度自适应
+		if (this.options.role === 'tab') {
+			$(this.scroller).children().height('auto');
+			document.body.scrollTop = 0;
+		}
 		self.scrollTo(-self.itemWidth*self.currentPage, 0, self.options.bounceTime, self.options.bounceEasing);
 
 		if (self.indicator) {
@@ -1558,7 +1562,6 @@ Scroll.prototype = {
 window.fz = window.fz || {};
 window.frozen = window.frozen || {};
 window.fz.Scroll = window.frozen.Scroll = Scroll;
-
 
 /*
  * 兼容 RequireJS 和 Sea.js
