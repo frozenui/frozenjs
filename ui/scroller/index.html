@@ -167,6 +167,12 @@
         <td>竖直滚动</td>
     </tr>
     <tr>
+        <td>bounce</td>
+        <td>boolean</td>
+        <td>true</td>
+        <td>反弹动画</td>
+    </tr>
+    <tr>
         <td>scrollTo(x, y)</td>
         <td>function</td>
         <td>-</td>
@@ -233,7 +239,7 @@ frameborder="0" scrolling="0" ></iframe></div><div class="highlight"><pre><code 
 
 <span class="comment">&lt;!-- js --&gt;</span>
 <span class="tag">&lt;<span class="title">script</span>&gt;</span><span class="javascript">
-window.addEventListener(<span class="string">'load'</span>, <span class="keyword">function</span>(){
+(<span class="keyword">function</span>() {
     <span class="keyword">var</span> scroll = <span class="keyword">new</span> fz.Scroll(<span class="string">'.ui-scroller'</span>, {
         scrollY: <span class="literal">true</span>
     });
@@ -242,7 +248,8 @@ window.addEventListener(<span class="string">'load'</span>, <span class="keyword
 
     <span class="comment">// 若 offsetX 和 offsetY 都是 true，则滚动到元素位于屏幕中央的位置；</span>
     scroll.scrollToElement(<span class="string">"li:nth-child(3)"</span>, <span class="number">1000</span>, <span class="literal">true</span>, <span class="literal">true</span>);
-})
+
+})();
 </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div>
           </div>
         </div>
