@@ -34,10 +34,10 @@ Parallax 滚动视差动画组件，提供基础滑动、事件回调及内置�
 
 CSS 引用：
 ```html
-<style rel="stylesheet" href="{your path}/parallax.css"></style>
+<link rel="stylesheet" href="{your path}/parallax.css">
 
 /* 如果需要使用内置动画，需要引用下面的内容 */
-<style rel="stylesheet" href="{your path}/parallax-animation.css"></style>
+<link rel="stylesheet" href="{your path}/parallax-animation.css">
 ```
 
 JS 引用：

@@ -35,7 +35,7 @@ FrozenJS 针对移动端而生，可以处理大部分移动端的UI呈现。而
 引用js
 ```javascript
 <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"></script>
-<script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js?_bid=304"></script>
+<script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.1/frozen.js?_bid=304"></script>
 ```
 js调用
 ```javascript
@@ -63,7 +63,7 @@ js调用
 seajs.config({
 	alias:{
 		"zepto":"http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304",
-		"frozen":"http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js?_bid=304"
+		"frozen":"http://i.gtimg.cn/vipstyle/frozenjs/1.0.1/frozen.js?_bid=304"
 	}
 });
 seajs.use(["zepto","frozen"],function(z,fz){

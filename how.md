@@ -12,10 +12,10 @@
 
 <!-- 引入 JS -->
 <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"></script>
-<script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/frozen.js?_bid=304"></script>
+<script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.1/frozen.js?_bid=304"></script>
 
 <!-- 特效组件需要另外引用 -->
-<script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.0/effect.cover.js"></script>
+<script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.1/effect.cover.js"></script>
 ```
 
 ## GitHub
