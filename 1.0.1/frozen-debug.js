@@ -946,6 +946,8 @@ Scroll.prototype = {
 		// slide
 		// ==================================
 		if (this.options.role === 'slider' || this.options.role === 'tab') {
+			this.itemWidth = this.scroller.children[0].clientWidth;
+            this.scrollWidth = this.itemWidth * this.count;
 			this.scrollerWidth = this.scrollWidth;
 		}
 
