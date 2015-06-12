@@ -1,10 +1,5 @@
-(function (window, document, Math) {
+;(function ($) {
 
-
-/*
- * 使用 requestAnimationFrame 兼容不支持 Transform 属性的浏览器
- * 当原生 RAF 没有得到支持的时候，用 setTimeout 来模拟(60FPS)
- */
 var rAF = window.requestAnimationFrame	||
 	window.webkitRequestAnimationFrame	||
 	window.mozRequestAnimationFrame		||
@@ -13,23 +8,15 @@ var rAF = window.requestAnimationFrame	||
 	function (callback) { window.setTimeout(callback, 1000 / 60); };
 
 
-
 /*
  * 工具类
  */
 var utils = (function () {
 
-
-	/*
-	 * 最后用于返回的对象
-	 */
 	var me = {};
 
-
-	/*
-	 * 检测前缀，并按照支持度赋予
-	 */
 	var _elementStyle = document.createElement('div').style;
+
 	var _vendor = (function () {
 		var vendors = ['t', 'webkitT', 'MozT', 'msT', 'OT'],
 			transform,
@@ -40,7 +27,6 @@ var utils = (function () {
 			transform = vendors[i] + 'ransform';
 			if ( transform in _elementStyle ) return vendors[i].substr(0, vendors[i].length-1);
 		}
-
 		return false;
 	})();
 
@@ -51,19 +37,9 @@ var utils = (function () {
 	}
 
 
-
-
-	/*
-	 * 获取当前时间
-	 */
 	me.getTime = Date.now || function getTime () { return new Date().getTime(); };
 
 
-
-
-	/*
-	 * 扩展属性
-	 */
 	me.extend = function (target, obj) {
 		for ( var i in obj ) {
 			target[i] = obj[i];
@@ -71,25 +47,16 @@ var utils = (function () {
 	};
 
 
-
-	/*
-	 * 添加/解除事件绑定
-	 */
 	me.addEvent = function (el, type, fn, capture) {
 		el.addEventListener(type, fn, !!capture);	
 	};
+
 
 	me.removeEvent = function (el, type, fn, capture) {
 		el.removeEventListener(type, fn, !!capture);
 	};
 
 
-
-
-	/*
-	 * Pointer Evnet 是 Microsoft 提出的指针事件，和 Touch 事件类似
-	 * http://www.iefans.net/zhizhen-shijian-pointer-event/
-	 */
 	me.prefixPointerEvent = function (pointerEvent) {
 		return window.MSPointerEvent ? 
 			'MSPointer' + pointerEvent.charAt(9).toUpperCase() + pointerEvent.substr(10):
@@ -97,12 +64,16 @@ var utils = (function () {
 	};
 
 
-
-
-	/*
-	 * ====重要====
-	 *   设置动量
-	 */
+	/**
+     * 根据一定时间内的滑动距离计算出最终停止距离和时间。
+     * @param current：当前滑动位置
+     * @param start：touchStart 时候记录的开始位置，但是在touchmove时候可能被重写
+     * @param time：touchstart 到手指离开时候经历的时间，同样可能被touchmove重写
+     * @param lowerMargin：可移动的最大距离，这个一般为计算得出 this.wrapperHeight - this.scrollerHeight
+     * @param wrapperSize：如果有边界距离的话就是可拖动，不然碰到0的时候便停止
+     * @param deceleration：匀减速
+     * @returns {{destination: number, duration: number}}
+     */
 	me.momentum = function (current, start, time, lowerMargin, wrapperSize, deceleration) {
 		var distance = current - start,
 			speed = Math.abs(distance) / time,
@@ -130,14 +101,6 @@ var utils = (function () {
 		};
 	};
 
-
-
-
-
-	/* 
-	 * 动画能力嗅探与装饰
-	 * 如支持的属性、CSS 前缀绑定
-	 */
 	var _transform = _prefixStyle('transform');
 
 	me.extend(me, {
@@ -156,71 +119,19 @@ var utils = (function () {
 		transitionTimingFunction: _prefixStyle('transitionTimingFunction'),
 		transitionDuration: _prefixStyle('transitionDuration'),
 		transitionDelay: _prefixStyle('transitionDelay'),
-		transformOrigin: _prefixStyle('transformOrigin')
+		transformOrigin: _prefixStyle('transformOrigin'),
+		transitionProperty: _prefixStyle('transitionProperty')
 	});
 
 
-
-
-	/* 
-	 * 类名操作
-	 */
-	me.hasClass = function (e, c) {
-		var re = new RegExp("(^|\\s)" + c + "(\\s|$)");
-		return re.test(e.className);
-	};
-
-	me.addClass = function (e, c) {
-		if ( me.hasClass(e, c) ) {
-			return;
-		}
-
-		var newclass = e.className.split(' ');
-		newclass.push(c);
-		e.className = newclass.join(' ');
-	};
-
-	me.removeClass = function (e, c) {
-		var i,
-			l = e.length;
-		
-		for (i=0; i<l; i++) {
-			
-			if (me.hasClass(e[i], c)) {
-				var re = new RegExp("(^|\\s)" + c + "(\\s|$)", 'g');
-				e[i].className = e[i].className.replace(re, ' ');
-			}
-		}
-	};
-
-
-
-
-
-	/*
-	 * 获取元素的偏移值
-	 */
 	me.offset = function (el) {
-
-		/*
-		 * HTMLElement.offsetLeft 是一个只读属性，返回当前元素左上角相对于 HTMLElement.offsetParent 节点的左边界偏移的像素数。
-		 * 对块级元素来说，offsetTop、offsetLeft、offsetWidth 及 offsetHeight 描述的是一个元素相对于 offsetParent 的 border-box 的偏移量。
-		 */
 		var left = -el.offsetLeft,
 			top = -el.offsetTop;
 
-		/*
-		 * HTMLElement.offsetParent 是一个只读属性，返回一个指向最近的（closest，指包含层级上的最近）包含该元素的定位元素。
-		 * 定位元素即设置了 position: relative/absolute/fixed 属性的元素。
-		 * 如果没有定位的元素，则 offsetParent 为最近的 table 元素对象或根元素（标准模式下为 html；quirks 模式下为 body）。
-		 * 当元素的 style.display 设置为 "none" 时，offsetParent 返回 null。offsetParent 很有用，因为 offsetTop 和 offsetLeft 都是相对于其内边距边界的（padding）。
-		 */
-		// 若存在这么一个定位元素，则减去它。而且是递归的。这里希望得到的是一个相对于根节点的绝对定位坐标，这样才更准确。
 		while (el = el.offsetParent) {
 			left -= el.offsetLeft;
 			top -= el.offsetTop;
 		}
-
 		return {
 			left: left,
 			top: top
@@ -228,24 +139,21 @@ var utils = (function () {
 	};
 
 
-
-
+	/* 
+	 * 配合 config 里面的 preventDefaultException 属性
+	 * 不对匹配到的 element 使用 e.preventDefault()
+	 * 默认阻止所有事件的冒泡，包括 click 或 tap
+	 */
 	me.preventDefaultException = function (el, exceptions) {
 		for ( var i in exceptions ) {
 			if ( exceptions[i].test(el[i]) ) {
 				return true;
 			}
 		}
-
 		return false;
 	};
 
 
-
-
-	/* 
-	 * 标识不同的事件类型
-	 */
 	me.extend(me.eventType = {}, {
 		touchstart: 1,
 		touchmove: 1,
@@ -265,13 +173,6 @@ var utils = (function () {
 	});
 
 
-
-
-
-	/* 
-	 * 过渡动画扩展
-	 * 保存两个属性：一个是贝塞尔曲线，一个是相关的函数
-	 */
 	me.extend(me.ease = {}, {
 		quadratic: {
 			style: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
@@ -320,12 +221,6 @@ var utils = (function () {
 		}
 	});
 
-
-
-
-	/*
-	 * 触摸事件定义
-	 */
 	me.tap = function (e, eventName) {
 		var ev = document.createEvent('Event');
 		ev.initEvent(eventName, true, true);
@@ -334,15 +229,9 @@ var utils = (function () {
 		e.target.dispatchEvent(ev);
 	};
 
-
-
-	/* 
-	 * 自定义 Click 事件，如果选中是下面的表单元素，则不返回 click 事件
-	 */
 	me.click = function (e) {
 		var target = e.target,
 			ev;
-
 		if ( !(/(SELECT|INPUT|TEXTAREA)/i).test(target.tagName) ) {
 			ev = document.createEvent('MouseEvents');
 			ev.initMouseEvent('click', true, true, e.view, 1,
@@ -355,64 +244,66 @@ var utils = (function () {
 		}
 	};
 
-
 	return me;
 })();
 
 
 
-
-
-
 /*
- * Scroll 构造函数
+ * 构造函数
  */
-function Scroll (el, options) {
+function Scroll(el, options) {
 
-	// 通过 querySelector 只获取第一个元素
-	this.wrapper = typeof el == 'string' ? document.querySelector(el) : el;
+	this.wrapper = typeof el == 'string' ? $(el)[0] : el;
 
-
-	// 默认属性
 	this.options = {
-
 		startX: 0,					// 初始化 X 坐标
 		startY: 0,					// 初始化 Y 坐标
 		scrollY: true,				// 竖向滚动
-		directionLockThreshold: 5,	// 在竖向滚动的时候，锁定水平滚动的阈值（如水平滚动不超过 5 像素的时候不会水平滚）
+		scrollX: false,				// 默认非水平
+		directionLockThreshold: 5,	// 确定滚动方向的阈值
 		momentum: true,				// 是否开启惯性滚动
+
+		duration: 300,				// transition 过渡时间
 
 		bounce: true,				// 是否有反弹动画
 		bounceTime: 600,			// 反弹动画时间
-		bounceEasing: '',			// 反弹动画类型：'quadratic', 'circular', 'back', 'bounce', 'elastic'
-									// 可以自定义 Name: {style: 'cubic-bezier(0,0,1,1)',fn: function (k) { return k; }}
+		bounceEasing: '',			// 反弹动画类型：'circular'(default), 'quadratic', 'back', 'bounce', 'elastic'
 
-		/* 
-		 * 注意：
-		 *  1、eventPassthrough 的优先级要大于 preventDefault，如果前者设置了某一方向，那么另外一个方向不会冒泡事件，不管后者是否设置为 false。
-		 * 	2、默认情况下会阻止事件冒泡，即在 wrapper 范围内事件不会出去
-		 */
-		preventDefault: true,		// 是否阻止事件冒泡
-		eventPassthrough: '',		// vertical / horizontal：允许某个方向的事件冒泡
+		preventDefault: true,		// 是否阻止默认滚动事件（和冒泡有区别）
+		eventPassthrough: true,		// 穿透，是否触发原生滑动（取值 true、false、vertical、horizental）
 
 		freeScroll: false,			// 任意方向的滚动。若 scrollX 和 scrollY 同时开启，则相当于 freeScroll
 
-		preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/ },
+	    bindToWrapper : true,		// 事件是否绑定到 wrapper 元素上，否则大部分绑定到 window（若存在嵌套，则绑定在元素上最好）
+    	resizePolling : 60,			// resize 时候隔 60ms 就执行 refresh 方法重新获取位置信息(事件节流)
+    	
+    	disableMouse : false,		// 是否禁用鼠标
+	    disableTouch : false,		// 是否禁用touch事件
+	    disablePointer : false,		// 是否禁用win系统的pointer事件
 
-		HWCompositing: true, 		// 硬件加速
+		tap: true,					// 是否模拟 tap 事件
+		click: false,				// 是否模拟点击事件（false 则使用原生click事件）
+
+		preventDefaultException: { tagName: /^(INPUT|TEXTAREA|BUTTON|SELECT)$/ }, // 当遇到正则内的元素则不阻止冒泡
+
+		HWCompositing: true, 		// Hardware acceleration
 		useTransition: true,		// Transition || requestAnimationFrame
 		useTransform: true			// Translate || Left/Top
 	};
 
 
-
-
-	// 覆盖或重置新属性
 	for ( var i in options ) {
 		this.options[i] = options[i];
 	}
 
 
+	// scroller
+	// ==================================
+
+	if (!this.options.role && this.options.scrollX === false) {
+		this.options.eventPassthrough = 'horizontal';	// 竖直滚动的 scroller 不拦截横向原生滚动
+	}
 
 	// slide
 	// ==================================
@@ -423,17 +314,33 @@ function Scroll (el, options) {
 		this.options.scrollY = false;
 		this.options.momentum = false;
 
-		this.scroller = document.querySelector('.ui-slider-content');
-		this.indicator = this.options.indicator ? document.querySelector('.ui-slider-indicators') : null;
+		this.scroller = $('.ui-slider-content')[0];
+		$(this.scroller.children[0]).addClass('current');
 
 		this.currentPage = 0;
-		
 		this.count = this.scroller.children.length;
+
+		this.scroller.style.width = this.count+"00%";
+
 		this.itemWidth = this.scroller.children[0].clientWidth;
 		this.scrollWidth = this.itemWidth * this.count;
+
 		
-		if (this.indicator) {
-			utils.addClass(this.indicator.children[0], 'current');
+
+		if (this.options.indicator) {
+			var temp = '<ul class="ui-slider-indicators">';
+
+			for (var i=1; i<=this.count; i++) {
+				if (i===1) {
+					temp += '<li class="current">'+i+'</li>';
+				}
+				else {
+					temp += '<li>'+i+'</li>';
+				}
+			}
+			temp += '</ul>';
+			$(this.wrapper).append(temp);
+			this.indicator = $('.ui-slider-indicators')[0];
 		}
 	}
 
@@ -447,112 +354,81 @@ function Scroll (el, options) {
 		this.options.scrollY = false;
 		this.options.momentum = false;
 
-		this.scroller = document.querySelector('.ui-tab-content');
-		this.nav = document.querySelector('.ui-tab-nav');
+		this.scroller = $('.ui-tab-content')[0];
+		this.nav = $('.ui-tab-nav')[0];
+
+		$(this.scroller.children[0]).addClass('current');
+		$(this.nav.children[0]).addClass('current');
 
 		this.currentPage = 0;
-		
 		this.count = this.scroller.children.length;
+
+		this.scroller.style.width = this.count+"00%";
+
 		this.itemWidth = this.scroller.children[0].clientWidth;
 		this.scrollWidth = this.itemWidth * this.count;
-		
-		for (var i=0; i<this.count; i++) {
-			this.nav.children[i]['id'] = i;
-		}
-		utils.addClass(this.nav.children[0], 'current');
-		
-	}
 
+
+	}
 	else {
 		this.scroller = this.wrapper.children[0];
 	}
-
-
-	// cache style for better performance
-	// 缓存样式
 	this.scrollerStyle = this.scroller.style;
 
 
-	// 这里的设置会覆盖用户的设置，主要是最一些不合理的设置进行重置
-
-	// 有了 perspective 之后开启硬件加速才有效？
 	this.translateZ = utils.hasPerspective && this.options.HWCompositing ? ' translateZ(0)' : '';
-
 	this.options.useTransition = utils.hasTransition && this.options.useTransition;
 	this.options.useTransform = utils.hasTransform && this.options.useTransform;
-
 	this.options.eventPassthrough = this.options.eventPassthrough === true ? 'vertical' : this.options.eventPassthrough;
 	this.options.preventDefault = !this.options.eventPassthrough && this.options.preventDefault;
-
 	// If you want eventPassthrough I have to lock one of the axes
 	this.options.scrollX = this.options.eventPassthrough == 'horizontal' ? false : this.options.scrollX;
 	this.options.scrollY = this.options.eventPassthrough == 'vertical' ? false : this.options.scrollY;
-
 	// With eventPassthrough we also need lockDirection mechanism
 	this.options.freeScroll = this.options.freeScroll && !this.options.eventPassthrough;
 	this.options.directionLockThreshold = this.options.eventPassthrough ? 0 : this.options.directionLockThreshold;
-
 	this.options.bounceEasing = typeof this.options.bounceEasing == 'string' ? utils.ease[this.options.bounceEasing] || utils.ease.circular : this.options.bounceEasing;
-
 	this.options.resizePolling = this.options.resizePolling === undefined ? 60 : this.options.resizePolling;
 
-	if ( this.options.tap === true ) {
+	if (this.options.tap === true) {
 		this.options.tap = 'tap';
 	}
+	if (this.options.useTransform === false) {
+		this.scroller.style.position = 'relative';
+	}
 
-
-
-
-
-	// Some defaults	
+	// Some defaults
 	this.x = 0;
 	this.y = 0;
 	this.directionX = 0;
 	this.directionY = 0;
-	this._events = {};		// 存放绑定事件的对象
-
-
-
+	this._events = {};
 
 	this._init();	// 绑定各种事件
-	this.refresh();	// 
+	this.refresh();
 
-	this.scrollTo(this.options.startX, this.options.startY);	// 滚动到指定位置
-	this.enable();	// 设置能否滑动
+	this.scrollTo(this.options.startX, this.options.startY);
+	this.enable();
 
+	// 自动播放
 	if (this.options.autoplay) {
 		var context = this;
-
 		this.options.interval = this.options.interval || 2000;
-
 		this.options.flag = setTimeout(function(){
 			context._autoplay.apply(context)
 		}, context.options.interval);
 	}
-	
 }
 
 
 
-
-
-/* 
- * Scroll 原型扩展
- */
 Scroll.prototype = {
-	// version: '5.1.3',
 
 	_init: function () {
 		this._initEvents();
-
 	},
-	
 
-	/*
-	 * 事件绑定
-	 */
 	_initEvents: function (remove) {
-
 		var eventType = remove ? utils.removeEvent : utils.addEvent,
 			target = this.options.bindToWrapper ? this.wrapper : window;
 
@@ -593,8 +469,6 @@ Scroll.prototype = {
 		eventType(this.scroller, 'oTransitionEnd', this);
 		eventType(this.scroller, 'MSTransitionEnd', this);
 
-
-
 		// tab
 		// =============================
 		if (this.options.role === 'tab') {
@@ -602,52 +476,50 @@ Scroll.prototype = {
 			eventType(this.nav, 'mouseup', this);
 			eventType(this.nav, 'pointerup', this);
 		}
-
 	},
-
 
 	
 	refresh: function () {
-		var rf = this.wrapper.offsetHeight;		// Force reflow
+		var rf = this.wrapper.offsetHeight;	// Force reflow
 
-
-		/*
-		 * clientWidth/Height
-		 * offsetWidth/Height
-		 * 详情看这里：http://jsfiddle.net/y8Y32/25/
-		 */
+		// http://jsfiddle.net/y8Y32/25/
+		// clientWidth = content + padding
 		this.wrapperWidth	= this.wrapper.clientWidth;
 		this.wrapperHeight	= this.wrapper.clientHeight;
 
 
-		var matrix = window.getComputedStyle(this.wrapper, null);
-
+		// 添加 wrapper 的 padding 值到 scroller 身上，更符合使用预期
+		var matrix = window.getComputedStyle(this.wrapper, null); 
 		var pt = matrix['padding-top'].replace(/[^-\d.]/g, ''),
 			pb = matrix['padding-bottom'].replace(/[^-\d.]/g, ''),
 			pl = matrix['padding-left'].replace(/[^-\d.]/g, ''),
 			pr = matrix['padding-right'].replace(/[^-\d.]/g, '');
 
+		var matrix2 = window.getComputedStyle(this.scroller, null);
+		var	mt2 = matrix2['margin-top'].replace(/[^-\d.]/g, ''),
+			mb2 = matrix2['margin-bottom'].replace(/[^-\d.]/g, ''),
+			ml2 = matrix2['margin-left'].replace(/[^-\d.]/g, ''),
+			mr2 = matrix2['margin-right'].replace(/[^-\d.]/g, '');
 
-		this.scrollerWidth	= this.scroller.offsetWidth+parseInt(pl)+parseInt(pr);
-		this.scrollerHeight	= this.scroller.offsetHeight+parseInt(pt)+parseInt(pb);
 
-		// this.scrollerWidth	= this.scroller.scrollWidth;
-		// this.scrollerHeight	= this.scroller.scrollHeight;
+		// offsetWidth = content + padding + border
+		this.scrollerWidth	= this.scroller.offsetWidth+parseInt(pl)+parseInt(pr)+parseInt(ml2)+parseInt(mr2);
+		this.scrollerHeight	= this.scroller.offsetHeight+parseInt(pt)+parseInt(pb)+parseInt(mt2)+parseInt(mb2);
 
 
 		// slide
 		// ==================================
 		if (this.options.role === 'slider' || this.options.role === 'tab') {
+			this.itemWidth = this.scroller.children[0].clientWidth;
+            this.scrollWidth = this.itemWidth * this.count;
 			this.scrollerWidth = this.scrollWidth;
 		}
-
 
 		this.maxScrollX		= this.wrapperWidth - this.scrollerWidth;
 		this.maxScrollY		= this.wrapperHeight - this.scrollerHeight;
 
 		this.hasHorizontalScroll	= this.options.scrollX && this.maxScrollX < 0;
 		this.hasVerticalScroll		= this.options.scrollY && this.maxScrollY < 0;
-
 
 		if ( !this.hasHorizontalScroll ) {
 			this.maxScrollX = 0;
@@ -664,19 +536,10 @@ Scroll.prototype = {
 		this.directionY = 0;
 
 		this.wrapperOffset = utils.offset(this.wrapper);
-
-		this._execEvent('refresh');
-
 		this.resetPosition();
-
 	},
 	
 	
-
-
-	/*
-	 * 统一事件接口
-	 */
 	handleEvent: function (e) {
 		switch ( e.type ) {
 			case 'touchstart':
@@ -732,21 +595,17 @@ Scroll.prototype = {
 
 	_start: function (e) {
 
-		// React to left mouse button only
-		// 如果是鼠标点击，则只响应鼠标左键，其他键不做响应，包括滚轮
-		if ( utils.eventType[e.type] != 1 ) {
-
-			// e.button  0：鼠标左键 1：鼠标滚轮 2：鼠标右键
+		if ( utils.eventType[e.type] != 1 ) {	// 如果是鼠标点击，则只响应鼠标左键
 			if ( e.button !== 0 ) {
 				return;
 			}
 		}
-		
 
 		if ( !this.enabled || (this.initiated && utils.eventType[e.type] !== this.initiated) ) {
 			return;
 		}
 
+		// 如果 preventDefault === true 且 不是落后的安卓版本 且 不是需要过滤的 target 就阻止默认的行为
 		if ( this.options.preventDefault && !utils.isBadAndroid && !utils.preventDefaultException(e.target, this.options.preventDefaultException) ) {
 			e.preventDefault();
 		}
@@ -754,49 +613,34 @@ Scroll.prototype = {
 		var point = e.touches ? e.touches[0] : e,	// 检验是触摸事件对象还是鼠标事件对象
 			pos;
 
-		this.initiated	= utils.eventType[e.type];	// 初始化事件类型（触摸：1，鼠标：2，pointer：3）
-		this.moved		= false;					// 是否移动
+		this.initiated	= utils.eventType[e.type];	// 初始化事件类型（1：触摸，2：鼠标，3：pointer）
+		this.moved		= false;
 		this.distX		= 0;
 		this.distY		= 0;
 		this.directionX = 0;
 		this.directionY = 0;
 		this.directionLocked = 0;
 
-		this._transitionTime();				// 设置 scroller 的缓动时间
+		this._transitionTime();
+		this.startTime = utils.getTime();
 
-		this.startTime = utils.getTime();	// 记录滑动开始时间
-
-
-		// 场景：若 scroller 正在惯性滚动，同时被按住（使用 Transition 属性）
-		// 结果：立马定住正在滑动的 scroller
-		if ( this.options.useTransition && this.isInTransition ) {
+		// 定住正在滑动的 scroller，slider/tab 不这么做
+		if ( this.options.useTransition && this.isInTransition && this.options.role !== 'slider' && this.options.role !== 'tab') {
 			this.isInTransition = false;
-			pos = this.getComputedPosition();						// {x:x, y:y}
-			this._translate(Math.round(pos.x), Math.round(pos.y));	// 立马定住 scroller 的位置
-			this._execEvent('scrollEnd');							// 发出滚动结束的事件
+			pos = this.getComputedPosition();
+			this._translate(Math.round(pos.x), Math.round(pos.y));
 		}
-
 		// 场景：（没有使用 Transition 属性）
 		else if ( !this.options.useTransition && this.isAnimating ) {
 			this.isAnimating = false;
-			this._execEvent('scrollEnd');
 		}
 
-		this.startX    = this.x;	// 相对于 wrapper 的偏移量
-		this.startY    = this.y;	// 相对于 wrapper 的偏移量
+		this.startX    = this.x;
+		this.startY    = this.y;
 		this.absStartX = this.x;
 		this.absStartY = this.y;
-		this.pointX    = point.pageX;	// 相对于 document 的偏移量
-		this.pointY    = point.pageY;	// 相对于 document 的偏移量
-
-
-		this._execEvent('beforeScrollStart');
-
-		if (this.options.role === 'slider' || this.options.role === 'tab') {
-			this._execEvent('slideStart');
-		}
-
-
+		this.pointX    = point.pageX;
+		this.pointY    = point.pageY;
 
 		// throttle
 		// ======================
@@ -805,47 +649,45 @@ Scroll.prototype = {
 
 			clearTimeout(this.options.flag);
 			this.options.flag = setTimeout(function() {
-									context._autoplay.apply(context);
-								}, context.options.interval);
+				context._autoplay.apply(context);
+			}, context.options.interval);
 		}
-		
+
+		event.stopPropagation();
 	},
 
 
 
 	_move: function (e) {
-		if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {
+
+		if ( !this.enabled || utils.eventType[e.type] !== this.initiated ) {	// 如果事件类型和 touchstart 初始化的事件类型不一致，退出
 			return;
 		}
-
-		if ( this.options.preventDefault ) {	// increases performance on Android
-			e.preventDefault();					// 貌似这么做才能确保 Android 下 touchend 能被正常触发
+		if ( this.options.preventDefault ) {	// 这么做才能确保 Android 下 touchend 能被正常触发（需测试）
+			e.preventDefault();
 		}
-
 		var point		= e.touches ? e.touches[0] : e,
-			deltaX		= point.pageX - this.pointX,		// 偏移量X
-			deltaY		= point.pageY - this.pointY,		// 偏移量Y
-			timestamp	= utils.getTime(),					// 获取当前时间戳
+			deltaX		= point.pageX - this.pointX,
+			deltaY		= point.pageY - this.pointY,
+			timestamp	= utils.getTime(),
 			newX, newY,
 			absDistX, absDistY;
 
-		this.pointX		= point.pageX;		// 重新赋值当前偏移量X
-		this.pointY		= point.pageY;		// 重新赋值当前偏移量Y
+		this.pointX		= point.pageX;
+		this.pointY		= point.pageY;
 
-		this.distX		+= deltaX;			// 距离X 的偏移量
-		this.distY		+= deltaY;			// 距离Y 的偏移量
+		this.distX		+= deltaX;
+		this.distY		+= deltaY;
 		absDistX		= Math.abs(this.distX);
 		absDistY		= Math.abs(this.distY);
 		
 
-		// We need to move at least 10 pixels for the scrolling to initiate
 		// 如果在很长的时间内只移动了少于 10 像素的距离，那么不会触发惯性滚动
 		if ( timestamp - this.endTime > 300 && (absDistX < 10 && absDistY < 10) ) {
 			return;
 		}
-		
 
-		// If you are scrolling in one direction lock the other
+		// 屏蔽滚动方向的另外一个方向（可配置）
 		if ( !this.directionLocked && !this.options.freeScroll ) {
 			if ( absDistX > absDistY + this.options.directionLockThreshold ) {
 				this.directionLocked = 'h';		// lock horizontally
@@ -855,28 +697,28 @@ Scroll.prototype = {
 				this.directionLocked = 'n';		// no lock
 			}
 		}
-
 		if ( this.directionLocked == 'h' ) {
+			// slider/tab 外层高度自适应
+			if (this.options.role === 'tab') {
+				$(this.scroller).children('li').height('auto');	
+			}
 			if ( this.options.eventPassthrough == 'vertical' ) {
 				e.preventDefault();
 			} else if ( this.options.eventPassthrough == 'horizontal' ) {
-				this.initiated = false;		// 滑动事件类型设置 false
+				this.initiated = false;
 				return;
 			}
-
-			deltaY = 0;
-		} else if ( this.directionLocked == 'v' ) {
+			deltaY = 0;	// 不断重置垂直偏移量为 0
+		}
+		else if ( this.directionLocked == 'v' ) {
 			if ( this.options.eventPassthrough == 'horizontal' ) {
 				e.preventDefault();
 			} else if ( this.options.eventPassthrough == 'vertical' ) {
-				this.initiated = false;		// 滑动事件类型设置 false
+				this.initiated = false;
 				return;
 			}
-
-			deltaX = 0;
+			deltaX = 0;	// 不断重置水平偏移量为 0
 		}
-
-		
 
 		deltaX = this.hasHorizontalScroll ? deltaX : 0;
 		deltaY = this.hasVerticalScroll ? deltaY : 0;
@@ -895,21 +737,10 @@ Scroll.prototype = {
 		this.directionX = deltaX > 0 ? -1 : deltaX < 0 ? 1 : 0;
 		this.directionY = deltaY > 0 ? -1 : deltaY < 0 ? 1 : 0;
 
-		if ( !this.moved ) {
-			this._execEvent('scrollStart');
-		}
-
 		this.moved = true;	// 滚动开始
-
 		this._translate(newX, newY);
-		
 
-
-		/*
-		 * 300ms 应该是一个阈值，若是人为的滚动一般都会超过 300ms
-		 * 所以每次滑动后都会重置当前时间和当前位置
-		 */
-		if ( timestamp - this.startTime > 300 ) {
+		if ( timestamp - this.startTime > 300 ) {	// 每 300 毫秒重置一次初始值
 			this.startTime = timestamp;
 			this.startX = this.x;
 			this.startY = this.y;
@@ -928,10 +759,7 @@ Scroll.prototype = {
 			e.preventDefault();
 		}
 
-
-		// 移开屏幕的那个触摸点，只会包含在changedTouches列表中
-		// 而不会包含在 touches 或 targetTouches 列表中
-		var point = e.changedTouches ? e.changedTouches[0] : e,
+		var point = e.changedTouches ? e.changedTouches[0] : e,	// 移开屏幕的那个触摸点，只会包含在 changedTouches 列表中，而不会包含在 touches 或 targetTouches 列表中
 			momentumX,
 			momentumY,
 			duration = utils.getTime() - this.startTime,
@@ -945,39 +773,26 @@ Scroll.prototype = {
 		this.isInTransition = 0;
 		this.initiated = 0;
 		this.endTime = utils.getTime();
+	
 
-		// reset if we are outside of the boundaries
-		if ( this.resetPosition(this.options.bounceTime) ) {
+		if ( this.resetPosition(this.options.bounceTime) ) {	// reset if we are outside of the boundaries
+			if (this.options.role === 'tab') {
+				$(this.scroller.children[this.currentPage]).siblings('li').height(0);	
+			}
 			return;
 		}
 
 		this.scrollTo(newX, newY);	// ensures that the last position is rounded
 
-		// we scrolled less than 10 pixels
-		if ( !this.moved && !this.options.role === 'tab') {
-			if ( this.options.tap ) {
+		if (!this.moved) {	// we scrolled less than 10 pixels
+			if (this.options.tap && utils.eventType[e.type] === 1) {
 				utils.tap(e, this.options.tap);
 			}
-
-			if ( this.options.click ) {
+			if ( this.options.click) {
 				utils.click(e);
 			}
-
-			this._execEvent('scrollCancel');
-			return;
 		}
 
-
-		/*
-		 * flick 意为「轻拍，快速拂动」，即短时间内很快地划过，这个时候插件会取消惯性滚动
-		 * 如果你注册了这个事件（on('flick',function(){})）那么就会启动它，所以不要注册
-		 */
-		if ( this._events.flick && duration < 200 && distanceX < 100 && distanceY < 100 ) {
-			this._execEvent('flick');
-			return;
-		}
-
-		// start momentum animation if needed
 		// 300ms 内的滑动要启动惯性滚动
 		if ( this.options.momentum && duration < 300 ) {
 			momentumX = this.hasHorizontalScroll ? utils.momentum(this.x, this.startX, duration, this.maxScrollX, this.options.bounce ? this.wrapperWidth : 0, this.options.deceleration) : { destination: newX, duration: 0 };
@@ -988,13 +803,11 @@ Scroll.prototype = {
 			this.isInTransition = 1;
 		}
 
-
 		if ( newX != this.x || newY != this.y ) {
 			// change easing function when scroller goes out of the boundaries
 			if ( newX > 0 || newX < this.maxScrollX || newY > 0 || newY < this.maxScrollY ) {
 				easing = utils.ease.quadratic;
 			}
-
 			this.scrollTo(newX, newY, time, easing);
 			return;
 		}
@@ -1002,103 +815,81 @@ Scroll.prototype = {
 
 		// tab
 		// ==========================
-		if (this.options.role === 'tab' && event.target.parentNode.className === 'ui-tab-nav') {
-			
-			utils.removeClass(this.nav.children, 'current');
-			utils.addClass(event.target, 'current');
+		if (this.options.role === 'tab' && $(event.target).closest('ul').hasClass('ui-tab-nav')) {
+			$(this.nav).children().removeClass('current');
+			$(event.target).addClass('current');
+			var tempCurrentPage = this.currentPage;
+			this.currentPage = $(event.target).index();
 
-			this.currentPage = event.target.id;
+			$(this.scroller).children().height('auto');	// tab 外层高度自适应
+			this._execEvent('beforeScrollStart', tempCurrentPage, this.currentPage);
 		}
+
 
 
 		// slider & tab
 		// ==============================
 		if (this.options.role === 'slider' || this.options.role === 'tab') {
 
-			if (distanceX < 50) {
+			if (distanceX < 30) {
 				this.scrollTo(-this.itemWidth*this.currentPage, 0, this.options.bounceTime, this.options.bounceEasing);
 			}
-			else if (distanceX >= 50 && newX-this.startX<0) {
+			else if (newX-this.startX<0) {	// 向前
+				this._execEvent('beforeScrollStart', this.currentPage, this.currentPage+1);
 				this.scrollTo(-this.itemWidth*++this.currentPage, 0, this.options.bounceTime, this.options.bounceEasing);
-				
-				if (this.indicator) {
-					utils.removeClass(this.indicator.children, 'current');
-					utils.addClass(this.indicator.children[this.currentPage], 'current');	
-				}
-				else if (this.nav) {
-					utils.removeClass(this.nav.children, 'current');
-					utils.addClass(this.nav.children[this.currentPage], 'current');		
-				}
 			}
-			else if (distanceX >= 50 && newX-this.startX>=0) {
+			else if (newX-this.startX>=0) {	// 向后
+				this._execEvent('beforeScrollStart', this.currentPage, this.currentPage-1);
 				this.scrollTo(-this.itemWidth*--this.currentPage, 0, this.options.bounceTime, this.options.bounceEasing);
-				
-				if (this.indicator) {
-					utils.removeClass(this.indicator.children, 'current');
-					utils.addClass(this.indicator.children[this.currentPage], 'current');
-				}
-				else if (this.nav) {
-					utils.removeClass(this.nav.children, 'current');
-					utils.addClass(this.nav.children[this.currentPage], 'current');	
-				}
 			}
 
-			this._execEvent('slideEnd');
+			// tab 外层高度自适应
+			if (this.options.role === 'tab') {
+				$(this.scroller.children[this.currentPage]).siblings('li').height(0);
+			}
+
+			if (this.indicator && distanceX >= 30) {
+				$(this.indicator).children().removeClass('current');
+				$(this.indicator.children[this.currentPage]).addClass('current');
+			}
+			else if (this.nav && distanceX >= 30) {
+				$(this.nav).children().removeClass('current');
+				$(this.nav.children[this.currentPage]).addClass('current');
+			}
+
+			$(this.scroller).children().removeClass('current');
+			$(this.scroller.children[this.currentPage]).addClass('current');
 		}
-
-
-		this._execEvent('scrollEnd');
 	},
 
 
-
-
-	/*
-	 * 窗体大小改变时的布局重新计算
-	 */
 	_resize: function () {
 		var that = this;
-
 		clearTimeout(this.resizeTimeout);
-
 		this.resizeTimeout = setTimeout(function () {
 			that.refresh();
 		}, this.options.resizePolling);
 	},
 
 
-
-
-	/*
-	 * 动画结束后
-	 */
 	_transitionEnd: function (e) {
 		if ( e.target != this.scroller || !this.isInTransition ) {
 			return;
 		}
-
 		this._transitionTime();
+
 		if ( !this.resetPosition(this.options.bounceTime) ) {
 			this.isInTransition = false;
-			this._execEvent('scrollEnd');
+			this._execEvent('scrollEnd', this.currentPage);
 		}
 	},
 
 
-
-	/* 
-	 * 把所有事件绑定给去掉 
-	 */
 	destroy: function () {
 		this._initEvents(true);		// 去除事件绑定
-		this._execEvent('destroy');
 	},
 
-	
 
-	/*
-	 * 归位：超出边界后回到原来的位置
-	 */ 
 	resetPosition: function (time) {
 		var x = this.x,
 			y = this.y;
@@ -1121,11 +912,8 @@ Scroll.prototype = {
 			return false;
 		}
 		this.scrollTo(x, y, time, this.options.bounceEasing);
-
 		return true;
 	},
-
-
 
 
 
@@ -1139,20 +927,12 @@ Scroll.prototype = {
 
 
 
-
-	/* 
-	 * 自定义事件监听方法，支持监听多个同类型的事件
-	 * 如：myScroll.on('scrollEnd', function(){ console.log('1') })
-	 *    myScroll.on('scrollEnd', function(){ console.log('2') })
-	 */
 	on: function (type, fn) {
 		if ( !this._events[type] ) {
 			this._events[type] = [];
 		}
-
 		this._events[type].push(fn);
 	},
-
 	off: function (type, fn) {
 		if ( !this._events[type] ) {
 			return;
@@ -1166,54 +946,20 @@ Scroll.prototype = {
 	},
 
 
-
-	/*
-	 * 执行事件
-	 * 这个事件的牛逼指出在于，如果你没有设置 on 的话，那么事件是不会执行的。
-	 * 就是说 var myScroll = new Scroll(..); myScroll.on('xxx', functino(){}) 注册后才会有这个xxx事件
-	 */
 	_execEvent: function (type) {
-
-		// 若没有事先 on(type)，则跳出（不执行事件）
 		if ( !this._events[type] ) {
 			return;
 		}
-
 		var i = 0,
 			l = this._events[type].length;
 
 		if ( !l ) {
 			return;
 		}
-
-		// 循环回调绑定的函数
 		for ( ; i < l; i++ ) {
-			// [].slice.call(arguments) 能将具有 length 属性的对象转成数组
-			// 等价于 Array.prototype.slice.call(argument)
-			// 但是这里的 [].slice.call(arguments, 1) 没有意义，因为 argument 只有一个参数
-			// [].slice.call(arguments, 1) 永远得到的是一个空数组 []
-			// 这里这么写暂时不知道为什么，也许是为了兼容
 			this._events[type][i].apply(this, [].slice.call(arguments, 1));
 		}
 	},
-
-
-
-
-	/*
-	 * 从当前位置开始移动，允许设置偏移量
-	 * 而 scrollTo 方法需要明确的位置 x、y
-	 */
-	scrollBy: function (x, y, time, easing) {
-		x = this.x + x;
-		y = this.y + y;
-		time = time || 0;
-
-		this.scrollTo(x, y, time, easing);
-	},
-
-
-
 
 
 	scrollTo: function (x, y, time, easing) {
@@ -1222,7 +968,12 @@ Scroll.prototype = {
 		this.isInTransition = this.options.useTransition && time > 0;
 
 		if ( !time || (this.options.useTransition && easing.style) ) {
-			this._transitionTimingFunction(easing.style);
+
+			if (this.options.role === 'slider' || this.options.role === 'tab') {	// 不添加判断会影响 left/top 的过渡
+				time = this.options.duration;
+				this.scrollerStyle[utils.style.transitionProperty] = utils.style.transform;	
+			}
+			this.scrollerStyle[utils.style.transitionTimingFunction] = easing.style;
 			this._transitionTime(time);
 			this._translate(x, y);
 		} else {
@@ -1231,18 +982,13 @@ Scroll.prototype = {
 	},
 
 
-
-
-
 	scrollToElement: function (el, time, offsetX, offsetY, easing) {
 		el = el.nodeType ? el : this.scroller.querySelector(el);
 
 		if ( !el ) {
 			return;
 		}
-
 		var pos = utils.offset(el);
-
 		pos.left -= this.wrapperOffset.left;
 		pos.top  -= this.wrapperOffset.top;
 
@@ -1254,10 +1000,8 @@ Scroll.prototype = {
 		if ( offsetY === true ) {
 			offsetY = Math.round(el.offsetHeight / 2 - this.wrapper.offsetHeight / 2);
 		}
-
 		pos.left -= offsetX || 0;
 		pos.top  -= offsetY || 0;
-
 		pos.left = pos.left > 0 ? 0 : pos.left < this.maxScrollX ? this.maxScrollX : pos.left;
 		pos.top  = pos.top  > 0 ? 0 : pos.top  < this.maxScrollY ? this.maxScrollY : pos.top;
 
@@ -1267,16 +1011,8 @@ Scroll.prototype = {
 	},
 
 
-
-
-
-	/* 
-	 * 缓动时间
-	 */
 	_transitionTime: function (time) {
 		time = time || 0;
-
-		// 之前缓存的 scroller 的样式
 		this.scrollerStyle[utils.style.transitionDuration] = time + 'ms';
 
 		if ( !time && utils.isBadAndroid ) {
@@ -1285,40 +1021,21 @@ Scroll.prototype = {
 	},
 
 
-
-
-	_transitionTimingFunction: function (easing) {
-		this.scrollerStyle[utils.style.transitionTimingFunction] = easing;
-	},
-
-
-
-
 	_translate: function (x, y) {
 		if ( this.options.useTransform ) {
-
 			this.scrollerStyle[utils.style.transform] = 'translate(' + x + 'px,' + y + 'px)' + this.translateZ;
-
 		} else {
 			x = Math.round(x);
 			y = Math.round(y);
 			this.scrollerStyle.left = x + 'px';
 			this.scrollerStyle.top = y + 'px';
 		}
-
 		this.x = x;
 		this.y = y;
 	},
 
 
-
-	/* 
-	 * 计算当前位置
-	 */
 	getComputedPosition: function () {
-
-		// getComputedStyle 是一个可以获取当前元素所有最终使用的 CSS 属性值。
-		// 返回的是一个 CSS 样式声明对象 ([object CSSStyleDeclaration])，只读。
 		var matrix = window.getComputedStyle(this.scroller, null),
 			x, y;
 
@@ -1335,9 +1052,7 @@ Scroll.prototype = {
 	},
 
 	
-
-
-	_animate: function (destX, destY, duration, easingFn) {
+	_animate: function (destX, destY, duration, easingFn) {	// 当浏览器不支持 transition 时提供的退化方案 requestAnimationFrame
 		var that = this,
 			startX = this.x,
 			startY = this.y,
@@ -1354,9 +1069,8 @@ Scroll.prototype = {
 				that._translate(destX, destY);
 
 				if ( !that.resetPosition(that.options.bounceTime) ) {
-					that._execEvent('scrollEnd');
+					that._execEvent('scrollEnd', this.currentPage);
 				}
-
 				return;
 			}
 
@@ -1370,42 +1084,50 @@ Scroll.prototype = {
 				rAF(step);
 			}
 		}
-
 		this.isAnimating = true;
 		step();
 	},
 
 
 	_autoplay: function() {
-		var self = this;
-
+		var self = this,
+			curPage = self.currentPage;
+		
 		self.currentPage = self.currentPage >= self.count-1 ? 0 : ++self.currentPage;
+		self._execEvent('beforeScrollStart', curPage, self.currentPage);	// 对于自动播放的 slider/tab，这个时机就是 beforeScrollStart
 
+		// tab 外层高度自适应
+		if (this.options.role === 'tab') {
+			$(this.scroller).children().height('auto');
+			document.body.scrollTop = 0;
+		}
 		self.scrollTo(-self.itemWidth*self.currentPage, 0, self.options.bounceTime, self.options.bounceEasing);
 
 		if (self.indicator) {
-			utils.removeClass(self.indicator.children, 'current');
-			utils.addClass(self.indicator.children[self.currentPage], 'current');	
+			$(self.indicator).children().removeClass('current');
+			$(self.indicator.children[self.currentPage]).addClass('current');
+			$(self.scroller).children().removeClass('current');
+			$(self.scroller.children[self.currentPage]).addClass('current');
 		}
 		else if (self.nav) {
-			utils.removeClass(self.nav.children, 'current');
-			utils.addClass(self.nav.children[self.currentPage], 'current');		
+			$(self.nav).children().removeClass('current');
+			$(self.nav.children[self.currentPage]).addClass('current');
+			$(self.scroller).children().removeClass('current');
+			$(self.scroller.children[self.currentPage]).addClass('current');
 		}
 
 		self.options.flag = setTimeout(function() {
-								self._autoplay.apply(self);
-							}, self.options.interval);
-
+			self._autoplay.apply(self);
+		}, self.options.interval);
 	}
+
 
 };
 
-
-
-
-Scroll.utils = utils;
-window.Scroll = Scroll;
-
+// Scroll.utils = utils;
+window.fz = window.fz || {};
+window.frozen = window.frozen || {};
+window.fz.Scroll = window.frozen.Scroll = Scroll;
 
 /*
  * 兼容 RequireJS 和 Sea.js
@@ -1416,5 +1138,4 @@ if (typeof define === "function") {
 	})
 }
 
-
-})(window, document, Math);
+})(window.Zepto);
