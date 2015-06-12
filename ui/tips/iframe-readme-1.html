@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link media="all" href="http://i.gtimg.cn/vipstyle/frozenui/1.2.1/css/global.css?_bid=306" rel="stylesheet">
+
+  
+
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/sea.js?_bid=304"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.1/frozen.js?_bid=304"></script>
+  
+  
+    <script src="../../ui/tips/src/tips.js"></script>
+  
+</head>
+
+<body>
+    <div class="ui-center">
+
+    <div class="ui-btn" id="btn1">弹出提示</div>
+
+
+</div>
+
+<script type="text/javascript">
+var el;
+$("#btn1").tap(function(){
+    el=$.tips({
+        content:'温馨提示内容',
+        stayTime:2000,
+        type:"success"
+    })
+    el.on("tips:hide",function(){
+        console.log("tips hide");
+    })
+
+});
+
+
+
+</script>
+</body>
+</html>

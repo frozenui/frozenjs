@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="cn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link media="all" href="http://i.gtimg.cn/vipstyle/frozenui/1.2.1/css/global.css?_bid=306" rel="stylesheet">
+
+  
+
+  <script type="text/javascript" src="http://tajs.qq.com/stats?sId=37342703" charset="UTF-8"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/sea.js?_bid=304"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"></script>
+  <script src="http://i.gtimg.cn/vipstyle/frozenjs/1.0.1/frozen.js?_bid=304"></script>
+  
+  
+</head>
+
+<body>
+   <!-- html -->
+<div class="ui-tab">
+    <ul class="ui-tab-nav ui-border-b">
+        <li class="current">热门推荐</li>
+        <li>全部表情</li>
+        <li>表情</li>
+    </ul>
+    <ul class="ui-tab-content" style="width:300%">
+        <li class="current"><p>内容</p><p>内容</p><p>内容</p><p>内容</p></li>
+        <li><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p><p>内容</p></li>
+        <li><p>内容</p><p>内容</p></li>
+    </ul>
+</div>
+
+
+<!-- js -->
+<script>
+(function() {
+
+    var tab = new fz.Scroll('.ui-tab', {
+        role: 'tab',
+        autoplay: true,
+        interval: 3000
+    });
+
+    tab.on('beforeScrollStart', function(from, to) {
+        console.log(from, to);
+    });
+
+    tab.on('scrollEnd', function(curPage) {
+        console.log(curPage);
+    });
+
+})();
+</script>
+</body>
+</html>
