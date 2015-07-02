@@ -128,7 +128,10 @@ $("#btn1").tap(function(){
 	
 })
 $("#btn2").tap(function(){
-	$(".ui-dialog").dialog("show");
+	var dia2=$(".ui-dialog").dialog("show");
+	dia2.on("dialog:action",function(e){
+		console.log(e.index)
+	});
 })
 </script>
 ```
