@@ -177,7 +177,7 @@ module.exports = function(grunt){
         options: {
           port: 8000,
           // hostname: 'localhost', //默认就是这个值，可配置为本机某个 IP，localhost 或域名
-          livereload: 35729  //声明给 watch 监听的端口
+          livereload: 35721  //声明给 watch 监听的端口
         },
 
         server: {

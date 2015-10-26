@@ -228,8 +228,8 @@
         if( ( e.which && e.which > 1 ) || e.shiftKey || e.altKey || e.metaKey || e.ctrlKey ){
           return;
         }
-
-        e.preventDefault();
+        if($(e.target)[0]==$el[0])
+          e.preventDefault();
 
         // this part prevents a double callback from touch and mouse on the same tap
 

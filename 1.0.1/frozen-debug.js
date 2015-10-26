@@ -228,8 +228,8 @@
         if( ( e.which && e.which > 1 ) || e.shiftKey || e.altKey || e.metaKey || e.ctrlKey ){
           return;
         }
-
-        e.preventDefault();
+        if($(e.target)[0]==$el[0])
+          e.preventDefault();
 
         // this part prevents a double callback from touch and mouse on the same tap
 
@@ -337,12 +337,14 @@
 	Dialog.prototype={
 		_bindEvent:function(){
 			var self=this;
+			
 			self.button.on("tap",function(){
 				var index=$(self.button).index($(this));
 				// self.option.callback("button",index);
 				var e=$.Event("dialog:action");
 				e.index=index;
 				self.element.trigger(e);
+				self.element.unbind("dialog:action");
 				self.hide.apply(self);
 			});
 		},

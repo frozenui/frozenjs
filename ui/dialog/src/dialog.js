@@ -47,12 +47,14 @@
 	Dialog.prototype={
 		_bindEvent:function(){
 			var self=this;
+			
 			self.button.on("tap",function(){
 				var index=$(self.button).index($(this));
 				// self.option.callback("button",index);
 				var e=$.Event("dialog:action");
 				e.index=index;
 				self.element.trigger(e);
+				self.element.unbind("dialog:action");
 				self.hide.apply(self);
 			});
 		},
