@@ -238,7 +238,10 @@ $(<span class="string">"#btn1"</span>).tap(<span class="keyword">function</span>
 
 })
 $(<span class="string">"#btn2"</span>).tap(<span class="keyword">function</span>(){
-    $(<span class="string">".ui-dialog"</span>).dialog(<span class="string">"show"</span>);
+    <span class="keyword">var</span> dia2=$(<span class="string">".ui-dialog"</span>).dialog(<span class="string">"show"</span>);
+    dia2.on(<span class="string">"dialog:action"</span>,<span class="keyword">function</span>(e){
+        console.log(e.index)
+    });
 })
 </span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div>
           </div>

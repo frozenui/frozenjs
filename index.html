@@ -144,8 +144,8 @@
 <li>轻量，可复用可扩展</li>
 </ol>
 <h2 id="frozenjs-的基本调用方式">FrozenJS 的基本调用方式</h2><h3 id="非模块化方式">非模块化方式</h3><p>引用js</p>
-<div class="highlight"><pre><code class="javascript">&lt;script src=<span class="string">"http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://i.gtimg.cn/vipstyle/frozenjs/1.0.1/frozen.js?_bid=304"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></code></pre></div><p>js调用</p>
+<div class="highlight"><pre><code class="javascript">&lt;script src=<span class="string">"../lib/zepto.min.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"../js/frozen.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></code></pre></div><p>js调用</p>
 <div class="highlight"><pre><code class="javascript"><span class="keyword">var</span> myDialog=$.dialog({
     title:<span class="string">"温馨提示"</span>,
     content:<span class="string">'温馨提示内容'</span>,
@@ -153,35 +153,7 @@
 })
 myDialog.on(<span class="string">"dialog:hide"</span>,<span class="keyword">function</span>(e){
     <span class="comment">// To do sth when dialog hide</span>
-})</code></pre></div><h3 id="模块化方式">模块化方式</h3><p>引用js</p>
-<div class="highlight"><pre><code class="javascript">&lt;script src=<span class="string">"http://i.gtimg.cn/vipstyle/frozenjs/lib/sea.js?_bid=304"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="title">script</span>&gt;</span></span></code></pre></div><p>js调用</p>
-<div class="highlight"><pre><code class="javascript">seajs.config({
-    alias:{
-        <span class="string">"zepto"</span>:<span class="string">"http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"</span>,
-        <span class="string">"frozen"</span>:<span class="string">"http://i.gtimg.cn/vipstyle/frozenjs/1.0.1/frozen.js?_bid=304"</span>
-    }
-});
-seajs.use([<span class="string">"zepto"</span>,<span class="string">"frozen"</span>],<span class="keyword">function</span>(z,fz){
-    <span class="keyword">var</span> $=z;
-    <span class="keyword">var</span> myDialog=$.dialog({
-        title:<span class="string">"温馨提示"</span>,
-        content:<span class="string">'温馨提示内容'</span>,
-        button:[<span class="string">"确认"</span>,<span class="string">"取消"</span>]
-    })
-    myDialog.on(<span class="string">"dialog:hide"</span>,<span class="keyword">function</span>(e){
-        <span class="comment">// To do sth when dialog hide</span>
-    })
-})</code></pre></div><p>这里对 zepto 进行了模块化操作，建议引用 <a href="http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304">http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304</a></p>
-<p>若还是想要引用自己项目的zepto，请通过以下方式对zepto进行模块化：</p>
-<div class="highlight"><pre><code class="javascript">window.Zepto = Zepto
-window.$ === <span class="literal">undefined</span> &amp;&amp; (window.$ = Zepto)
-
-<span class="comment">// exports to module</span>
-<span class="keyword">if</span>($.isFunction(window.define)) {
-    define(<span class="keyword">function</span>(require, exports, module) {
-        module.exports = window.Zepto
-    })
-}</code></pre></div><h2 id="frozenjs-的维护与开发">FrozenJS 的维护与开发</h2><p>FrozenJS 通过 grunt 来管理，首先应确保 grunt 的运行环境，可参照 <a href="https://github.com/QQVIPTeam/team/issues/5">https://github.com/QQVIPTeam/team/issues/5</a></p>
+})</code></pre></div><h2 id="frozenjs-的维护与开发">FrozenJS 的维护与开发</h2><p>FrozenJS 通过 grunt 来管理，首先应确保 grunt 的运行环境，可参照 <a href="https://github.com/QQVIPTeam/team/issues/5">https://github.com/QQVIPTeam/team/issues/5</a></p>
 <div class="highlight"><pre><code class="javascript">grunt：合并压缩代码
 grunt docs：文档生成与调试</code></pre></div><p>使用 <code>grunt</code> 会合并压缩代码，提交当前目录到 <code>master</code> 分支；</p>
 <p>使用 <code>grunt docs</code> 会将文档生成到 <code>_site</code> 目录，提交 <code>_site</code> 目录到 <code>gh-pages</code> 分支。</p>

@@ -126,16 +126,15 @@
         <div class="content-area">
           <div class="content">
               <h1 id="如何使用">如何使用</h1><h2 id="直接引用">直接引用</h2><p>使用 FrozenJS 需引入 FrozenUI (CSS)、zepto.js、frozen.js。如果要使用特效组件，需要引入相应的特效组件的 js。</p>
-<p>直接引用可以使用手机 QQ 的离线包，离线包机制可以在第一次下载之后缓存到本地，以后无需请求，大幅提升加载速度。</p>
 <div class="highlight"><pre><code class="xml"><span class="comment">&lt;!-- 引入 CSS --&gt;</span>
- <span class="tag">&lt;<span class="title">link</span> <span class="attribute">media</span>=<span class="value">"all"</span> <span class="attribute">href</span>=<span class="value">"http://i.gtimg.cn/vipstyle/frozenui/1.2.0/css/frozen.css?_bid=306"</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span>&gt;</span>
+ <span class="tag">&lt;<span class="title">link</span> <span class="attribute">media</span>=<span class="value">"all"</span> <span class="attribute">href</span>=<span class="value">"../css/frozen.css"</span> <span class="attribute">rel</span>=<span class="value">"stylesheet"</span>&gt;</span>
 
 <span class="comment">&lt;!-- 引入 JS --&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://i.gtimg.cn/vipstyle/frozenjs/lib/zepto.min.js?_bid=304"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://i.gtimg.cn/vipstyle/frozenjs/1.0.1/frozen.js?_bid=304"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"../lib/zepto.min.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"../js/frozen.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span>
 
 <span class="comment">&lt;!-- 特效组件需要另外引用 --&gt;</span>
-<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"http://i.gtimg.cn/vipstyle/frozenjs/1.0.1/effect.cover.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div><h2 id="github">GitHub</h2><p>你也可以去 GitHub 上查看和下载 FrozenJS 的代码。任何建议也可以在 GitHub 上给我们反馈：<a href="https://github.com/frozenui/frozenjs">FrozenJS</a>。</p>
+<span class="tag">&lt;<span class="title">script</span> <span class="attribute">src</span>=<span class="value">"../js/effect/cover.js"</span>&gt;</span><span class="javascript"></span><span class="tag">&lt;/<span class="title">script</span>&gt;</span></code></pre></div><h2 id="github">GitHub</h2><p>你也可以去 GitHub 上查看和下载 FrozenJS 的代码。任何建议也可以在 GitHub 上给我们反馈：<a href="https://github.com/frozenui/frozenjs">FrozenJS</a>。</p>
 <h2 id="调用方式">调用方式</h2><p>FrozenJS 的调用方式很简单，跟熟知的 jQuery 插件很相似，比如 dialog 的调用：</p>
 <div class="highlight"><pre><code class="javascript">&lt;!-- 使用默认模版 --&gt;
 $.dialog({
